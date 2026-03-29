@@ -1,0 +1,122 @@
+/* Container adjustments */
+.hero-container {
+  width: 100%;
+  min-height: 600px; /* Removed 100vh */
+  padding: 80px 0;   /* Top/Bottom spacing */
+  background-color: #000000; /* Pure Black Theme */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  font-family: 'Inter', sans-serif;
+}
+
+/* 90% Width Slider */
+.heroSwiper {
+  width: 90%; 
+  max-width: 1400px;
+  height: 550px;
+  padding-bottom: 50px !important; /* Space for pagination */
+}
+
+.hero-slide {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* Aligns text to left */
+  border-radius: 30px;
+  background-size: cover;
+  background-position: center;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  position: relative;
+}
+
+.card-content {
+  padding: 60px;
+  text-align: left;
+  max-width: 600px;
+  z-index: 2;
+  position: relative;
+}
+
+.accent-bar {
+  width: 80px;
+  height: 5px;
+  margin-bottom: 25px;
+  border-radius: 10px;
+}
+
+.slide-number {
+  position: absolute;
+  top: 20px;
+  right: 40px;
+  font-size: 6rem;
+  font-weight: 900;
+  color: rgba(255, 255, 255, 0.05);
+  user-select: none;
+}
+
+.card-content h1 {
+  color: #ffffff;
+  font-size: 4rem;
+  margin: 0 0 20px 0;
+  line-height: 1;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.card-content p {
+  color: #cccccc;
+  font-size: 1.6rem;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.hero-btn {
+  padding: 5px 20px;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: white;
+  /* font-family: ; */
+  background: transparent;
+  border: 2px solid var(--btn-clr);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.hero-btn:hover {
+  background: var(--btn-clr);
+  box-shadow: 0 0 30px var(--btn-clr);
+  transform: scale(1.05);
+}
+
+/* Swiper Pagination Styling */
+.swiper-pagination-bullet {
+  background: #fff !important;
+  opacity: 0.2;
+}
+
+.swiper-pagination-bullet-active {
+  opacity: 1;
+  width: 30px !important;
+  border-radius: 5px !important;
+  background: #fff !important;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .heroSwiper {
+    height: 500px;
+    width: 95%;
+  }
+  .card-content {
+    padding: 30px;
+  }
+  .card-content h1 {
+    font-size: 2.5rem;
+  }
+  .slide-number {
+    font-size: 4rem;
+  }
+}
