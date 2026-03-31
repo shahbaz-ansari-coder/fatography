@@ -6,7 +6,7 @@ import "swiper/css";
 import "swiper/css/effect-creative";
 import "swiper/css/pagination";
 
-import "../../style/hero.css";
+import "../../style/Slider.css";
 
 // import required modules
 import { EffectCreative, Pagination, Autoplay } from "swiper/modules";
@@ -56,7 +56,7 @@ const heroData = [
 
 const Slider = () => {
     return (
-      <div className="hero-container">
+      <div className="slider-container">
         <Swiper
           grabCursor={true}
           effect={"creative"}

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 function Hero() {
 const animatedWords = [
   "Wedding Photography",
-  "Pre-Wedding Shoots",
+  "Pre Wedding Shoots",
   "Product Photography",
   "Corporate Shoots",
   "Event Photography",

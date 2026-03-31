@@ -24,8 +24,8 @@ function Home() {
 
       <main>
         <article>
-          <Hero/>
           <Slider />
+          <Hero/>
           <Gallery />
           <Category />
           <About />

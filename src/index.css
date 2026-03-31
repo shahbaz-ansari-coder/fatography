@@ -465,7 +465,6 @@ body.active {
 
 /** ───────────────────────────────────── Hero Section /*/
 .hero {
-  padding-block-start: 120px;
   text-align: center;
 }
 
@@ -946,6 +945,15 @@ body.active {
   * ────── responsive for large than 575px screen
   */
 
+@media (max-width: 575px) {
+  .hero .wrapper {
+    font-size: 40px; /* Adjusted font size for small screens */
+  }
+  .hero.section {
+      padding: 0;
+  }
+}
+
 @media (min-width: 575px) {
   /* === Custom Property === */
   :root {
@@ -1384,7 +1392,7 @@ body.active {
 
   /* === Hero === */
   .hero {
-    padding-block: 170px 150px;
+    padding-block: 0px 150px;
   }
 
   .hero .container {
