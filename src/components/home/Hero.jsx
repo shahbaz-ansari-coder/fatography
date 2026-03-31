@@ -48,15 +48,6 @@ const animatedWords = [
   return (
     <section className="section hero" id="home" aria-label="home">
       <div className="container">
-        {/* Hero Image */}
-        <img
-          src="/logo.svg"
-          width="322"
-          height="322"
-          alt=""
-          className="hero-banner"
-        />
-
         {/* Hero Content */}
         <div className="hero-content">
           <h1 className="h1 hero-title">Fatography</h1>
