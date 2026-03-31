@@ -950,7 +950,14 @@ body.active {
     font-size: 40px; /* Adjusted font size for small screens */
   }
   .hero.section {
-      padding: 0;
+      padding-top: 0;
+      padding-bottom: 80px;
+  }
+  .heroSwiper {
+    height: 330px !important;
+  }
+  .slider-container {
+    min-height: auto !important;
   }
 }
 
