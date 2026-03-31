@@ -1,9 +1,9 @@
-Container adjustments
+/* Container adjustments */
 .hero-container {
   width: 100%;
   min-height: 600px; /* Removed 100vh */
   padding: 80px 0;   /* Top/Bottom spacing */
-  background-color: #000000; /* Pure Black Theme */
+  background-color: #121212; /* Pure Black Theme */
   display: flex;
   justify-content: center;
   align-items: center;

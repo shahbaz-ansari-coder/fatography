@@ -10,6 +10,7 @@ import Portfolio from "../components/home/Portfolio";
 import Preloader from "../components/home/Preloader";
 import ScrollReveal from "../components/home/ScrollReveal";
 import Service from "../components/home/Service";
+import Slider from "../components/home/Slider";
 
 
 // ─── Main application layout
@@ -23,7 +24,8 @@ function Home() {
 
       <main>
         <article>
-          <Hero />
+          <Hero/>
+          <Slider />
           <Gallery />
           <Category />
           <About />
