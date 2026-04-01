@@ -16,7 +16,6 @@ const celebrityData = [
     images: [
       "https://fatography.co/wp-content/uploads/2025/08/Farhan-Saeed-5-1.jpeg",
       "https://fatography.co/wp-content/uploads/2025/08/Farhan-Saeed-4.jpeg",
-      "https://fatography.co/wp-content/uploads/2025/09/1V1A3636-768x1152.jpg",
     ],
     effect: "card-zoom",
   },
