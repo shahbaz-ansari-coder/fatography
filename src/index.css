@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 /** ───────────────────────────────────── Custom Property /*/
 :root {
   /** === Colors === */
@@ -1629,4 +1631,12 @@ body.active {
   .footer-top .container {
     max-width: 1200px;
   }
+}
+
+
+
+img {
+  user-select: none !important;
+  -webkit-user-drag: none !important;
+  pointer-events: none !important;
 }

@@ -85,23 +85,9 @@ const Slider = () => {
               key={index}
               className="hero-slide"
               style={{
-                backgroundImage: `linear-gradient(to right, rgba(0,0,0,0.65) 30%, rgba(0,0,0,0.2)), url(${item.image})`,
+                backgroundImage: `url(${item.image})`,
               }}
             >
-              <div className="card-content">
-                <div
-                  className="accent-bar"
-                  style={{ backgroundColor: item.color }}
-                ></div>
-                <h1>{item.title}</h1>
-                <p>{item.para}</p>
-                <button
-                  className="hero-btn"
-                  style={{ "--btn-clr": item.color }}
-                >
-                  {item.btnText}
-                </button>
-              </div>
             </SwiperSlide>
           ))}
         </Swiper>

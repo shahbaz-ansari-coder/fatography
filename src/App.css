@@ -9,9 +9,9 @@
 
 .hero-hover-image {
   position: absolute;
-  right: 80px;
+  right: 120px;
   top: 50%;
-  transform: translateY(-100%);
+  transform: translateY(-140%);
   width: 320px;
   pointer-events: none;
 }
