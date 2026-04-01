@@ -28,9 +28,9 @@ function Home() {
         <article>
           <Slider />
           <Hero/>
+          <About />
           <Gallery />
           <CelebrityGallery/>
-          <About />
           <Service />
           <Portfolio />
           <VideoTestimonials/>
