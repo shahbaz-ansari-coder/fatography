@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
@@ -13,86 +13,66 @@ import { EffectCreative, Pagination, Autoplay } from "swiper/modules";
 
 const heroData = [
   {
-    title: "Wedding Photography",
-    para: "Capturing your most beautiful moments with timeless wedding photography and cinematic storytelling.",
-    btnText: "View Weddings",
-    color: "#e11d48",
     image:
       "https://fatography.co/wp-content/uploads/2025/10/generated-image-2.png",
   },
   {
-    title: "Brand & Product Shoot",
-    para: "Professional brand and product photography designed to elevate your business and visual identity.",
-    btnText: "See Portfolio",
-    color: "#7c3aed",
     image:
       "https://fatography.co/wp-content/uploads/2026/03/Dubai-Model-Photoshoot-–-Professional-Fashion-Lifestyle-Portraits-by-Fatography-Studio.jpg",
   },
   {
-    title: "Cinematic Video Production",
-    para: "High-end video shoots for brands, events, and stories that deserve a cinematic touch.",
-    btnText: "Watch Projects",
-    color: "#f59e0b",
     image:
-      "https://fatography.co/wp-content/uploads/2026/03/Fashion-Photography-Services.jpg",
+      "https://fatography.co/wp-content/uploads/2026/03/Dubai-Model-Photoshoot.jpg",
   },
   {
-    title: "Fashion Photography",
-    para: "Creative fashion photography that highlights style, personality, and modern visual storytelling.",
-    btnText: "Explore Fashion",
-    color: "#ec4899",
     image:
-      "https://fatography.co/wp-content/uploads/2025/09/FB_IMG_1757163602974.jpg",
+      "https://fatography.co/wp-content/uploads/2025/09/VDraw_3674528406411240329.png.jpg",
   },
   {
-    title: "Event Photography",
-    para: "Professional coverage for corporate events, parties, and celebrations with stunning visuals.",
-    btnText: "View Events",
-    color: "#6366f1",
     image:
       "https://fatography.co/wp-content/uploads/2026/03/Professional-Wedding-Photography-in-Dubai.jpeg",
   },
 ];
 
 const Slider = () => {
-    return (
-      <div className="slider-container">
-        <Swiper
-          grabCursor={true}
-          effect={"creative"}
-          creativeEffect={{
-            prev: {
-              shadow: true,
-              translate: ["-125%", 0, -800],
-              rotate: [0, 0, -90],
-            },
-            next: {
-              shadow: true,
-              translate: ["125%", 0, -800],
-              rotate: [0, 0, 90],
-            },
-          }}
-          autoplay={{
-            delay: 4000,
-            disableOnInteraction: false,
-          }}
-          pagination={{ clickable: true }}
-          modules={[EffectCreative, Pagination, Autoplay]}
-          className="heroSwiper"
-        >
-          {heroData.map((item, index) => (
-            <SwiperSlide
-              key={index}
-              className="hero-slide"
-              style={{
-                backgroundImage: `url(${item.image})`,
-              }}
-            >
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </div>
-    );
-}
+  return (
+    <div className="slider-container">
+      <Swiper
+        grabCursor={true}
+        loop={true}
+        effect={"creative"}
+        creativeEffect={{
+          prev: {
+            shadow: true,
+            translate: ["-125%", 0, -800],
+            rotate: [0, 0, -90],
+          },
+          next: {
+            shadow: true,
+            translate: ["125%", 0, -800],
+            rotate: [0, 0, 90],
+          },
+        }}
+        autoplay={{
+          delay: 4000,
+          disableOnInteraction: false,
+        }}
+        pagination={{ clickable: true }}
+        modules={[EffectCreative, Pagination, Autoplay]}
+        className="heroSwiper"
+      >
+        {heroData.map((item, index) => (
+          <SwiperSlide
+            key={index}
+            className="hero-slide"
+            style={{
+              backgroundImage: `url(${item.image})`,
+            }}
+          ></SwiperSlide>
+        ))}
+      </Swiper>
+    </div>
+  );
+};
 
-export default Slider
+export default Slider;

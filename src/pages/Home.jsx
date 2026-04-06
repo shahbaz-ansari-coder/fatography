@@ -9,6 +9,7 @@ import Header from "../components/home/Header";
 import Hero from "../components/home/Hero";
 import Portfolio from "../components/home/Portfolio";
 import Preloader from "../components/home/Preloader";
+import ReviewSection from "../components/home/Reviews";
 import ScrollReveal from "../components/home/ScrollReveal";
 import Service from "../components/home/Service";
 import Slider from "../components/home/Slider";
@@ -32,8 +33,8 @@ function Home() {
           <Gallery />
           <CelebrityGallery/>
           <Service />
-          <Portfolio />
           <VideoTestimonials/>
+          <ReviewSection/>
         </article>
       </main>
 

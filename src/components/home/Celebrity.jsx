@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../../style/celebrityGallery.css";
+import Category from "./Category";
 
 const celebrityData = [
   {
@@ -90,6 +91,9 @@ export default function CelebrityGallery() {
           {celebrityData.map((item, index) => (
             <CelebrityCard key={index} item={item} />
           ))}
+        </div>
+        <div className="celebrity-name-gallery">
+          <Category />
         </div>
 
         {/* Center Button Below Grid */}

@@ -238,3 +238,41 @@
 /* Responsive */
 @media (max-width: 1200px) { .celebrity-grid-v3 { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 600px) { .celebrity-grid-v3 { grid-template-columns: 1fr; } }
+
+
+/* Default (Desktop) */
+.celebrity-grid-v3{
+display:none;
+}
+
+.celebrity-name-gallery{
+display:block;
+}
+
+
+/* Tablet */
+@media (max-width:1024px){
+
+.celebrity-grid-v3{
+display:grid;
+}
+
+.celebrity-name-gallery{
+display:none;
+}
+
+}
+
+
+/* Mobile */
+@media (max-width:768px){
+
+.celebrity-grid-v3{
+display:grid;
+}
+
+.celebrity-name-gallery{
+display:none;
+}
+
+}

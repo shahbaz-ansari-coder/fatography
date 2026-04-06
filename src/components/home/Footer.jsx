@@ -1,196 +1,131 @@
-"use client";
+import React from "react";
+import { CiFacebook } from "react-icons/ci";
+import { FaEnvelopeOpenText, FaFacebookF, FaInstagram, FaLinkedinIn, FaTwitter, FaWhatsapp, FaYoutube } from "react-icons/fa";
+import { IoCallSharp, IoLocationSharp } from "react-icons/io5";
 
-import { useEffect, useState } from "react";
-import { ArrowUpRight } from "lucide-react";
+import '../../style/footer.css'
 
-// ─── Footer section component with embedded data
-export default function Footer() {
-  // ─── Data moved from JSON
-  const footerData = {
-    sectionId: "contact",
-    subtitle: "Get In Touch",
-    title: "Project ideas or collaborations? Let’s connect.",
-    buttonLink: "#",
-    topImages: [
-      {
-        src: "/footer-1.jpg",
-        alt: "visual work",
-        className: "abs-img abs-img-1",
-        width: 159,
-        height: 176,
-      },
-      {
-        src: "/footer-2.jpg",
-        alt: "visual work",
-        className: "abs-img abs-img-2",
-        width: 265,
-        height: 275,
-      },
-      {
-        src: "/footer-3.jpg",
-        alt: "visual work",
-        className: "abs-img abs-img-3",
-        width: 303,
-        height: 272,
-      },
-      {
-        src: "/footer-4.jpg",
-        alt: "visual work",
-        className: "abs-img abs-img-4",
-        width: 175,
-        height: 175,
-      },
-    ],
-    shapeImage: { src: "/footer-shape.svg", alt: "", width: 185, height: 134 },
-    logo: {
-      href: "#",
-      src: "/logo.svg",
-      alt: "Robert home",
-      width: 40,
-      height: 40,
-    },
-    socialLinks: [
-      { label: "Fa.", href: "#" },
-      { label: "Insta.", href: "#" },
-      { label: "Tw.", href: "#" },
-    ],
-    copyrightText: "©",
-    copyrightOwner: "Shahbaz Ansari",
-    copyrightEndText: "All Rights Reserved.",
-    footerBackground: {
-      src: "/footer-bg.jpg",
-      alt: "visual background",
-      width: 1920,
-      height: 1135,
-    },
-    backToTop: { href: "#top", ariaLabel: "back to top", defaultText: "0%" },
-  };
-
-  // ─── State management for scroll progress and back-to-top button
-  const [scrollPercent, setScrollPercent] = useState(0);
-  const [showButton, setShowButton] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const bodyHeight = document.body.scrollHeight;
-      const windowHeight = window.innerHeight;
-      const scrollEndPos = bodyHeight - windowHeight;
-      const totalScrollPercent = (window.scrollY / scrollEndPos) * 100;
-
-      setScrollPercent(totalScrollPercent);
-      setShowButton(totalScrollPercent > 5);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+const Footer = () => {
+  const currentYear = new Date().getFullYear();
 
   return (
-    <>
-      <footer className="footer">
-        {/* ─── Footer top call-to-action section */}
-        <div className="footer-top section" id={footerData.sectionId}>
-          <div className="container">
-            <p className="section-subtitle" data-reveal>
-              {footerData.subtitle}
-            </p>
-
-            <h2 className="h2 section-title" data-reveal>
-              {footerData.title}
-            </h2>
-
-            {/* ─── Footer main CTA button */}
-            <a
-              href={footerData.buttonLink}
-              className="btn-icon"
-              data-reveal
-              aria-label="Get in touch"
-            >
-              <ArrowUpRight size={26} />
+    <footer className="custom-footer">
+      <div className="footer-container">
+        {/* Logo & About Section */}
+        <div className="footer-section about">
+          <h2 className="footer-logo flex items-center gap-6">
+            <img src="logo.png" className="w-16" alt="" />
+            <h1>
+              Fato<span>graphy</span>
+            </h1>
+          </h2>
+          <p className="footer-description">
+            Fatography captures moments with creativity, precision, and heart —
+            turning them into timeless stories you’ll cherish.
+          </p>
+          <div className="social-icons">
+            <a href="#" target="_blank" className="social-link">
+              <FaFacebookF />
             </a>
-
-            {/* ─── Decorative footer images */}
-            {footerData.topImages.map((img, index) => (
-              <img
-                key={index}
-                src={img.src}
-                width={img.width}
-                height={img.height}
-                loading="lazy"
-                alt={img.alt}
-                className={img.className}
-                data-reveal
-              />
-            ))}
-
-            {/* ─── Footer decorative shape element */}
-            <img
-              src={footerData.shapeImage.src}
-              width={footerData.shapeImage.width}
-              height={footerData.shapeImage.height}
-              loading="lazy"
-              alt={footerData.shapeImage.alt}
-              className="shape"
-            />
+            <a href="#" target="_blank" className="social-link">
+              <FaWhatsapp />
+            </a>
+            <a href="#" target="_blank" className="social-link">
+              <FaInstagram />
+            </a>
+            <a href="#" target="_blank" className="social-link">
+              <FaYoutube />
+            </a>
+            <a href="#" target="_blank" className="social-link">
+              <FaLinkedinIn />
+            </a>
           </div>
         </div>
 
-        {/* ─── Footer bottom branding and social links */}
-        <div className="footer-bottom">
-          <div className="container">
-            <a href={footerData.logo.href} className="logo">
-              <img
-                src={footerData.logo.src}
-                width={footerData.logo.width}
-                height={footerData.logo.height}
-                loading="lazy"
-                alt={footerData.logo.alt}
-              />
-            </a>
+        {/* Quick Links Section */}
+        <div className="footer-section links">
+          <h3>Quick Links</h3>
+          <ul>
+            <li>
+              <a href="/">Home</a>
+            </li>
+            <li>
+              <a href="/">About Us</a>
+            </li>
+            <li>
+              <a href="/">Reviews</a>
+            </li>
+            <li>
+              <a href="/">Contact</a>
+            </li>
+          </ul>
+        </div>
 
-            {/* ─── Social media links */}
-            <ul className="social-list">
-              {footerData.socialLinks.map((social, index) => (
-                <li key={index}>
-                  <a href={social.href} className="social-link">
-                    {social.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
+        {/* Services Section */}
+        <div className="footer-section links">
+          <h3>Services</h3>
+          <ul>
+            <li>
+              <a href="/">Wedding Events</a>
+            </li>
+            <li>
+              <a href="/"> Product Photography</a>
+            </li>
+            <li>
+              <a href="/">Event Coverage</a>
+            </li>
+            <li>
+              <a href="/">Corporate Shoots</a>
+            </li>
+          </ul>
+        </div>
 
-            {/* ─── Footer copyright notice */}
-            <p className="copyright">
-              {footerData.copyrightText}{" "}
-              <strong>{footerData.copyrightOwner}</strong>{" "}
-              {footerData.copyrightEndText}
-            </p>
+        {/* Newsletter Section */}
+        {/* Contact Us Section */}
+        <div className="footer-section contact-info">
+          <h3 className="section-heading">Contact Us</h3>
+          <div className="contact-list">
+            <div className="contact-card">
+              <div className="contact-icon-box">
+                <FaEnvelopeOpenText />
+              </div>
+              <div className="contact-card-text">
+                <small>Our Email</small>
+                <p>info@fatography.co</p>
+              </div>
+            </div>
+
+            <div className="contact-card">
+              <div className="contact-icon-box">
+                <IoCallSharp />
+              </div>
+              <div className="contact-card-text">
+                <small>Phone Number</small>
+                <p>+971 509396784</p>
+              </div>
+            </div>
+
+            <div className="contact-card">
+              <div className="contact-icon-box">
+                <IoLocationSharp />
+              </div>
+              <div className="contact-card-text">
+                <small>Our Address</small>
+                <p>Arjan Al Barsha South - Dubai - UAE</p>
+              </div>
+            </div>
           </div>
         </div>
+      </div>
 
-        {/* ─── Footer background image layer */}
-        <div className="footer-bg has-before">
-          <img
-            src={footerData.footerBackground.src}
-            width={footerData.footerBackground.width}
-            height={footerData.footerBackground.height}
-            loading="lazy"
-            alt={footerData.footerBackground.alt}
-            className="img-cover"
-          />
-        </div>
-      </footer>
-
-      {/* ─── Scroll progress back-to-top button */}
-      <a
-        href={footerData.backToTop.href}
-        aria-label={footerData.backToTop.ariaLabel}
-        className={`back-top-btn ${showButton ? "show" : ""}`}
-        data-back-top-btn
-      >
-        {scrollPercent.toFixed(0)}%
-      </a>
-    </>
+      {/* Bottom Copyright */}
+      <div className="footer-bottom">
+        <p>
+          &copy; {currentYear} <strong>Fatography</strong>. All Rights Reserved.
+        </p>
+      </div>
+    </footer>
   );
-}
+};
+
+export default Footer;
