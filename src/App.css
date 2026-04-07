@@ -116,7 +116,7 @@ html {
 }
 
 body {
-  background-color: var(--smokey-black);
+  background-color: black;
   color: var(--white);
   font-size: 1.6rem;
   font-weight: var(--fw-400);

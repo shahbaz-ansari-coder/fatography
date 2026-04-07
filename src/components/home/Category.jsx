@@ -6,28 +6,19 @@ export default function Category() {
   // ─── Data moved here from JSON
   const categoryData = [
     {
-      title: "Bilal Abbas Khan,",
-      image:
-        "https://fatography.co/wp-content/uploads/2025/08/Bilal-Abbas-Khan-Fatography-1-768x960.png",
-      alt: "Landscape",
-      width: 600,
-      height: 690,
-      link: "#",
-    },
-    {
-      title: "Farhan Saeed,",
-      image:
-        "https://fatography.co/wp-content/uploads/2025/08/Farhan-Saeed-5-1.jpeg",
-      alt: "Model",
-      width: 600,
-      height: 690,
-      link: "#",
-    },
-    {
       title: "Cengiz Coşkun,",
       image:
         "https://fatography.co/wp-content/uploads/2025/08/Cengiz-Coskun-Fatography-7.png",
       alt: "Street",
+      width: 600,
+      height: 690,
+      link: "#",
+    },
+    {
+      title: "Bilal Abbas Khan,",
+      image:
+        "https://fatography.co/wp-content/uploads/2025/08/Bilal-Abbas-Khan-Fatography-1-768x960.png",
+      alt: "Landscape",
       width: 600,
       height: 690,
       link: "#",
@@ -42,6 +33,15 @@ export default function Category() {
       link: "#",
     },
     {
+      title: "Farhan Saeed,",
+      image:
+        "https://fatography.co/wp-content/uploads/2025/08/Farhan-Saeed-5-1.jpeg",
+      alt: "Model",
+      width: 600,
+      height: 690,
+      link: "#",
+    },
+    {
       title: "Shehzad Roy,",
       image:
         "https://fatography.co/wp-content/uploads/2025/08/Shehzad-Roy-Fatography-14-768x961.png",
@@ -51,7 +51,7 @@ export default function Category() {
       link: "#",
     },
     {
-      title: "Sadia Khan,",
+      title: "Sadia Khan",
       image:
         "https://fatography.co/wp-content/uploads/2025/10/1V1A4288-1551x2048.jpg",
       alt: "Architecture",

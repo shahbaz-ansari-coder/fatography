@@ -4,20 +4,16 @@ import "../../style/gallery.css";
 
 const galleryVideos = [
   [
-    { id: 1, videoUrl: "/Professional Photography & Videography in Dubai_2.mp4", width: 450, height: 625 },
-    { id: 2, videoUrl: "/Professional Photography & Videography in Dubai_3.mp4", width: 450, height: 625 },
+    { id: 1, videoUrl: "/Professional Photography & Videography in Dubai_9.mp4", width: 450, height: 625 },
   ],
   [
-    { id: 3, videoUrl: "/Professional Photography & Videography in Dubai_4.mp4", width: 450, height: 625 },
-    { id: 4, videoUrl: "/Professional Photography & Videography in Dubai_5.mp4", width: 450, height: 625 },
+    { id: 3, videoUrl: "/Professional Photography & Videography in Dubai_10.mp4", width: 450, height: 625 },
   ],
   [
-    { id: 5, videoUrl: "/Professional Photography & Videography in Dubai_6.mp4", width: 450, height: 625 },
-    { id: 6, videoUrl: "/Professional Photography & Videography in Dubai.mp4", width: 450, height: 625 },
+    { id: 5, videoUrl: "/Professional Photography & Videography in Dubai_11.mp4", width: 450, height: 625 },
   ],
   [
-    { id: 7, videoUrl: "/Professional Photography & Videography in Dubai_7.mp4", width: 450, height: 625 },
-    { id: 8, videoUrl: "/Professional Photography & Videography in Dubai_8.mp4", width: 450, height: 625 },
+    { id: 7, videoUrl: "/Professional Photography & Videography in Dubai_12.mp4", width: 450, height: 625 },
   ],
 ];
 
@@ -76,9 +72,9 @@ export default function Gallery() {
   return (
     <section className="section gallery" id="gallery">
       <div className="reviews-header">
-        <p className="rev-eyebrow">Testimonials</p>
+        <p className="rev-eyebrow">Videography </p>
         <h2 className="rev-title">
-          What Our <em>Clients</em> Say
+          See Our Work in <em>Action</em>
         </h2>
       </div>
       <div className="container">

@@ -38,7 +38,7 @@ function Header() {
       <div className="container">
         {/* Logo */}
         <a href="#" className="logo">
-          <img src="/logo.svg" width="40" height="40" alt="Robert home" />
+          <img src="/logo.png" width="40" height="40" alt="Robert home" />
         </a>
 
         {/* Mobile Menu Button */}
@@ -55,7 +55,7 @@ function Header() {
           <div className="navbar-top">
             <a href="#" className="logo">
               <img
-                src="/logo.svg"
+                src="/logo.png"
                 width="40"
                 height="40"
                 alt="Robert home"

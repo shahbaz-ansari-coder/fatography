@@ -1,8 +1,8 @@
 // ─── Import all main page sections
 import About from "../components/home/About";
-import Category from "../components/home/Category";
 import CelebrityGallery from "../components/home/Celebrity";
 import CustomCursor from "../components/home/CustomCursor";
+import DemoImges from "../components/home/DemoImges";
 import Footer from "../components/home/Footer";
 import Gallery from "../components/home/Gallery";
 import Header from "../components/home/Header";
@@ -14,6 +14,7 @@ import ScrollReveal from "../components/home/ScrollReveal";
 import Service from "../components/home/Service";
 import Slider from "../components/home/Slider";
 import VideoTestimonials from "../components/home/VideoTestimonials";
+import ViewImages from "../components/home/ViewImages";
 
 
 // ─── Main application layout
@@ -32,7 +33,9 @@ function Home() {
           <About />
           <Gallery />
           <CelebrityGallery/>
+          <DemoImges/>
           <Service />
+          <ViewImages/>
           <VideoTestimonials/>
           <ReviewSection/>
         </article>
