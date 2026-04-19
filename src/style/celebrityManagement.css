@@ -1,0 +1,573 @@
+/* Celebrity Shoots Manager */
+.cs-container {
+  padding: 40px;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Header */
+.cs-header {
+  display: flex !important;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.cs-meta{
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+}
+
+.cs-title {
+  font-size: 28px !important;
+  font-weight: 700;
+  color: white;
+  margin: 0;
+}
+
+.cs-subtitle {
+  color: #666;
+  font-size: 14px;
+  margin: 8px 0 0 0;
+}
+
+.cs-add-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgb(182, 82, 79);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.cs-add-btn:hover {
+  background: rgb(200, 100, 97);
+  transform: translateY(-2px);
+}
+
+/* Loading State */
+.cs-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 80px 20px;
+  color: #666;
+}
+
+.cs-spin {
+  animation: spin 1s linear infinite;
+  width: 32px;
+  height: 32px;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Grid Layout */
+.cs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 25px;
+  margin-bottom: 40px;
+}
+
+/* Card */
+.cs-card {
+  background: #161616;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.cs-card:hover {
+  border-color: rgba(182, 82, 79, 0.3);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+}
+
+.cs-image-wrapper {
+  position: relative;
+  width: 100%;
+  padding-top: 100%;
+  overflow: hidden;
+  background: #0a0a0a;
+}
+
+.cs-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.cs-card:hover .cs-image {
+  transform: scale(1.05);
+}
+
+.cs-image-count {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.cs-card-body {
+  padding: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.cs-card-title {
+  font-size: 20px !important;
+  margin-bottom: -10px !important;
+  font-weight: 700;
+  color: white;
+  margin: 0 0 8px 0;
+}
+
+.cs-card-date {
+  font-size: 12px;
+  color: #666;
+  margin: 0 0 16px 0;
+}
+
+/* Action Buttons */
+.cs-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: auto;
+}
+
+.cs-btn {
+  flex: 1;
+  padding: 10px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+  color: #999;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.cs-btn:hover {
+  border-color: currentColor;
+  color: white;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.cs-btn-view:hover {
+  color: #3b82f6;
+}
+
+.cs-btn-edit:hover {
+  color: #fbbf24;
+}
+
+.cs-btn-delete:hover {
+  color: #ef4444;
+}
+
+/* Empty State */
+.cs-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 80px 20px;
+  color: #666;
+}
+
+.cs-empty svg {
+  opacity: 0.5;
+}
+
+.cs-empty p {
+  font-size: 16px;
+  margin: 0;
+}
+
+/* Modal Styles */
+.cs-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.cs-modal {
+  background: #1a1a1a;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  max-width: 600px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.cs-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.cs-modal-header h2 {
+  font-size: 22px !important;
+  font-weight: 700;
+  color: white;
+  margin: 0;
+}
+
+.cs-close-btn {
+  background: none;
+  border: none;
+  color: #999;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.3s ease;
+}
+
+.cs-close-btn:hover {
+  color: white;
+}
+
+/* Form */
+.cs-form {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.cs-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cs-label {
+  font-size: 14px !important;
+  font-weight: 600;
+  color: white;
+}
+
+.cs-input {
+  background: #0a0a0a;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 12px 16px;
+  color: white;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.cs-input:focus {
+  outline: none;
+  border-color: rgb(182, 82, 79);
+  background: #111;
+}
+
+.cs-input::placeholder {
+  color: #555;
+}
+
+/* Upload Area */
+.cs-file-input {
+  display: none;
+}
+
+.cs-upload-area {
+  position: relative;
+}
+
+.cs-upload-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 40px 20px;
+  background: rgba(182, 82, 79, 0.05);
+  border: 2px dashed rgba(182, 82, 79, 0.3);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #999;
+}
+
+.cs-upload-label:hover {
+  border-color: rgba(182, 82, 79, 0.6);
+  background: rgba(182, 82, 79, 0.1);
+  color: #ccc;
+}
+
+.cs-upload-label p {
+  font-size: 14px !important;
+  font-weight: 600;
+  margin: 0;
+}
+
+.cs-upload-label span {
+  font-size: 12px;
+  color: #666;
+}
+
+/* Preview Grid */
+.cs-preview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 12px;
+}
+
+.cs-preview-item {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.cs-preview-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cs-preview-item.selected {
+  border-color: rgb(182, 82, 79);
+  box-shadow: 0 0 12px rgba(182, 82, 79, 0.3);
+}
+
+.cs-check-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgb(182, 82, 79);
+  color: white;
+  border-radius: 50%;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Form Actions */
+.cs-form-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.cs-btn-primary,
+.cs-btn-secondary {
+  flex: 1;
+  padding: 14px 20px;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.cs-btn-primary {
+  background: rgb(182, 82, 79);
+  color: white;
+}
+
+.cs-btn-primary:hover:not(:disabled) {
+  background: rgb(200, 100, 97);
+  transform: translateY(-2px);
+}
+
+.cs-btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.cs-btn-secondary {
+  background: rgba(255, 255, 255, 0.05);
+  color: #999;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.cs-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+/* View Modal */
+.cs-view-modal h2{
+  font-size: 30px !important;
+  margin-top: 0px !important;
+  margin-bottom: -10px !important;
+}
+.cs-view-modal {
+  background: #1a1a1a;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  max-width: 700px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 30px;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.cs-view-title {
+  font-size: 22px !important;
+  font-weight: 700;
+  color: white;
+  margin: 0 0 24px 0;
+  padding-right: 40px;
+}
+
+.cs-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 12px;
+}
+
+.cs-gallery-item {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.cs-gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cs-thumbnail-badge {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  background: rgba(182, 82, 79, 0.9);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .cs-container {
+    padding: 20px;
+  }
+
+  .cs-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .cs-add-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .cs-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+  }
+
+  .cs-modal {
+    max-width: 95%;
+  }
+
+  .cs-form {
+    padding: 20px;
+  }
+
+  .cs-upload-label {
+    padding: 30px 15px;
+  }
+
+  .cs-preview-grid {
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .cs-container {
+    padding: 16px;
+  }
+
+  .cs-title {
+    font-size: 22px !important;
+  }
+
+  .cs-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cs-gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

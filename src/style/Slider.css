@@ -3,7 +3,7 @@
   width: 100%;
   min-height: 600px;
   padding: 80px 0;   
-  background-color: #121212;
+  background-color: #000000;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -107,8 +107,11 @@
 
 /* Mobile Responsive */
 @media (max-width: 768px) {
+  .hero-hover-image{
+    display: none !important;
+  }
   .heroSwiper {
-    height: 500px;
+    height: 400px;
     width: 95%;
   }
   .card-content {

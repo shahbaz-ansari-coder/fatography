@@ -1,0 +1,103 @@
+.ov-container {
+  padding: 30px;
+  background: #080808;
+  min-height: 100vh;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+}
+
+.ov-header { margin-bottom: 40px; }
+.ov-title { font-size: 32px; font-weight: 800; letter-spacing: -1px; margin: 0; }
+.ov-subtitle { color: #555; margin-top: 5px; font-size: 15px; }
+
+/* PC Grid: 4 Columns */
+.ov-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-bottom: 50px;
+}
+
+.ov-card {
+  background: #111;
+  border: 1px solid #1a1a1a;
+  padding: 25px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  cursor: pointer;
+  transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.ov-card:hover {
+  background: #151515;
+  border-color: #b6524f;
+  transform: translateY(-5px);
+}
+
+.ov-card-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ov-card-info h3 { font-size: 18px; margin: 0; font-weight: 700; }
+.ov-card-info p { margin: 5px 0 0; color: #555; font-size: 13px; }
+
+.ov-arrow {
+  position: absolute;
+  right: 20px;
+  bottom: 25px;
+  color: #222;
+  transition: 0.3s;
+}
+
+.ov-card:hover .ov-arrow { color: #b6524f; transform: translateX(5px); }
+
+/* Quick Upload Section */
+.ov-sec-title { font-size: 20px; margin-bottom: 20px; color: #eee; }
+
+.ov-upload-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.ov-upload-box {
+  background: #111;
+  border: 1px solid #1a1a1a;
+  padding: 20px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.ov-upload-box:hover {
+  background: #181818;
+  border-color: #333;
+}
+
+.ov-up-icon {
+  background: rgba(255, 255, 255, 0.03);
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.ov-upload-box span { font-size: 14px; font-weight: 600; }
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .ov-stats-grid, .ov-upload-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 600px) {
+  .ov-stats-grid, .ov-upload-grid { grid-template-columns: 1fr; }
+}

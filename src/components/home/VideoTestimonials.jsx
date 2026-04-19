@@ -1,18 +1,20 @@
-import React, { useRef } from "react";
-import { ArrowUpRight } from "lucide-react";
+import React, { useRef, useState, useEffect } from "react";
 import "../../style/videoTestimonials.css";
 
 const galleryVideos = [
+  // ... (Aapka galleryVideos data same rahega)
   [
     {
       id: 1,
-      videoUrl: "/Professional Photography & Videography in Dubai_2.mp4",
+      videoUrl:
+        "https://res.cloudinary.com/djlshebp8/video/upload/q_auto/f_auto/v1776357693/Professional_Photography___Videography_in_Dubai_2_2_pvbsom.mp4",
       width: 450,
       height: 625,
     },
     {
       id: 2,
-      videoUrl: "/Professional Photography & Videography in Dubai_3.mp4",
+      videoUrl:
+        "https://res.cloudinary.com/djlshebp8/video/upload/q_auto/f_auto/v1776357694/Professional_Photography___Videography_in_Dubai_6_xxegfc.mp4",
       width: 450,
       height: 625,
     },
@@ -20,13 +22,15 @@ const galleryVideos = [
   [
     {
       id: 3,
-      videoUrl: "/Professional Photography & Videography in Dubai_4.mp4",
+      videoUrl:
+        "https://res.cloudinary.com/djlshebp8/video/upload/q_auto/f_auto/v1776357697/Professional_Photography___Videography_in_Dubai_2_n0qmjl.mp4",
       width: 450,
       height: 625,
     },
     {
       id: 4,
-      videoUrl: "/Professional Photography & Videography in Dubai_5.mp4",
+      videoUrl:
+        "https://res.cloudinary.com/djlshebp8/video/upload/q_auto/f_auto/v1776357694/Professional_Photography___Videography_in_Dubai_5_jnftwb.mp4",
       width: 450,
       height: 625,
     },
@@ -34,13 +38,15 @@ const galleryVideos = [
   [
     {
       id: 5,
-      videoUrl: "/Professional Photography & Videography in Dubai_6.mp4",
+      videoUrl:
+        "https://res.cloudinary.com/djlshebp8/video/upload/q_auto/f_auto/v1776357692/Professional_Photography___Videography_in_Dubai_8_ctwwqq.mp4",
       width: 450,
       height: 625,
     },
     {
       id: 6,
-      videoUrl: "/Professional Photography & Videography in Dubai.mp4",
+      videoUrl:
+        "https://res.cloudinary.com/djlshebp8/video/upload/q_auto/f_auto/v1776357711/Professional_Photography___Videography_in_Dubai_4_w72ttl.mp4",
       width: 450,
       height: 625,
     },
@@ -48,42 +54,68 @@ const galleryVideos = [
   [
     {
       id: 7,
-      videoUrl: "/Professional Photography & Videography in Dubai_7.mp4",
+      videoUrl:
+        "https://res.cloudinary.com/djlshebp8/video/upload/q_auto/f_auto/v1776357703/Professional_Photography___Videography_in_Dubai_3_cske1g.mp4",
       width: 450,
       height: 625,
     },
     {
       id: 8,
-      videoUrl: "/Professional Photography & Videography in Dubai_8.mp4",
+      videoUrl:
+        "https://res.cloudinary.com/djlshebp8/video/upload/q_auto/f_auto/v1776358721/Professional_Photography_Videography_in_Dubai_7_ebltlm.mp4",
       width: 450,
       height: 625,
     },
   ],
 ];
 
-const VideoCard = ({ videoUrl, width, height }) => {
+const VideoCard = ({ videoUrl, width, height, id, isActive, setActive }) => {
   const videoRef = useRef(null);
+  const [isHovered, setIsHovered] = useState(false); // Hover state tracking
 
-  const handleHover = () => {
-    if (videoRef.current) {
-      videoRef.current.muted = false; // Sound On
-      videoRef.current.play().catch(() => {});
-    }
-  };
-
-  const handleLeave = () => {
-    if (videoRef.current) {
+  useEffect(() => {
+    if (!videoRef.current) return;
+    if (isActive) {
+      videoRef.current.muted = false;
+      videoRef.current.play().catch(() => {
+        videoRef.current.muted = true;
+        videoRef.current.play();
+      });
+    } else {
       videoRef.current.pause();
-      videoRef.current.muted = true;
       videoRef.current.currentTime = 0;
+      videoRef.current.muted = true;
     }
-  };
+  }, [isActive]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting && isActive) {
+          setActive(null);
+        }
+      },
+      { threshold: 0.5 },
+    );
+    if (videoRef.current) observer.observe(videoRef.current);
+    return () => observer.disconnect();
+  }, [isActive, setActive]);
+
+  // Logic: Button kab dikhega?
+  // 1. Agar video paused hai (!isActive) -> Show hamesha.
+  // 2. Agar video play hai (isActive) -> Sirf hover pe show (isHovered).
+  const shouldShowButton = !isActive || (isActive && isHovered);
 
   return (
     <div
       className="gallery-card"
-      onMouseEnter={handleHover}
-      onMouseLeave={handleLeave}
+      onClick={(e) => {
+        e.stopPropagation();
+        setActive(isActive ? null : id);
+      }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      style={{ position: "relative", cursor: "pointer" }}
     >
       <figure
         className="card-banner img-holder has-before"
@@ -95,20 +127,41 @@ const VideoCard = ({ videoUrl, width, height }) => {
           loop
           muted
           playsInline
-          preload="auto"
+          preload="metadata"
         >
           <source src={videoUrl} type="video/mp4" />
         </video>
       </figure>
 
-      {/* Testimonials Style Overlay */}
-      <div className="play-indicator-overlay">
-        <div className="play-icon-v5">
-          <svg viewBox="0 0 24 24" fill="currentColor">
+      {/* Play/Pause Button with Visibility Logic */}
+      <button
+        className="play-btn"
+        style={{
+          display: shouldShowButton ? "flex" : "none",
+          zIndex: 10,
+        }}
+      >
+        {isActive ? (
+          <svg viewBox="0 0 24 24" fill="currentColor" width="30">
+            <path d="M6 5h4v14H6V5zm8 0h4v14h-4V5z" />
+          </svg>
+        ) : (
+          <svg viewBox="0 0 24 24" fill="currentColor" width="30">
             <path d="M8 5v14l11-7z" />
           </svg>
+        )}
+      </button>
+
+      {/* Overlay: Only visible when paused */}
+      {!isActive && (
+        <div className="play-indicator-overlay">
+          <div className="play-icon-v5">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="50">
+              <path d="M8 5v14l11-7z" />
+            </svg>
+          </div>
         </div>
-      </div>
+      )}
 
       <div className="corner-border top-left"></div>
       <div className="corner-border bottom-right"></div>
@@ -117,6 +170,8 @@ const VideoCard = ({ videoUrl, width, height }) => {
 };
 
 export default function VideoTestimonials() {
+  const [activeVideo, setActiveVideo] = useState(null);
+
   return (
     <section className="section gallery" id="gallery">
       <div className="reviews-header">
@@ -132,9 +187,12 @@ export default function VideoTestimonials() {
               {column.map((video) => (
                 <VideoCard
                   key={video.id}
+                  id={video.id}
                   videoUrl={video.videoUrl}
                   width={video.width}
                   height={video.height}
+                  isActive={activeVideo === video.id}
+                  setActive={setActiveVideo}
                 />
               ))}
             </li>

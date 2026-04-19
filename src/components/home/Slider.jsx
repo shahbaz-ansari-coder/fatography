@@ -1,45 +1,34 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/effect-creative";
 import "swiper/css/pagination";
-
 import "../../style/Slider.css";
 
-// import required modules
 import { EffectCreative, Pagination, Autoplay } from "swiper/modules";
 
-const heroData = [
-  {
-    image:
-      "https://fatography.co/wp-content/uploads/2025/10/generated-image-2.png",
-  },
-  {
-    image:
-      "https://fatography.co/wp-content/uploads/2026/03/Dubai-Model-Photoshoot-–-Professional-Fashion-Lifestyle-Portraits-by-Fatography-Studio.jpg",
-  },
-  {
-    image:
-      "https://fatography.co/wp-content/uploads/2026/03/Dubai-Model-Photoshoot.jpg",
-  },
-  {
-    image:
-      "https://fatography.co/wp-content/uploads/2025/09/VDraw_3674528406411240329.png.jpg",
-  },
-  {
-    image:
-      "https://fatography.co/wp-content/uploads/2026/03/Professional-Wedding-Photography-in-Dubai.jpeg",
-  },
-];
-
 const Slider = () => {
+  const [images, setImages] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("https://fatography-backend.vercel.app/api/slider/all")
+      .then((res) => {
+        const allImages = (res.data.data || []).flatMap((s) => s.images || []);
+        setImages(allImages);
+      })
+      .catch((err) => console.error("Slider fetch error:", err));
+  }, []);
+
+  if (images.length === 0) return null;
+
   return (
     <div className="slider-container">
       <Swiper
         grabCursor={true}
-        loop={true}
+        loop={images.length > 1}
         effect={"creative"}
         creativeEffect={{
           prev: {
@@ -61,14 +50,12 @@ const Slider = () => {
         modules={[EffectCreative, Pagination, Autoplay]}
         className="heroSwiper"
       >
-        {heroData.map((item, index) => (
+        {images.map((img, index) => (
           <SwiperSlide
             key={index}
             className="hero-slide"
-            style={{
-              backgroundImage: `url(${item.image})`,
-            }}
-          ></SwiperSlide>
+            style={{ backgroundImage: `url(${img})` }}
+          />
         ))}
       </Swiper>
     </div>

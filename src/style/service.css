@@ -1,5 +1,5 @@
 :root {
-  --clr-bg: #080b0f;
+  --clr-bg: #000000;
   --clr-accent: rgb(216 116 112);
   --clr-text: #e8dcc8;
   /* Cards ka size chota kar diya */
@@ -130,4 +130,109 @@
     --card-h: 240px;
     --speed: 15s;
   }
+}
+
+
+/* ... baki purani CSS ... */
+
+/* Jab animation na ho to cards center mein rahein */
+.marquee-wrapper.no-animate {
+  mask-image: none;
+  overflow: visible;
+  justify-content: center;
+}
+
+.marquee-content.static-grid {
+  animation: none;
+  justify-content: center;
+  flex-wrap: wrap; /* Kam cards hone par wo agli line mein aa sakte hain */
+}
+
+/* Row separation */
+.service-rows-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+}
+
+
+/* --- Baki Purani CSS Same Rakhein --- */
+
+:root {
+  --clr-bg: #080b0f;
+  --clr-accent: rgb(216 116 112);
+  --clr-text: #e8dcc8;
+  --card-w: 220px; 
+  --card-h: 300px;
+  --gap: 20px;
+  --speed: 25s;
+}
+
+/* ... (Your Desktop CSS here) ... */
+
+/* --- Optimized Responsive Section --- */
+
+@media (max-width: 1024px) {
+  :root {
+    --card-w: 200px;
+    --card-h: 270px;
+    --gap: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .service {
+    padding: 60px 0;
+  }
+
+  .service-container {
+    padding: 0 10px; /* Mobile par side space kam */
+  }
+
+  :root {
+    /* Mobile screen ki width ke hisaab se 2 cards fix karne ka formula */
+    /* (100vw - 3 gaps - 20px padding) / 2 */
+    --card-w: calc((100vw - 50px) / 2); 
+    --card-h: calc(var(--card-w) * 1.35); /* Aspect ratio maintain rakha */
+    --gap: 10px;
+    --speed: 15s; /* Mobile par choti screen ki wajah se speed tez lagti hai, toh adjust kiya */
+  }
+
+  .marquee-wrapper {
+    /* Mobile par mask ko thoda kam kiya taaki cards zyada clear dikhein */
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 5%,
+      black 95%,
+      transparent
+    );
+  }
+
+  .card-name {
+    font-size: 12px; /* Text size chota kiya */
+    padding: 4px 12px;
+  }
+
+  .card-overlay {
+    padding: 10px;
+  }
+}
+
+/* Extra Small Devices */
+@media (max-width: 400px) {
+  :root {
+    --card-h: calc(var(--card-w) * 1.4);
+  }
+  
+  .rev-title {
+    font-size: 24px;
+  }
+}
+
+/* Smooth Swiper for Mobile */
+.card-inner-swiper, .full-card-img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;
 }

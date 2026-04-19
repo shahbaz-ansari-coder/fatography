@@ -779,10 +779,25 @@ body.active {
   * ────── responsive for large than 575px screen
   */
 
+/* PC (Desktop) par show hoga, kyunki ye default hai */
+#all-pictures {
+  display: block;
+}
+
+/* Tablet aur Mobile (1024px se choti screens) par hide */
+@media (max-width: 1024px) {
+  #all-pictures {
+    display: none !important;
+  }
+}
+
 @media (max-width: 575px) {
   .hero .wrapper {
-    font-size: 40px; /* Adjusted font size for small screens */
+    font-size: 30px; /* Adjusted font size for small screens */
+       color: rgb(182, 82, 79);
+       padding-left: 10px !important;
   }
+  
   .hero.section {
     padding-top: 0;
     padding-bottom: 80px;
@@ -988,7 +1003,7 @@ body.active {
   }
 
   .hero-title {
-    text-align: left;
+    text-align: left !important;
   }
 
   .hero .wrapper {
@@ -1510,4 +1525,12 @@ img {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+.nav-main-logo img{
+  width: 170px !important;
+}
+
+.navbar-top img{
+  width: 180px !important;
 }

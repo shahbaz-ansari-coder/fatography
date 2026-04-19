@@ -1,15 +1,74 @@
-/* Layout Position */
+/* --- Desktop Layout (Same as before) --- */
 .gallery-list {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 Columns layout */
+  grid-template-columns: repeat(4, 1fr); 
   gap: 30px;
+  list-style: none;
+  padding: 0;
 }
 
 .gallery-item {
   display: flex;
   flex-direction: column;
-  gap: 30px; /* Space between vertical videos in same column */
+  gap: 30px; 
 }
+
+/* --- Mobile & Tablet Fix --- */
+
+@media (max-width: 1024px) {
+  .gallery-list { 
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 20px; 
+  }
+}
+
+@media (max-width: 600px) {
+  .gallery-list { 
+    /* Force 2 columns on small mobiles */
+    grid-template-columns: repeat(2, 1fr) !important; 
+    gap: 12px; /* Mobile par gap thoda kam taaki video clear dikhe */
+    padding: 0 5px;
+  }
+
+  /* Magic Property: Isse nested column structure grid mein convert ho jayega */
+  .gallery-item {
+    display: contents; 
+  }
+
+  .gallery-card {
+    border-radius: 8px; /* Mobile par thoda kam radius */
+    margin-bottom: 0px; 
+  }
+
+  /* Mobile par buttons ka size thoda handle karte hain */
+  .play-btn {
+    width: 45px !important;
+    height: 45px !important;
+  }
+
+  .play-btn svg {
+    width: 20px !important;
+  }
+
+  .play-icon-v5 {
+    width: 35px !important;
+    height: 35px !important;
+  }
+
+  /* Corner borders mobile par thode chote */
+  .corner-border {
+    width: 10px;
+    height: 10px;
+    top: 8px;
+    left: 8px;
+  }
+  .bottom-right {
+    bottom: 8px;
+    right: 8px;
+  }
+}
+
+/* --- UI Elements Styling (Same as before) --- */
 
 .gallery-card {
   position: relative;
@@ -20,10 +79,6 @@
   transition: transform 0.4s ease;
 }
 
-.gallery-card:hover {
-  transform: scale(1.02);
-}
-
 .img-cover {
   width: 100%;
   height: 100%;
@@ -32,11 +87,25 @@
   transition: filter 0.4s ease;
 }
 
-.gallery-card:hover .img-cover {
-  filter: brightness(1);
+.play-btn {
+  position: absolute;
+  z-index: 1 !important;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70px;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-/* UI Elements from Testimonials */
 .play-indicator-overlay {
   position: absolute;
   inset: 0;
@@ -44,12 +113,7 @@
   justify-content: center;
   align-items: center;
   background: rgba(0, 0, 0, 0.2);
-  transition: opacity 0.3s ease;
   pointer-events: none;
-}
-
-.gallery-card:hover .play-indicator-overlay {
-  opacity: 0;
 }
 
 .play-icon-v5 {
@@ -63,12 +127,6 @@
   backdrop-filter: blur(4px);
 }
 
-.play-icon-v5 svg {
-  width: 18px;
-  color: white;
-}
-
-/* Corner Borders */
 .corner-border {
   position: absolute;
   width: 15px;
@@ -83,14 +141,4 @@
 
 .gallery-card:hover .corner-border {
   opacity: 1;
-  width: 30px;
-  height: 30px;
-}
-
-/* Responsive */
-@media (max-width: 1024px) {
-  .gallery-list { grid-template-columns: repeat(2, 1fr); }
-}
-@media (max-width: 600px) {
-  .gallery-list { grid-template-columns: 1fr; }
 }

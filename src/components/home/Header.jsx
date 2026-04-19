@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router";
 
 function Header() {
   const [isNavOpen, setIsNavOpen] = useState(false);
@@ -37,8 +38,13 @@ function Header() {
     <header className={`header ${isHeaderActive ? "active" : ""}`} data-header>
       <div className="container">
         {/* Logo */}
-        <a href="#" className="logo">
-          <img src="/logo.png" width="40" height="40" alt="Robert home" />
+        <a href="/" className="logo nav-main-logo">
+          <img
+            src="/text_logo.png"
+            width="40"
+            height="40"
+            alt="Fatography_LOGO"
+          />
         </a>
 
         {/* Mobile Menu Button */}
@@ -55,7 +61,7 @@ function Header() {
           <div className="navbar-top">
             <a href="#" className="logo">
               <img
-                src="/logo.png"
+                src="/text_logo.png"
                 width="40"
                 height="40"
                 alt="Robert home"
@@ -82,12 +88,6 @@ function Header() {
             </li>
 
             <li className="navbar-item">
-              <a href="#gallery" className="navbar-link" onClick={closeNav}>
-                Gallery
-              </a>
-            </li>
-
-            <li className="navbar-item">
               <a href="#about" className="navbar-link" onClick={closeNav}>
                 About
               </a>
@@ -100,15 +100,35 @@ function Header() {
             </li>
 
             <li className="navbar-item">
-              <a href="#portfolio" className="navbar-link" onClick={closeNav}>
-                Portfolio
+              <a href="#videography" className="navbar-link" onClick={closeNav}>
+                Videography
               </a>
             </li>
 
             <li className="navbar-item">
-              <a href="#contact" className="navbar-link" onClick={closeNav}>
-                Contact us
+              <a
+                href="#celebrity-shoots"
+                className="navbar-link"
+                onClick={closeNav}
+              >
+                Celebrity Shoots
               </a>
+            </li>
+
+            <li className="navbar-item">
+              <a
+                href="/#testimonials"
+                className="navbar-link"
+                onClick={closeNav}
+              >
+                Testimonials
+              </a>
+            </li>
+
+            <li className="navbar-item">
+              <Link to="/contact" className="navbar-link" onClick={closeNav}>
+                Contact us
+              </Link>
             </li>
           </ul>
 
@@ -121,7 +141,7 @@ function Header() {
 
           <p className="navbar-text">
             Urgent issue? call us at{" "}
-            <a href="tel:8314927761" className="contact-link">
+            <a href="tel:+971509396784" className="contact-link">
               +971 509396784
             </a>
           </p>

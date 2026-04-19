@@ -36,7 +36,7 @@ function About() {
             }}
           >
             <img
-              src="/about-banner.jpg"
+              src="/fatima.jpg"
               width="512"
               height="684"
               loading="lazy"
@@ -47,12 +47,12 @@ function About() {
 
           {/* ─── Decorative shapes */}
           <img
-            src="/logo.svg"
+            src="/logo.png"
             width="180"
             height="180"
             loading="lazy"
             alt=""
-            className="shape shape-1"
+            className="shape shape-1 !h-[80px]"
           />
 
           <img

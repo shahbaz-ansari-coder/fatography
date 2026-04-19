@@ -1,49 +1,6 @@
 import { useEffect, useMemo, useRef, useCallback } from "react";
 import { useGesture } from "@use-gesture/react";
 
-const DEFAULT_IMAGES = [
-  {
-    src: "/fatography random photoshoots 1.jpg",
-    alt: "fatography photoshoots",
-  },
-  {
-    src: "fatography random photoshoots 2.jpg",
-    alt: "fatography photoshoots",
-  },
-  {
-    src: "fatography random photoshoots 3.heic",
-    alt: "fatography photoshoots",
-  },
-  {
-    src: "fatography random photoshoots 4.webp",
-    alt: "fatography photoshoots",
-  },
-  {
-    src: "fatography random photoshoots 5.jpg",
-    alt: "fatography photoshoots",
-  },
-  {
-    src: "fatography random photoshoots 6.jpg",
-    alt: "fatography photoshoots",
-  },
-  {
-    src: "fatography random photoshoots 7.jpg",
-    alt: "fatography photoshoots",
-  },
-  {
-    src: "fatography random photoshoots 8.jpg",
-    alt: "fatography photoshoots",
-  },
-  {
-    src: "fatography random photoshoots 9.jpg",
-    alt: "fatography photoshoots",
-  },
-  {
-    src: "fatography random photoshoots 10.jpg",
-    alt: "fatography photoshoots",
-  },
-];
-
 const DEFAULTS = {
   maxVerticalRotationDeg: 5,
   dragSensitivity: 20,
@@ -123,7 +80,7 @@ function computeItemBaseRotation(offsetX, offsetY, sizeX, sizeY, segments) {
 }
 
 export default function DomeGallery({
-  images = DEFAULT_IMAGES,
+  images,
   fit = 0.5,
   fitBasis = "auto",
   minRadius = 600,

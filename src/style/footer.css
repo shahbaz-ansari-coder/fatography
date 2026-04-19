@@ -125,7 +125,7 @@
 
 /* Footer Bottom */
 .footer-bottom {
-  text-align: center;
+  display: flex !important;
   margin-top: 50px;
   padding: 0px !
   ;
@@ -215,5 +215,8 @@
   .contact-card {
     justify-content: center;
     text-align: left; /* Text remains left aligned for readability */
+  }
+  .footer-bottom {
+    flex-direction: column-reverse !important;
   }
 }

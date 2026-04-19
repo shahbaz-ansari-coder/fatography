@@ -276,3 +276,102 @@ display:none;
 }
 
 }
+
+
+
+/* Mobile */
+@media (max-width:768px){
+
+  .celebrity-grid-v3{
+    grid-template-columns: 1fr; /* ek card per row */
+    gap: 30px;
+    max-width: 300px; /* card zyada wide na ho */
+    margin:auto;
+  }
+
+  .celeb-card-v3{
+    height: 400px;
+  }
+
+  .celeb-name-text{
+    font-size:16px;
+  }
+
+  .celeb-name-container{
+    padding:15px 10px;
+  }
+
+}
+
+
+
+/* --- Desktop & Base Styles (Inko mat chhediye) --- */
+.celebrity-grid-v3 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Default (Desktop: Grid chupa rahegi according to your logic) */
+.celebrity-grid-v3 { display: none; }
+.celebrity-name-gallery { display: block; }
+
+/* --- Tablet (1024px and below) --- */
+@media (max-width: 1024px) {
+  .celebrity-grid-v3 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Tablet par 2 cards */
+    padding: 0 20px;
+  }
+  .celebrity-name-gallery { display: none; }
+}
+
+/* --- MOBILE OPTIMIZATION (Zaruri Tabdeeli) --- */
+@media (max-width: 768px) {
+  .celebrity-page {
+    padding: 60px 15px; /* Side padding kam kar di */
+  }
+
+  .celebrity-grid-v3 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr) !important; /* Force 2 cards per row */
+    gap: 12px; /* Gap thoda kam taaki cards screen mein fit rahein */
+    max-width: 100%; /* Wider width for mobile grids */
+    margin: 0 auto;
+  }
+
+  .celeb-card-v3 {
+    height: 280px; /* Mobile par card ki height adjust ki taaki 2 cards bhadde na lagein */
+    border-radius: 12px; /* Thoda kam radius */
+  }
+
+  .celeb-name-text {
+    font-size: 14px; /* Chota font size for mobile names */
+    letter-spacing: 0.5px;
+  }
+
+  .celeb-subtext {
+    font-size: 8px; /* View shoot text chota kar diya */
+    letter-spacing: 1px;
+  }
+
+  .celeb-name-container {
+    padding: 15px 8px; /* Padding adjust ki */
+  }
+
+  /* Main Button resize for mobile */
+  .main-glow-btn {
+    padding: 14px 30px;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+  }
+}
+
+/* Extra small devices ke liye height aur choti kar sakte hain */
+@media (max-width: 480px) {
+  .celeb-card-v3 {
+    height: 240px; 
+  }
+}

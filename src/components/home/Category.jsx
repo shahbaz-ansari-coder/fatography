@@ -1,91 +1,58 @@
-import React from "react";
-import { ArrowUpRight } from "lucide-react"; // optional, remove if not needed
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { Link } from "react-router";
 
-// ─── Category section component with data inside the file
 export default function Category() {
-  // ─── Data moved here from JSON
-  const categoryData = [
-    {
-      title: "Cengiz Coşkun,",
-      image:
-        "https://fatography.co/wp-content/uploads/2025/08/Cengiz-Coskun-Fatography-7.png",
-      alt: "Street",
-      width: 600,
-      height: 690,
-      link: "#",
-    },
-    {
-      title: "Bilal Abbas Khan,",
-      image:
-        "https://fatography.co/wp-content/uploads/2025/08/Bilal-Abbas-Khan-Fatography-1-768x960.png",
-      alt: "Landscape",
-      width: 600,
-      height: 690,
-      link: "#",
-    },
-    {
-      title: "Momina Mustehsan,",
-      image:
-        "https://fatography.co/wp-content/uploads/2025/08/Momina-Mustehsan-Fatography-20-1.png",
-      alt: "Fashion",
-      width: 600,
-      height: 690,
-      link: "#",
-    },
-    {
-      title: "Farhan Saeed,",
-      image:
-        "https://fatography.co/wp-content/uploads/2025/08/Farhan-Saeed-5-1.jpeg",
-      alt: "Model",
-      width: 600,
-      height: 690,
-      link: "#",
-    },
-    {
-      title: "Shehzad Roy,",
-      image:
-        "https://fatography.co/wp-content/uploads/2025/08/Shehzad-Roy-Fatography-14-768x961.png",
-      alt: "Film",
-      width: 600,
-      height: 690,
-      link: "#",
-    },
-    {
-      title: "Sadia Khan",
-      image:
-        "https://fatography.co/wp-content/uploads/2025/10/1V1A4288-1551x2048.jpg",
-      alt: "Architecture",
-      width: 600,
-      height: 690,
-      link: "#",
-    },
-  ];
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchCelebrity();
+  }, []);
+
+  const fetchCelebrity = async () => {
+    try {
+      setLoading(true);
+
+      const res = await axios.get(
+        "https://fatography-backend.vercel.app/api/celebrity-shoot/all",
+      );
+
+      setData(res.data.data || []);
+    } catch (error) {
+      console.error("Error fetching celebrity:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <section className="section category" aria-label="photography category">
       <div className="container">
         <ul className="category-list">
-          {categoryData.map((item, index) => (
-            <li className="category-item" data-reveal key={index}>
-              <a href={item.link} className="category-card">
-                <h3 className="h4 card-title">{item.title}</h3>
+          {loading ? (
+            <p>Loading...</p>
+          ) : (
+            data.map((item) => (
+              <li className="category-item" key={item._id}>
+                <Link to={`actor/${item._id}`} className="category-card">
+                  <h3 className="h4 card-title">{item.celebrityName},</h3>
 
-                <figure
-                  className="card-banner img-holder"
-                  style={{ "--width": item.width, "--height": item.height }}
-                >
-                  <img
-                    src={item.image}
-                    width={item.width}
-                    height={item.height}
-                    loading="lazy"
-                    alt={item.alt}
-                    className="img-cover"
-                  />
-                </figure>
-              </a>
-            </li>
-          ))}
+                  <figure
+                    className="card-banner img-holder"
+                    style={{ "--width": "600px", "--height": "290px" }}
+                  >
+                    <img
+                      src={item.thumbnail || item.images?.[0]}
+                      alt={item.celebrityName}
+                      loading="lazy"
+                      className="img-cover"
+                    />
+                  </figure>
+                </Link>
+              </li>
+            ))
+          )}
         </ul>
       </div>
     </section>
