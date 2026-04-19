@@ -127,7 +127,7 @@
 .footer-bottom {
   display: flex !important;
   margin-top: 50px;
-  padding: 0px !
+  padding: 0px !important
   ;
   border-top: 1px solid #1a1a1a;
   color: #777;
