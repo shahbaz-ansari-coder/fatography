@@ -1,5 +1,9 @@
-/* ─── Sidebar ─────────────────────────────────────────────── */
-.ad-sidebar {
+/* ================================================================
+   FATOGRAPHY ADMIN SIDEBAR — unique prefix: fatoadmin__
+   ================================================================ */
+
+/* ── Sidebar ──────────────────────────────────────────────────── */
+.fatoadmin__sidebar {
   width: 260px;
   background-color: #0f0f0f;
   border-right: 1px solid rgba(255, 255, 255, 0.05);
@@ -12,95 +16,103 @@
   padding: 30px 15px;
   z-index: 1000;
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-sizing: border-box;
 }
 
-/* ─── Logo ────────────────────────────────────────────────── */
-.ad-logo {
+/* ── Logo ─────────────────────────────────────────────────────── */
+.fatoadmin__logo {
   font-size: 22px !important;
-  font-weight: 900;
-  color: white;
-  margin-bottom: 40px;
+  font-weight: 900 !important;
+  color: #ffffff !important;
+  margin: 0 0 40px 0 !important;
   padding-left: 10px;
   letter-spacing: 1px;
+  line-height: 1.2 !important;
 }
 
-.ad-dot {
-  color: rgb(182, 82, 79);
+.fatoadmin__dot {
+  color: rgb(182, 82, 79) !important;
   display: inline !important;
 }
 
-/* ─── Nav ─────────────────────────────────────────────────── */
-.ad-nav {
+/* ── Nav ──────────────────────────────────────────────────────── */
+.fatoadmin__nav {
   display: flex;
   flex-direction: column;
   gap: 5px;
   flex-grow: 1;
+  overflow-y: auto;
 }
 
-.ad-nav-item {
+.fatoadmin__nav-item {
   display: flex !important;
-  align-items: center;
+  align-items: center !important;
   gap: 12px;
   padding: 12px 15px;
   border-radius: 10px;
-  color: #777;
+  color: #777777;
   font-size: 14px;
-  text-decoration: none;
+  text-decoration: none !important;
   transition: background 0.25s ease, color 0.25s ease;
+  white-space: nowrap;
 }
 
-.ad-nav-item:hover {
+.fatoadmin__nav-item:hover {
   background: rgba(182, 82, 79, 0.1);
-  color: white;
+  color: #ffffff;
+  text-decoration: none !important;
 }
 
-.ad-nav-item.active {
-  background: rgb(182, 82, 79);
-  color: white;
+.fatoadmin__nav-item--active {
+  background: rgb(182, 82, 79) !important;
+  color: #ffffff !important;
 }
 
-/* ─── Footer ──────────────────────────────────────────────── */
-.ad-sidebar-footer {
-  border-top: 1px solid #222;
+/* ── Footer ───────────────────────────────────────────────────── */
+.fatoadmin__footer {
+  border-top: 1px solid #222222;
   padding-top: 20px;
+  flex-shrink: 0;
 }
 
-.ad-footer-item {
+.fatoadmin__footer-link {
   display: flex !important;
-  align-items: center;
+  align-items: center !important;
   gap: 10px;
-  color: #888;
+  color: #888888;
   font-size: 13px;
   margin-bottom: 15px;
   padding-left: 15px;
-  text-decoration: none;
+  text-decoration: none !important;
   transition: color 0.2s;
 }
 
-.ad-footer-item:hover {
-  color: #ccc;
+.fatoadmin__footer-link:hover {
+  color: #cccccc;
+  text-decoration: none !important;
 }
 
-.ad-logout-btn {
-  background: none;
-  border: none;
+.fatoadmin__logout-btn {
+  background: none !important;
+  border: none !important;
   cursor: pointer;
   color: #ff4d4d;
   font-weight: 700;
   font-size: 13px;
   display: flex !important;
-  align-items: center;
+  align-items: center !important;
   gap: 10px;
   padding-left: 15px;
   transition: opacity 0.2s;
+  width: 100%;
 }
 
-.ad-logout-btn:hover {
+.fatoadmin__logout-btn:hover {
   opacity: 0.75;
 }
 
-/* ─── Mobile Top Bar ──────────────────────────────────────── */
-.ad-mobile-topbar {
+/* ── Mobile Top Bar ───────────────────────────────────────────── */
+.fatoadmin__topbar {
   display: none;
   position: fixed;
   top: 0;
@@ -112,74 +124,70 @@
   align-items: center;
   justify-content: space-between;
   padding: 0 20px;
-  z-index: 999;
+  z-index: 1001;
+  box-sizing: border-box;
 }
 
-.ad-mobile-logo {
+.fatoadmin__topbar-logo {
   font-size: 18px;
   font-weight: 900;
-  color: white;
-  text-decoration: none;
+  color: #ffffff !important;
+  text-decoration: none !important;
   letter-spacing: 1px;
 }
 
-.ad-hamburger {
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: white;
+.fatoadmin__hamburger {
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: #ffffff !important;
   width: 40px;
   height: 40px;
   border-radius: 10px;
-  display: flex;
+  display: flex !important;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: background 0.2s ease;
+  flex-shrink: 0;
 }
 
-.ad-hamburger:hover {
-  background: rgba(182, 82, 79, 0.25);
+.fatoadmin__hamburger:hover {
+  background: rgba(182, 82, 79, 0.3) !important;
 }
 
-/* ─── Overlay ─────────────────────────────────────────────── */
-.ad-overlay {
-  display: none;
+/* ── Overlay ──────────────────────────────────────────────────── */
+.fatoadmin__overlay {
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(2px);
-  z-index: 998;
-  animation: fadeIn 0.25s ease;
+  -webkit-backdrop-filter: blur(2px);
+  z-index: 999;
+  animation: fatoadmin__fadeIn 0.25s ease;
 }
 
-@keyframes fadeIn {
+@keyframes fatoadmin__fadeIn {
   from { opacity: 0; }
   to   { opacity: 1; }
 }
 
-/* ─── Responsive ──────────────────────────────────────────── */
+/* ── Responsive ───────────────────────────────────────────────── */
 @media (max-width: 768px) {
-  .ad-mobile-topbar {
+  .fatoadmin__topbar {
     display: flex;
   }
 
-  .ad-overlay {
-    display: block;
-  }
-
-  .ad-sidebar {
+  .fatoadmin__sidebar {
     transform: translateX(-100%);
-    top: 0;
-    padding-top: 25px;
     box-shadow: 4px 0 30px rgba(0, 0, 0, 0.5);
+    padding-top: 20px;
   }
 
-  .ad-sidebar--open {
+  .fatoadmin__sidebar--open {
     transform: translateX(0);
   }
 
-  /* hide desktop logo inside sidebar on mobile (shown in topbar) */
-  .ad-sidebar-header {
+  .fatoadmin__sidebar-header {
     display: none;
   }
 }

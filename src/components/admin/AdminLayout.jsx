@@ -17,14 +17,10 @@ const AdminLayout = () => {
         const res = await fetch(
           "https://fatography-backend.vercel.app/api/admin/verify-admin",
           {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
+            headers: { Authorization: `Bearer ${token}` },
           },
         );
-        if (!res.ok) {
-          navigate("/login");
-        }
+        if (!res.ok) navigate("/login");
       } catch (error) {
         navigate("/login");
       } finally {
@@ -37,33 +33,27 @@ const AdminLayout = () => {
   if (loading) return null;
 
   return (
-    <div
-      style={{
-        display: "flex",
-        minHeight: "100vh",
-        backgroundColor: "#080808",
-      }}
-    >
+    <div className="fatoadmin__layout">
       <Sidebar />
-
-      {/* Main content: shifts right on desktop, drops below topbar on mobile */}
-      <div
-        style={{
-          marginLeft: "260px",
-          width: "100%",
-          minHeight: "100vh",
-        }}
-        className="ad-main-content"
-      >
+      <main className="fatoadmin__main">
         <Outlet />
-      </div>
+      </main>
 
-      {/* Inline responsive override — keeps AdminLayout self-contained */}
       <style>{`
+        .fatoadmin__layout {
+          display: flex;
+          min-height: 100vh;
+          background-color: #080808;
+        }
+        .fatoadmin__main {
+          margin-left: 260px;
+          width: 100%;
+          min-height: 100vh;
+        }
         @media (max-width: 768px) {
-          .ad-main-content {
+          .fatoadmin__main {
             margin-left: 0 !important;
-            padding-top: 60px; /* height of mobile topbar */
+            padding-top: 60px;
           }
         }
       `}</style>

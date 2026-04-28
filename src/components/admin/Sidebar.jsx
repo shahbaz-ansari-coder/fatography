@@ -19,12 +19,10 @@ const Sidebar = () => {
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
 
-  // Close sidebar on route change (mobile)
   useEffect(() => {
     setIsOpen(false);
   }, [location.pathname]);
 
-  // Prevent body scroll when sidebar is open on mobile
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -76,13 +74,13 @@ const Sidebar = () => {
 
   return (
     <>
-      {/* Mobile Top Bar */}
-      <header className="ad-mobile-topbar">
-        <Link to="/" className="ad-mobile-logo">
-          FATOGRAPHY<span className="ad-dot">.</span>
+      {/* ── Mobile Top Bar ── */}
+      <header className="fatoadmin__topbar">
+        <Link to="/" className="fatoadmin__topbar-logo">
+          FATOGRAPHY<span className="fatoadmin__dot">.</span>
         </Link>
         <button
-          className="ad-hamburger"
+          className="fatoadmin__hamburger"
           onClick={() => setIsOpen((prev) => !prev)}
           aria-label="Toggle menu"
         >
@@ -90,32 +88,34 @@ const Sidebar = () => {
         </button>
       </header>
 
-      {/* Overlay */}
+      {/* ── Overlay ── */}
       {isOpen && (
         <div
-          className="ad-overlay"
+          className="fatoadmin__overlay"
           onClick={() => setIsOpen(false)}
           aria-hidden="true"
         />
       )}
 
-      {/* Sidebar */}
-      <aside className={`ad-sidebar ${isOpen ? "ad-sidebar--open" : ""}`}>
-        <div className="ad-sidebar-header">
+      {/* ── Sidebar ── */}
+      <aside
+        className={`fatoadmin__sidebar ${isOpen ? "fatoadmin__sidebar--open" : ""}`}
+      >
+        <div className="fatoadmin__sidebar-header">
           <Link to="/" onClick={() => setIsOpen(false)}>
-            <h2 className="ad-logo">
-              FATOGRAPHY<span className="ad-dot">.</span>
+            <h2 className="fatoadmin__logo">
+              FATOGRAPHY<span className="fatoadmin__dot">.</span>
             </h2>
           </Link>
         </div>
 
-        <nav className="ad-nav">
+        <nav className="fatoadmin__nav">
           {menuItems.map((item) => (
             <NavLink
               key={item.path}
               to={item.path}
               className={({ isActive }) =>
-                `ad-nav-item ${isActive ? "active" : ""}`
+                `fatoadmin__nav-item${isActive ? " fatoadmin__nav-item--active" : ""}`
               }
             >
               {item.icon}
@@ -124,11 +124,14 @@ const Sidebar = () => {
           ))}
         </nav>
 
-        <div className="ad-sidebar-footer">
-          <NavLink to="/admin/account-settings" className="ad-footer-item">
+        <div className="fatoadmin__footer">
+          <NavLink
+            to="/admin/account-settings"
+            className="fatoadmin__footer-link"
+          >
             <UserCog size={18} /> <span>Account Settings</span>
           </NavLink>
-          <button className="ad-logout-btn" onClick={handleLogout}>
+          <button className="fatoadmin__logout-btn" onClick={handleLogout}>
             <LogOut size={18} /> <span>Logout</span>
           </button>
         </div>
