@@ -1,20 +1,40 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   LayoutDashboard,
   Image,
   Settings,
   LogOut,
   MessageSquare,
-  Star,
   Camera,
   Sliders,
   UserCog,
+  Menu,
+  X,
 } from "lucide-react";
-import { Link, NavLink, useNavigate } from "react-router";
+import { Link, NavLink, useNavigate, useLocation } from "react-router-dom";
 import "../../style/adminSidebar.css";
 
 const Sidebar = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const [isOpen, setIsOpen] = useState(false);
+
+  // Close sidebar on route change (mobile)
+  useEffect(() => {
+    setIsOpen(false);
+  }, [location.pathname]);
+
+  // Prevent body scroll when sidebar is open on mobile
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
 
   const menuItems = [
     {
@@ -55,40 +75,65 @@ const Sidebar = () => {
   };
 
   return (
-    <aside className="ad-sidebar">
-      <div className="ad-sidebar-header">
-        <Link to={'/'}>
-        <h2 className="ad-logo">
+    <>
+      {/* Mobile Top Bar */}
+      <header className="ad-mobile-topbar">
+        <Link to="/" className="ad-mobile-logo">
           FATOGRAPHY<span className="ad-dot">.</span>
-        </h2>
         </Link>
-      </div>
-
-      <nav className="ad-nav">
-        {menuItems.map((item) => (
-          <NavLink
-            key={item.path}
-            to={item.path}
-            className={({ isActive }) =>
-              `ad-nav-item ${isActive ? "active" : ""}`
-            }
-          >
-            {item.icon}
-            <span>{item.label}</span>
-          </NavLink>
-        ))}
-      </nav>
-
-      <div className="ad-sidebar-footer">
-        <NavLink to="/admin/account-settings" className="ad-footer-item">
-          <UserCog size={18} /> <span>Account Settings</span>
-        </NavLink>
-
-        <button className="ad-logout-btn" onClick={handleLogout}>
-          <LogOut size={18} /> <span>Logout</span>
+        <button
+          className="ad-hamburger"
+          onClick={() => setIsOpen((prev) => !prev)}
+          aria-label="Toggle menu"
+        >
+          {isOpen ? <X size={22} /> : <Menu size={22} />}
         </button>
-      </div>
-    </aside>
+      </header>
+
+      {/* Overlay */}
+      {isOpen && (
+        <div
+          className="ad-overlay"
+          onClick={() => setIsOpen(false)}
+          aria-hidden="true"
+        />
+      )}
+
+      {/* Sidebar */}
+      <aside className={`ad-sidebar ${isOpen ? "ad-sidebar--open" : ""}`}>
+        <div className="ad-sidebar-header">
+          <Link to="/" onClick={() => setIsOpen(false)}>
+            <h2 className="ad-logo">
+              FATOGRAPHY<span className="ad-dot">.</span>
+            </h2>
+          </Link>
+        </div>
+
+        <nav className="ad-nav">
+          {menuItems.map((item) => (
+            <NavLink
+              key={item.path}
+              to={item.path}
+              className={({ isActive }) =>
+                `ad-nav-item ${isActive ? "active" : ""}`
+              }
+            >
+              {item.icon}
+              <span>{item.label}</span>
+            </NavLink>
+          ))}
+        </nav>
+
+        <div className="ad-sidebar-footer">
+          <NavLink to="/admin/account-settings" className="ad-footer-item">
+            <UserCog size={18} /> <span>Account Settings</span>
+          </NavLink>
+          <button className="ad-logout-btn" onClick={handleLogout}>
+            <LogOut size={18} /> <span>Logout</span>
+          </button>
+        </div>
+      </aside>
+    </>
   );
 };
 

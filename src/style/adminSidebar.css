@@ -1,25 +1,41 @@
+/* ─── Sidebar ─────────────────────────────────────────────── */
 .ad-sidebar {
   width: 260px;
   background-color: #0f0f0f;
-  border-right: 1px solid rgba(255,255,255,0.05);
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
   display: flex;
   flex-direction: column;
   position: fixed;
+  top: 0;
+  left: 0;
   height: 100vh;
   padding: 30px 15px;
+  z-index: 1000;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* ─── Logo ────────────────────────────────────────────────── */
 .ad-logo {
   font-size: 22px !important;
   font-weight: 900;
   color: white;
   margin-bottom: 40px;
   padding-left: 10px;
+  letter-spacing: 1px;
 }
 
-.ad-dot { color: rgb(182, 82, 79); display: inline !important; }
+.ad-dot {
+  color: rgb(182, 82, 79);
+  display: inline !important;
+}
 
-.ad-nav { display: flex; flex-direction: column; gap: 5px; flex-grow: 1; }
+/* ─── Nav ─────────────────────────────────────────────────── */
+.ad-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  flex-grow: 1;
+}
 
 .ad-nav-item {
   display: flex !important;
@@ -29,17 +45,25 @@
   border-radius: 10px;
   color: #777;
   font-size: 14px;
-  transition: 0.3s;
+  text-decoration: none;
+  transition: background 0.25s ease, color 0.25s ease;
 }
 
-.ad-nav-item:hover, .ad-nav-item.active {
+.ad-nav-item:hover {
   background: rgba(182, 82, 79, 0.1);
   color: white;
 }
 
-.ad-nav-item.active { background: rgb(182, 82, 79); }
+.ad-nav-item.active {
+  background: rgb(182, 82, 79);
+  color: white;
+}
 
-.ad-sidebar-footer { border-top: 1px solid #222; padding-top: 20px; }
+/* ─── Footer ──────────────────────────────────────────────── */
+.ad-sidebar-footer {
+  border-top: 1px solid #222;
+  padding-top: 20px;
+}
 
 .ad-footer-item {
   display: flex !important;
@@ -49,13 +73,113 @@
   font-size: 13px;
   margin-bottom: 15px;
   padding-left: 15px;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.ad-footer-item:hover {
+  color: #ccc;
 }
 
 .ad-logout-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
   color: #ff4d4d;
   font-weight: 700;
+  font-size: 13px;
   display: flex !important;
   align-items: center;
   gap: 10px;
   padding-left: 15px;
+  transition: opacity 0.2s;
+}
+
+.ad-logout-btn:hover {
+  opacity: 0.75;
+}
+
+/* ─── Mobile Top Bar ──────────────────────────────────────── */
+.ad-mobile-topbar {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background-color: #0f0f0f;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  z-index: 999;
+}
+
+.ad-mobile-logo {
+  font-size: 18px;
+  font-weight: 900;
+  color: white;
+  text-decoration: none;
+  letter-spacing: 1px;
+}
+
+.ad-hamburger {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.ad-hamburger:hover {
+  background: rgba(182, 82, 79, 0.25);
+}
+
+/* ─── Overlay ─────────────────────────────────────────────── */
+.ad-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(2px);
+  z-index: 998;
+  animation: fadeIn 0.25s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ─── Responsive ──────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .ad-mobile-topbar {
+    display: flex;
+  }
+
+  .ad-overlay {
+    display: block;
+  }
+
+  .ad-sidebar {
+    transform: translateX(-100%);
+    top: 0;
+    padding-top: 25px;
+    box-shadow: 4px 0 30px rgba(0, 0, 0, 0.5);
+  }
+
+  .ad-sidebar--open {
+    transform: translateX(0);
+  }
+
+  /* hide desktop logo inside sidebar on mobile (shown in topbar) */
+  .ad-sidebar-header {
+    display: none;
+  }
 }

@@ -372,3 +372,17 @@
   align-items: center;
   gap: 10px;
 }
+
+
+@media (max-width: 425px) {
+  .adm-header{
+    flex-direction: column;
+    gap: 20px;
+  }
+  .adm-title{
+    font-size: 22px !important;
+  }
+  .adm-container {
+    padding: 20px !important;
+  }
+}
