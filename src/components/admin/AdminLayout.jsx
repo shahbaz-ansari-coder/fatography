@@ -6,24 +6,24 @@ const AdminLayout = () => {
   const [activeTab, setActiveTab] = useState("overview");
   const navigate = useNavigate();
 
-useEffect(() => {
-  const token = localStorage.getItem("token");
+// useEffect(() => {
+//   const token = localStorage.getItem("token");
 
-  fetch("https://fatography-backend.vercel.app/api/admin/verify-admin", {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  })
-    .then((res) => {
-      if (!res.ok) {
-        navigate("/login");
-      }
-      return res.json();
-    })
-    .catch(() => {
-      navigate("/login");
-    });
-}, []);
+//   fetch("https://fatography-backend.vercel.app/api/admin/verify-admin", {
+//     headers: {
+//       Authorization: `Bearer ${token}`,
+//     },
+//   })
+//     .then((res) => {
+//       if (!res.ok) {
+//         navigate("/login");
+//       }
+//       return res.json();
+//     })
+//     .catch(() => {
+//       navigate("/login");
+//     });
+// }, []);
 
 
   return (
