@@ -21,7 +21,7 @@ import ScrollReveal from "./components/home/ScrollReveal";
 import TestimonialsPage from "./pages/user/TestimonialsPage";
 import AllServicesPage from "./pages/user/AllServicesPage";
 import CelebrityShootsPage from "./pages/user/CelebrityShootsPage";
-import AboutPage from "./pages/user/Aboutpage";
+import AboutPage from "./pages/user/AboutPage";
 import VideographyPage from "./pages/user/VideographyPage";
 import ServicePage from "./pages/user/Service";
 import PreWedding from "./pages/user/PreWedding";
