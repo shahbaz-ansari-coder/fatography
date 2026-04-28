@@ -1,6 +1,18 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
+
+/* SAME CELEBRITY ORDER */
+
+const CELEBRITY_ORDER = [
+  "Cengiz Coşkun",
+  "Bilal Abbas Khan",
+  "Momina Mustehsan",
+  "Farhan Saeed",
+  "Shehzad Roy",
+  "Sadia Khan",
+  "Ebraheem Al Samadi",
+];
 
 export default function Category() {
   const [data, setData] = useState([]);
@@ -18,7 +30,23 @@ export default function Category() {
         "https://fatography-backend.vercel.app/api/celebrity-shoot/all",
       );
 
-      setData(res.data.data || []);
+      const apiData = res.data.data || [];
+
+      /* FILTER REQUIRED CELEBRITIES */
+
+      const filtered = apiData.filter((item) =>
+        CELEBRITY_ORDER.includes(item.celebrityName),
+      );
+
+      /* SORT BY ORDER */
+
+      const sorted = CELEBRITY_ORDER.map((name) =>
+        filtered.find((item) => item.celebrityName === name),
+      ).filter(Boolean);
+
+      /* LIMIT 7 */
+
+      setData(sorted.slice(0, 7));
     } catch (error) {
       console.error("Error fetching celebrity:", error);
     } finally {
@@ -35,7 +63,7 @@ export default function Category() {
           ) : (
             data.map((item) => (
               <li className="category-item" key={item._id}>
-                <Link to={`actor/${item._id}`} className="category-card">
+                <Link to={`/actor/${item._id}`} className="category-card">
                   <h3 className="h4 card-title">{item.celebrityName},</h3>
 
                   <figure

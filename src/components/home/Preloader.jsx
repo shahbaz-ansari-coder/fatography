@@ -1,21 +1,28 @@
 import { useEffect, useState } from "react";
 
-// ─── Preloader data
-const preloaderData = {
-  loadingImage: "/logo.svg",
-  loadingCircleImage: "/loading-circle.svg",
-  loadingAltText: "loading",
-};
-
-// ─── Page preloader component
 function Preloader() {
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    const handleLoad = () => {
-      setIsLoaded(true);
-      document.body.classList.remove("active");
+    let pageLoaded = false;
+
+    const hideLoader = () => {
+      if (!pageLoaded) {
+        pageLoaded = true;
+        setLoaded(true);
+        document.body.classList.remove("active");
+      }
     };
+
+    // Page load hone par
+    const handleLoad = () => {
+      hideLoader();
+    };
+
+    // Maximum wait time (1.5s)
+    const maxTimer = setTimeout(() => {
+      hideLoader();
+    }, 1500);
 
     if (document.readyState === "complete") {
       handleLoad();
@@ -25,28 +32,22 @@ function Preloader() {
 
     return () => {
       window.removeEventListener("load", handleLoad);
+      clearTimeout(maxTimer);
     };
   }, []);
 
-  return (
-    <div className={`loading ${isLoaded ? "loaded" : ""}`} data-loading>
-      {/* Main loading icon */}
-      <img
-        src={preloaderData.loadingImage}
-        width="155"
-        height="155"
-        alt={preloaderData.loadingAltText}
-        className="img"
-      />
+  if (loaded) return null;
 
-      {/* Animated loading circle */}
-      <img
-        src={preloaderData.loadingCircleImage}
-        width="170"
-        height="170"
-        alt=""
-        className="circle"
-      />
+  return (
+    <div className="sa-loader-wrapper">
+      <div className="sa-loader">
+        {[...Array(9)].map((_, i) => (
+          <div className="sa-text" key={i}>
+            <span>Loading</span>
+          </div>
+        ))}
+        <div className="sa-line"></div>
+      </div>
     </div>
   );
 }

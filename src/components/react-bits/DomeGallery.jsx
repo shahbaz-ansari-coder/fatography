@@ -41,9 +41,7 @@ function buildItems(pool, seg) {
   }
 
   const normalizedImages = pool.map((image) => {
-    if (typeof image === "string") {
-      return { src: image, alt: "" };
-    }
+    if (typeof image === "string") return { src: image, alt: "" };
     return { src: image.src || "", alt: image.alt || "" };
   });
 
@@ -86,7 +84,7 @@ export default function DomeGallery({
   minRadius = 600,
   maxRadius = Infinity,
   padFactor = 0.25,
-  overlayBlurColor = "#060010",
+  overlayBlurColor = "#000000",
   maxVerticalRotationDeg = DEFAULTS.maxVerticalRotationDeg,
   dragSensitivity = DEFAULTS.dragSensitivity,
   enlargeTransitionMs = DEFAULTS.enlargeTransitionMs,
@@ -119,6 +117,9 @@ export default function DomeGallery({
   const openingRef = useRef(false);
   const openStartedAtRef = useRef(0);
   const lastDragEndAt = useRef(0);
+
+  // --- SCROLL FIX: intent ref ---
+  const intentRef = useRef(null); // 'horizontal' | 'vertical' | null
 
   const scrollLockedRef = useRef(false);
   const lockScroll = useCallback(() => {
@@ -206,7 +207,6 @@ export default function DomeGallery({
             frameR.left - mainR.left + (frameR.width - tempRect.width) / 2;
           const centeredTop =
             frameR.top - mainR.top + (frameR.height - tempRect.height) / 2;
-
           enlargedOverlay.style.left = `${centeredLeft}px`;
           enlargedOverlay.style.top = `${centeredTop}px`;
         } else {
@@ -287,9 +287,11 @@ export default function DomeGallery({
         if (focusedElRef.current) return;
         stopInertia();
 
+        // --- SCROLL FIX: intent reset ---
+        intentRef.current = null;
+
         pointerTypeRef.current = event.pointerType || "mouse";
-        if (pointerTypeRef.current === "touch") event.preventDefault();
-        if (pointerTypeRef.current === "touch") lockScroll();
+        // Only lock scroll for touch AFTER we determine horizontal intent
         draggingRef.current = true;
         cancelTapRef.current = false;
         movedRef.current = false;
@@ -298,6 +300,7 @@ export default function DomeGallery({
         const potential = event.target.closest?.(".item__image");
         tapTargetRef.current = potential || null;
       },
+
       onDrag: ({
         event,
         last,
@@ -311,6 +314,33 @@ export default function DomeGallery({
           !startPosRef.current
         )
           return;
+
+        // --- SCROLL FIX: detect intent on first significant movement ---
+        if (pointerTypeRef.current === "touch" && intentRef.current === null) {
+          const dx = Math.abs(event.clientX - startPosRef.current.x);
+          const dy = Math.abs(event.clientY - startPosRef.current.y);
+          if (dx > 6 || dy > 6) {
+            intentRef.current = dx > dy ? "horizontal" : "vertical";
+            // Only lock scroll if horizontal (globe rotation)
+            if (intentRef.current === "horizontal") {
+              lockScroll();
+            }
+          }
+        }
+
+        // --- SCROLL FIX: let vertical touch scroll pass through ---
+        if (
+          pointerTypeRef.current === "touch" &&
+          intentRef.current === "vertical"
+        ) {
+          if (last) {
+            draggingRef.current = false;
+            startPosRef.current = null;
+            tapTargetRef.current = null;
+            movedRef.current = false;
+          }
+          return;
+        }
 
         if (pointerTypeRef.current === "touch") event.preventDefault();
 
@@ -344,9 +374,7 @@ export default function DomeGallery({
             const dy = event.clientY - startPosRef.current.y;
             const dist2 = dx * dx + dy * dy;
             const TAP_THRESH_PX = pointerTypeRef.current === "touch" ? 10 : 6;
-            if (dist2 <= TAP_THRESH_PX * TAP_THRESH_PX) {
-              isTap = true;
-            }
+            if (dist2 <= TAP_THRESH_PX * TAP_THRESH_PX) isTap = true;
           }
 
           let [vMagX, vMagY] = velArr;
@@ -368,6 +396,7 @@ export default function DomeGallery({
           if (!isTap && (Math.abs(vx) > 0.005 || Math.abs(vy) > 0.005)) {
             startInertia(vx, vy);
           }
+
           startPosRef.current = null;
           cancelTapRef.current = !isTap;
 
@@ -400,8 +429,8 @@ export default function DomeGallery({
       if (!overlay) return;
 
       const refDiv = parent.querySelector(".item__image--reference");
-
       const originalPos = originalTilePositionRef.current;
+
       if (!originalPos) {
         overlay.remove();
         if (refDiv) refDiv.remove();
@@ -424,7 +453,6 @@ export default function DomeGallery({
         width: originalPos.width,
         height: originalPos.height,
       };
-
       const overlayRelativeToRoot = {
         left: currentRect.left - rootRect.left,
         top: currentRect.top - rootRect.top,
@@ -460,7 +488,6 @@ export default function DomeGallery({
 
       overlay.remove();
       rootRef.current.appendChild(animatingOverlay);
-
       void animatingOverlay.getBoundingClientRect();
 
       requestAnimationFrame(() => {
@@ -474,11 +501,9 @@ export default function DomeGallery({
       const cleanup = () => {
         animatingOverlay.remove();
         originalTilePositionRef.current = null;
-
         if (refDiv) refDiv.remove();
         parent.style.transition = "none";
         el.style.transition = "none";
-
         parent.style.setProperty("--rot-y-delta", `0deg`);
         parent.style.setProperty("--rot-x-delta", `0deg`);
 
@@ -492,7 +517,6 @@ export default function DomeGallery({
           requestAnimationFrame(() => {
             parent.style.transition = "";
             el.style.transition = "opacity 300ms ease-out";
-
             requestAnimationFrame(() => {
               el.style.opacity = "1";
               setTimeout(() => {
@@ -520,7 +544,6 @@ export default function DomeGallery({
       if (e.key === "Escape") close();
     };
     window.addEventListener("keydown", onKey);
-
     return () => {
       scrim.removeEventListener("click", close);
       window.removeEventListener("keydown", onKey);
@@ -561,7 +584,6 @@ export default function DomeGallery({
     refDiv.className = "item__image item__image--reference opacity-0";
     refDiv.style.transform = `rotateX(${-parentRot.rotateX}deg) rotateY(${-parentRot.rotateY}deg)`;
     parent.appendChild(refDiv);
-
     void refDiv.offsetHeight;
 
     const tileR = refDiv.getBoundingClientRect();
@@ -618,10 +640,8 @@ export default function DomeGallery({
     const ty0 = tileR.top - frameR.top;
     const sx0 = tileR.width / frameR.width;
     const sy0 = tileR.height / frameR.height;
-
     const validSx0 = isFinite(sx0) && sx0 > 0 ? sx0 : 1;
     const validSy0 = isFinite(sy0) && sy0 > 0 ? sy0 : 1;
-
     overlay.style.transform = `translate(${tx0}px, ${ty0}px) scale(${validSx0}, ${validSy0})`;
 
     setTimeout(() => {
@@ -685,12 +705,8 @@ export default function DomeGallery({
       --item-width: calc(var(--circ) / var(--segments-x));
       --item-height: calc(var(--circ) / var(--segments-y));
     }
-    
-    .sphere-root * {
-      box-sizing: border-box;
-    }
+    .sphere-root * { box-sizing: border-box; }
     .sphere, .sphere-item, .item__image { transform-style: preserve-3d; }
-    
     .stage {
       width: 100%;
       height: 100%;
@@ -702,13 +718,11 @@ export default function DomeGallery({
       perspective: calc(var(--radius) * 2);
       perspective-origin: 50% 50%;
     }
-    
     .sphere {
       transform: translateZ(calc(var(--radius) * -1));
       will-change: transform;
       position: absolute;
     }
-    
     .sphere-item {
       width: calc(var(--item-width) * var(--item-size-x));
       height: calc(var(--item-height) * var(--item-size-y));
@@ -721,33 +735,20 @@ export default function DomeGallery({
       transform-origin: 50% 50%;
       backface-visibility: hidden;
       transition: transform 300ms;
-      transform: rotateY(calc(var(--rot-y) * (var(--offset-x) + ((var(--item-size-x) - 1) / 2)) + var(--rot-y-delta, 0deg))) 
-                 rotateX(calc(var(--rot-x) * (var(--offset-y) - ((var(--item-size-y) - 1) / 2)) + var(--rot-x-delta, 0deg))) 
+      transform: rotateY(calc(var(--rot-y) * (var(--offset-x) + ((var(--item-size-x) - 1) / 2)) + var(--rot-y-delta, 0deg)))
+                 rotateX(calc(var(--rot-x) * (var(--offset-y) - ((var(--item-size-y) - 1) / 2)) + var(--rot-x-delta, 0deg)))
                  translateZ(var(--radius));
     }
-    
     .sphere-root[data-enlarging="true"] .scrim {
       opacity: 1 !important;
       pointer-events: all !important;
     }
-    
     @media (max-aspect-ratio: 1/1) {
       .viewer-frame {
         height: auto !important;
         width: 100% !important;
       }
     }
-    
-    // body.dg-scroll-lock {
-    //   position: fixed !important;
-    //   top: 0;
-    //   left: 0;
-    //   width: 100% !important;
-    //   height: 100% !important;
-    //   overflow: hidden !important;
-    //   touch-action: none !important;
-    //   overscroll-behavior: contain !important;
-    // }
     .item__image {
       position: absolute;
       inset: 10px;
@@ -765,6 +766,17 @@ export default function DomeGallery({
       position: absolute;
       inset: 10px;
       pointer-events: none;
+    }
+
+    @media (max-width: 480px) {
+      .sphere-root {
+        --viewer-pad: 16px;
+      }
+    }
+    @media (max-width: 768px) and (min-width: 481px) {
+      .sphere-root {
+        --viewer-pad: 32px;
+      }
     }
   `;
 
@@ -787,7 +799,8 @@ export default function DomeGallery({
           ref={mainRef}
           className="absolute inset-0 grid place-items-center overflow-hidden select-none bg-transparent"
           style={{
-            touchAction: "none",
+            // --- SCROLL FIX: pan-y allows vertical scroll to pass through ---
+            touchAction: "pan-y",
             WebkitUserSelect: "none",
           }}
         >
@@ -850,7 +863,7 @@ export default function DomeGallery({
                       style={{
                         backfaceVisibility: "hidden",
                         filter: grayscale ? "grayscale(1)" : "none",
-                        transition: "filter 0.4s ease", // smooth transition
+                        transition: "filter 0.4s ease",
                       }}
                       onMouseEnter={(e) =>
                         (e.currentTarget.style.filter = "grayscale(0)")
@@ -873,7 +886,6 @@ export default function DomeGallery({
               backgroundImage: `radial-gradient(rgba(235, 235, 235, 0) 65%, var(--overlay-blur-color, ${overlayBlurColor}) 100%)`,
             }}
           />
-
           <div
             className="absolute inset-0 m-auto z-[3] pointer-events-none"
             style={{
@@ -882,7 +894,6 @@ export default function DomeGallery({
               backdropFilter: "blur(3px)",
             }}
           />
-
           <div
             className="absolute left-0 right-0 top-0 h-[120px] z-[5] pointer-events-none rotate-180"
             style={{

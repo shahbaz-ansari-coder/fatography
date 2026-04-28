@@ -1,206 +1,368 @@
-:root {
-  --primary: rgb(216 116 112);
-  --dark: #0d0d0d;
-  --bg-darker: #050505;
-  --text-dim: #999;
-  --border-color: rgba(255, 255, 255, 0.08);
-}
 
-.actor-page-container {
-  background-color: var(--bg-darker);
-  color: white;
-  min-height: 100vh;
-  font-family: 'Inter', sans-serif;
-  overflow-x: hidden;
-}
-
-/* Top Nav */
-.actor-top-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 40px;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background: rgba(5, 5, 5, 0.8);
-  backdrop-filter: blur(10px);
-}
-
-.back-circle {
-  background: var(--border-color);
-  border: none;
-  color: white;
-  width: 45px;
-  height: 45px;
+/* ═══════════════════════════════════
+   BACK BUTTON
+═══════════════════════════════════ */
+.asp-back-btn {
+  position: absolute;
+  top: 32px;
+  left: calc(5% + 140px);
+  z-index: 4;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
   border-radius: 50%;
-  cursor: pointer;
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: 0.3s;
+  cursor: pointer;
+  transition: background 0.25s ease, border-color 0.25s ease;
+}
+.asp-back-btn:hover { background: var(--p); border-color: var(--p); }
+
+/* ═══════════════════════════════════
+   HERO TWEAKS
+═══════════════════════════════════ */
+.asp-hero { background-position: center 20%; }
+
+/* extra dark vignette — portrait images need more contrast */
+.asp-hero-gradient-boost {
+  background:
+    linear-gradient(to right, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 60%),
+    linear-gradient(to top,   rgba(0,0,0,0.98) 0%, rgba(0,0,0,0)   52%),
+    linear-gradient(to bottom,rgba(0,0,0,0.5)  0%, rgba(0,0,0,0)   28%) !important;
 }
 
-.back-circle:hover { background: var(--primary); }
+/* photographer / location row below tagline */
+.asp-hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 32px;
+}
+.asp-hero-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.55);
+  font-weight: 300;
+}
+.asp-hero-meta-item svg { opacity: 0.6; flex-shrink: 0; }
 
-.nav-center-text {
-  font-size: 11px;
-  letter-spacing: 5px;
-  font-weight: 700;
-  color: var(--text-dim);
+/* ═══════════════════════════════════
+   LIGHTBOX ARROWS + COUNTER
+═══════════════════════════════════ */
+.asp-lb-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10001;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 50%;
+  width: 46px;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+  color: #fff;
+}
+.asp-lb-arrow:hover { background: var(--p); border-color: var(--p); }
+.asp-lb-arrow--left  { left: 28px; }
+.asp-lb-arrow--right { right: 28px; }
+
+.asp-lb-counter {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: "Unbounded", sans-serif;
+  font-size: 0.62rem;
+  letter-spacing: 3px;
+  color: rgba(255,255,255,0.4);
+  pointer-events: none;
 }
 
-/* Split Header */
-.actor-split-header {
+/* ═══════════════════════════════════
+   VIDEO SECTION
+═══════════════════════════════════ */
+.asp-video-section {
+  padding: 100px 5%;
+  background: var(--bg);
+  border-top: 1px solid var(--bdr);
+}
+.asp-video-section-inner {
+  max-width: var(--max);
+  margin: 0 auto;
   display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  min-height: 80vh;
-  padding: 40px;
+  grid-template-columns: 1fr 1.3fr;
   gap: 60px;
   align-items: center;
 }
 
-.brand-badge {
-  color: var(--primary);
-  font-size: 12px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  margin-bottom: 20px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.actor-title-main {
-  font-size: clamp(40px, 8vw, 85px);
+/* left text column */
+.asp-video-text {}
+.asp-video-heading {
+  font-family: "Unbounded", sans-serif;
+  font-size: clamp(1.8rem, 3.5vw, 3rem);
   font-weight: 900;
-  line-height: 0.95;
-  margin-bottom: 40px;
-  text-transform: uppercase;
+  line-height: 1.08;
+  margin-bottom: 20px;
+  background: linear-gradient(135deg, #fff 30%, var(--p) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
-
-.shoot-specs {
+.asp-video-sub {
+  font-size: 1rem;
+  color: #888;
+  line-height: 1.85;
+  font-weight: 300;
+  margin-bottom: 36px;
+}
+.asp-video-info-row {
   display: flex;
-  gap: 50px;
-  margin-bottom: 50px;
-  border-left: 2px solid var(--primary);
-  padding-left: 25px;
+  flex-direction: column;
+  gap: 14px;
+  border-left: 2px solid var(--p35);
+  padding-left: 22px;
 }
-
-.spec-item label {
-  display: block;
-  font-size: 10px;
-  color: var(--text-dim);
+.asp-vi-item {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.asp-vi-label {
+  font-family: "Unbounded", sans-serif;
+  font-size: 0.52rem;
+  letter-spacing: 3px;
   text-transform: uppercase;
-  letter-spacing: 2px;
-  margin-bottom: 5px;
+  color: var(--dim);
 }
-
-.spec-item p { font-size: 18px; font-weight: 500; }
-
-.brand-philosophy {
-  max-width: 450px;
-  padding: 30px;
-  background: var(--dark);
-  border-radius: 20px;
-  position: relative;
-}
-
-.quote-icon { color: var(--primary); margin-bottom: 15px; opacity: 0.5; }
-.brand-philosophy p { color: #ccc; line-height: 1.6; font-size: 15px; font-style: italic; }
-
-.header-right-image { position: relative; }
-.main-frame {
-  position: relative;
-  width: 100%;
-  height: 600px;
-  border-radius: 30px;
-  overflow: hidden;
-  box-shadow: 0 30px 60px rgba(0,0,0,0.5);
-}
-
-.main-frame img { width: 100%; height: 100%; object-fit: cover; }
-.frame-overlay-tag {
-  position: absolute;
-  bottom: 30px;
-  left: 30px;
-  background: var(--primary);
-  padding: 8px 20px;
-  border-radius: 50px;
-  font-size: 12px;
+.asp-vi-val {
+  font-size: 0.95rem;
   font-weight: 600;
+  color: var(--txt);
 }
 
-/* Gallery Section */
-.actor-gallery-section { padding: 80px 40px; }
-.gallery-intro {
+/* video player */
+.asp-video-wrap {
+  border-radius: 16px;
+    max-width: 380px;  /* keeps reel-style narrow look */
+  margin: 0 auto;
+  overflow: hidden;
+  background: #000;
+  border: 1px solid var(--bdr);
+  box-shadow: 0 24px 64px rgba(0,0,0,0.6);
+}
+.asp-video-inner {
+  position: relative;
+  aspect-ratio: 9 / 16;
+    max-height: 450px; 
+  cursor: pointer;
+  overflow: hidden;
+}
+.asp-video-el {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* play overlay */
+.asp-video-play-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  background: rgba(0,0,0,0.35);
+  backdrop-filter: blur(2px);
+}
+.asp-video-play-btn {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--p);
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 20px;
-  margin-bottom: 60px;
-  color: var(--text-dim);
-  font-size: 12px;
+  transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s ease;
+  box-shadow: 0 0 0 0 var(--p35);
+}
+.asp-video-play-btn:hover,
+.asp-video-inner:hover .asp-video-play-btn {
+  transform: scale(1.12);
+  box-shadow: 0 0 0 14px var(--p10);
+}
+.asp-video-play-label {
+  font-family: "Unbounded", sans-serif;
+  font-size: 0.6rem;
   letter-spacing: 4px;
-}
-.line-divider { height: 1px; width: 60px; background: var(--border-color); }
-
-.actor-gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 25px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.7);
 }
 
-.gallery-box {
-  position: relative;
-  border-radius: 20px;
-  overflow: hidden;
-  height: 400px;
-  background: var(--dark);
-}
-
-.gallery-box img {
-  width: 100%; height: 100%; object-fit: cover;
-  transition: transform 0.6s ease;
-}
-
-.box-hover {
-  position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
-  opacity: 0;
+/* top-right badge */
+.asp-video-badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 100px;
+  padding: 6px 14px;
+  font-family: "Unbounded", sans-serif;
+  font-size: 0.52rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
   display: flex;
-  align-items: flex-end;
-  padding: 30px;
-  transition: 0.3s;
+  align-items: center;
+  gap: 8px;
+  pointer-events: none;
 }
-
-.gallery-box:hover .box-hover { opacity: 1; }
-.gallery-box:hover img { transform: scale(1.08); }
-.shot-number { font-size: 12px; font-weight: 700; letter-spacing: 2px; }
-
-/* Responsive */
-@media (max-width: 1100px) {
-  .actor-split-header { grid-template-columns: 1fr; text-align: center; }
-  .shoot-specs { justify-content: center; border-left: none; padding: 0; }
-  .brand-philosophy { margin: 0 auto; }
-  .actor-gallery-grid { grid-template-columns: repeat(2, 1fr); }
-}
-
-@media (max-width: 700px) {
-  .actor-split-header { padding: 20px; }
-  .actor-gallery-grid { grid-template-columns: 1fr; }
-  .main-frame { height: 450px; }
-  .actor-top-nav { padding: 15px 20px; }
-}
-
-/* Loader */
-.actor-loader { height: 100vh; display: flex; justify-content: center; align-items: center; background: #000; }
-.spinner {
-  width: 40px; height: 40px;
-  border: 3px solid rgba(216, 116, 112, 0.2);
-  border-top: 3px solid var(--primary);
+.asp-video-badge-dot {
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
-  animation: spin 1s linear infinite;
+  background: var(--p);
+  animation: asp-dot-pulse 1.8s ease infinite;
+  display: inline-block;
 }
-@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes asp-dot-pulse {
+  0%,100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: 0.4; transform: scale(0.75); }
+}
+
+/* controls bar */
+.asp-video-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  background: var(--s1);
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+.asp-vc-btn {
+  background: none;
+  border: none;
+  color: var(--dim);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  border-radius: 4px;
+  transition: color 0.2s ease;
+  flex-shrink: 0;
+}
+.asp-vc-btn:hover { color: var(--p); }
+.asp-vc-bar {
+  flex: 1;
+  height: 3px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 10px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.asp-vc-bar-fill {
+  height: 100%;
+  background: var(--p);
+  border-radius: 10px;
+  transition: width 0.1s linear;
+}
+
+/* ═══════════════════════════════════
+   THUMBNAILS STRIP
+═══════════════════════════════════ */
+.asp-thumbs-section {
+  padding: 56px 5%;
+  background: var(--s1);
+  border-top: 1px solid var(--bdr);
+}
+.asp-thumbs-inner {
+  max-width: var(--max);
+  margin: 0 auto;
+}
+.asp-thumbs-row {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+.asp-thumb-card {
+  position: relative;
+  width: 200px;
+  height: 260px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.07);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: border-color 0.25s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+.asp-thumb-card:hover {
+  border-color: var(--p35);
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.5);
+}
+.asp-thumb-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+.asp-thumb-card:hover img { transform: scale(1.07); }
+.asp-thumb-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+.asp-thumb-card:hover .asp-thumb-overlay { opacity: 1; }
+
+/* ═══════════════════════════════════
+   GALLERY — inherits all fsg-gallery,
+   fsg-cards-grid, fsg-card from servicesPage.css
+   No overrides needed — exact same component.
+═══════════════════════════════════ */
+
+/* ═══════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════ */
+@media (max-width: 1100px) {
+  .asp-video-section-inner {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+@media (max-width: 860px) {
+  .asp-back-btn { left: calc(5% + 120px); }
+  .asp-video-section { padding: 72px 5%; }
+  .asp-thumbs-row { gap: 12px; }
+  .asp-thumb-card { width: 160px; height: 210px; }
+}
+
+@media (max-width: 600px) {
+  .asp-back-btn  { left: 5%; top: 72px; }
+  .asp-lb-arrow  { width: 38px; height: 38px; }
+  .asp-lb-arrow--left  { left: 12px; }
+  .asp-lb-arrow--right { right: 12px; }
+  .asp-video-section { padding: 56px 5%; }
+  .asp-thumbs-section { padding: 44px 5%; }
+  .asp-thumb-card { width: 130px; height: 170px; }
+  .asp-video-info-row { gap: 10px; }
+}

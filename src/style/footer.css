@@ -1,222 +1,317 @@
 .custom-footer {
-  background-color: #0a0a0a;
-  color: #ffffff;
-  padding: 60px 0 20px;
-  font-family: 'Inter', sans-serif;
-  border-top: 2px solid rgb(182, 82, 79);
+  background-color: #000;
+  color: white;
+  padding-top: 60px;
+  font-family: "Inter", sans-serif;
 }
 
-.footer-container {
-  max-width: 1200px;
-  margin: 0 auto;
+/* =========================
+   TOP SECTION (TEXT + MAP)
+========================= */
+
+.footer-top-section {
   display: grid;
-  grid-template-columns: 1.5fr 1fr 1fr 1.5fr;
+  grid-template-columns: 1fr 1fr;
+  max-width: 1250px;
+  margin: 0 auto;
   gap: 40px;
   padding: 0 20px;
 }
 
-.footer-logo {
+.training-content {
+  text-align: center;
+}
+
+.camera-icon img {
+  width: 50px;
+  margin: auto;
+  margin-bottom: 10px;
+}
+
+.serif-title {
+  font-family: serif;
+  font-style: italic;
   font-size: 28px;
-  font-weight: 800;
-  letter-spacing: 1px;
-  margin-bottom: 15px;
+  color: #d96b68;
+  margin-top: -20px;
 }
 
-.footer-logo span {
-  color: rgb(182, 82, 79);
-  display: inline !important;
+.main-title {
+  font-size: 34px;
+  font-weight: bold;
+  margin-top: -25px;
+  /* margin-bottom: 20px; */
 }
 
-.footer-description {
-  color: #b0b0b0;
+.description-text {
+  color: #aaa;
   line-height: 1.6;
+  margin-bottom: 25px;
+  font-size: 15px;
+}
+
+.details-btn {
+  background: #b6524f;
+  color: white;
+  padding: 6px 15px;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.3s;
+  margin: auto;
+}
+
+.details-btn:hover {
+  background: #d96b68;
+}
+
+/* MAP */
+
+.map-box {
+  height: 350px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #333;
+}
+
+/* =========================
+   SOCIAL ICON SECTION
+========================= */
+
+.social-icon-wrapper {
+  margin: 60px 0;
+  border-top: 1px solid #222;
+  border-bottom: 1px solid #222;
+  padding: 40px 0;
+}
+
+.large-social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+
+.big-circle {
+  width: 90px;
+  height: 90px;
+  border: 2px solid white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  color: white;
+  transition: 0.3s ease;
+}
+
+.big-circle:hover {
+  background: #b6524f;
+  border-color: #b6524f;
+  transform: translateY(-4px);
+}
+
+/* =========================
+   MAIN FOOTER CONTENT
+========================= */
+
+.footer-main-content {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1.5fr;
+  gap: 40px;
+  max-width: 1250px;
+  margin: auto;
+  padding: 0 20px 40px;
+}
+
+/* BRAND */
+
+.brand-info p {
+  color: #aaa;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.footer-logo-img {
+  width: 200px;
   margin-bottom: 20px;
 }
 
-.footer-section h3 {
+/* =========================
+   FOOTER LINKS
+========================= */
+
+.footer-links h3 {
+  margin-bottom: 15px;
   font-size: 18px;
   font-weight: 600;
-  margin-bottom: 20px;
-  position: relative;
 }
 
-.footer-section h3::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: -5px;
-  width: 30px;
-  height: 2px;
-  background-color: rgb(182, 82, 79);
-}
-
-.footer-section ul {
+.footer-links ul {
   list-style: none;
   padding: 0;
 }
 
-.footer-section ul li {
+.footer-links li {
   margin-bottom: 12px;
 }
 
-.footer-section ul li a {
-  color: #b0b0b0;
+.footer-links a {
+  color: #aaa;
   text-decoration: none;
-  transition: 0.3s ease;
+  transition: 0.3s;
 }
 
-.footer-section ul li a:hover {
-  color: rgb(182, 82, 79);
+.footer-links a:hover {
+  color: #b6524f;
   padding-left: 5px;
 }
 
-/* Social Icons */
-.social-icons {
-  display: flex;
-  gap: 15px;
-}
+/* =========================
+   CONTACT SECTION
+========================= */
 
-.social-icons a {
-  color: #ffffff;
-  background: #1a1a1a;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  transition: 0.3s;
-}
-
-.social-icons a:hover {
-  background: rgb(182, 82, 79);
-  transform: translateY(-3px);
-}
-
-/* Newsletter Input */
-.subscribe-form {
-  display: flex;
-  margin-top: 15px;
-}
-
-.subscribe-form input {
-  padding: 12px;
-  background: #1a1a1a;
-  border: 1px solid #333;
-  color: white;
-  border-radius: 4px 0 0 4px;
-  outline: none;
-  width: 100%;
-}
-
-.subscribe-form button {
-  background: rgb(182, 82, 79);
-  border: none;
-  padding: 0 15px;
-  color: white;
-  cursor: pointer;
-  border-radius: 0 4px 4px 0;
-  transition: 0.3s;
-}
-
-.subscribe-form button:hover {
-  background: #e6264b;
-}
-
-/* Footer Bottom */
-.footer-bottom {
-  display: flex !important;
-  margin-top: 50px;
-  padding: 0px !important
-  ;
-  border-top: 1px solid #1a1a1a;
-  color: #777;
-  font-size: 14px;
-}
-
-.footer-bottom strong {
-  color: rgb(182, 82, 79);
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .footer-container {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-@media (max-width: 480px) {
-  .footer-container {
-    grid-template-columns: 1fr;
-  }
-}
-
-
-/* Contact Section Premium Styling */
-.contact-list {
+.contact-details {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-.contact-card {
+.contact-item {
   display: flex;
   align-items: center;
   gap: 15px;
-  transition: all 0.3s ease;
-}
-
-.contact-icon-box {
-  width: 42px;
-  height: 42px;
-  background: rgba(255, 45, 85, 0.05); /* Very light pink tint */
-  border: 1px solid rgba(255, 45, 85, 0.2);
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--accent-pink);
-  font-size: 18px;
-  flex-shrink: 0;
+  text-decoration: none;
   transition: 0.3s;
 }
 
-.contact-card:hover .contact-icon-box {
-  background: var(--accent-pink);
-  color: white;
-  box-shadow: 0 0 15px rgba(255, 45, 85, 0.4);
-  transform: scale(1.05);
+.icon-sq {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  background: rgba(182, 82, 79, 0.1);
+  border: 1px solid rgba(182, 82, 79, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #b6524f;
+  font-size: 18px;
+  transition: 0.3s;
 }
 
-.contact-card-text small {
+.text-sq small {
+  color: #b6524f;
+  font-weight: 700;
   display: block;
   font-size: 11px;
-  font-weight: 700;
-  text-transform: uppercase;
-  color: var(--accent-pink);
   letter-spacing: 1px;
-  margin-bottom: 2px;
 }
 
-.contact-card-text p {
-  font-size: 14.5px;
-  color: #ffffff;
+.text-sq p {
+  font-size: 14px;
   margin: 0;
-  font-weight: 400;
-  line-height: 1.4;
+  color: white;
 }
 
-.contact-card:hover {
-  transform: translateX(8px);
+.contact-item:hover {
+  transform: translateX(6px);
 }
 
-/* Mobile Alignment */
-@media (max-width: 600px) {
-  .contact-card {
-    justify-content: center;
-    text-align: left; /* Text remains left aligned for readability */
+.contact-item:hover .icon-sq {
+  background: #b6524f;
+  color: white;
+  box-shadow: 0 0 12px rgba(182, 82, 79, 0.5);
+}
+
+/* =========================
+   FOOTER BOTTOM
+========================= */
+
+.footer-bottom {
+  max-width: 1250px;
+  margin: 0 auto;
+  padding: 0 20px 20px;
+}
+
+.bottom-line {
+  height: 1px;
+  background: #222;
+  margin-bottom: 20px;
+}
+
+.bottom-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bottom-flex p {
+  font-size: 14px;
+  color: #888;
+}
+
+.bottom-flex strong {
+  color: #b6524f;
+}
+
+.payment-img {
+  width: 260px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 900px) {
+  .footer-top-section {
+    grid-template-columns: 1fr;
   }
-  .footer-bottom {
-    flex-direction: column-reverse !important;
+
+  .footer-main-content {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .footer-main-content {
+    grid-template-columns: 1fr;
+  }
+
+  .large-social-icons {
+    flex-wrap: wrap;
+  }
+
+  .big-circle {
+    width: 60px;
+    height: 60px;
+    font-size: 22px;
+  }
+
+  .bottom-flex {
+    flex-direction: column-reverse;
+    gap: 25px;
+  }
+}
+
+@media (max-width: 425px) {
+  .big-circle {
+    width: 45px;
+    height: 45px;
+    font-size: 22px;
+  }
+  .social-icon-wrapper {
+    margin: 60px 0;
+    border-top: 1px solid #222;
+    border-bottom: 1px solid #222;
+    padding: 20px 0;
+  }
+  .serif-title {
+  font-size: 20px;
+  margin-top: 1px !important;
+  }
+  .main-title {
+    font-size: 20px;
+    margin-top: -6px;
   }
 }

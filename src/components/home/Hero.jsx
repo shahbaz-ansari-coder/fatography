@@ -4,24 +4,23 @@ function Hero() {
   const animatedWords = [
     {
       text: "Wedding Photography",
-      image: "https://images.unsplash.com/photo-1519741497674-611481863552",
+      image:
+        "https://res.cloudinary.com/djlshebp8/image/upload/v1776375629/services/banner/uo9dcyvv1oufn5ak9nwo.jpg",
     },
     {
       text: "Pre Wedding Shoots",
-      image: "https://images.unsplash.com/photo-1522673607200-164d1b6ce486",
-    },
-    {
-      text: "Product Photography",
       image:
-        "https://img.freepik.com/free-photo/product-photography-shoot-shoes_53876-137635.jpg?t=st=1774976449~exp=1774980049~hmac=3e22ed976b98c41bb3eb8a3c80bf84a4c66e9bf86217b3a990bd64c8996b4f97&w=740",
+        "https://res.cloudinary.com/djlshebp8/image/upload/q_auto/f_auto/v1777285069/services/shoots/wwcdn7qvmbiyjisg0phd.jpg",
     },
     {
-      text: "Corporate Shoots",
-      image: "https://images.unsplash.com/photo-1551836022-d5d88e9218df",
+      text: "Fashion Photography",
+      image:
+        "https://res.cloudinary.com/djlshebp8/image/upload/v1776884899/services/banner/fnxjodalixwp47elkppn.jpg",
     },
     {
-      text: "Event Photography",
-      image: "https://images.unsplash.com/photo-1505373877841-8d25f7d46678",
+      text: "Food Photography",
+      image:
+        "https://res.cloudinary.com/djlshebp8/image/upload/v1776376702/services/shoots/qml9b0efrwhmmm2g52yx.jpg",
     },
   ];
 
@@ -65,7 +64,9 @@ function Hero() {
     <section className="section hero">
       <div className="container">
         <div className="hero-content">
-          <h1 className="h1 hero-title">Fatography</h1>
+          <h1 className="hero-text-logo">
+            <img src="/text_logo.png" alt="a" />
+          </h1>
 
           {/* Parent Wrapper par hover logic */}
           <div
@@ -98,7 +99,6 @@ function Hero() {
       {hoverData.img && (
         <div className="hero-hover-image">
           <img src={hoverData.img} alt={hoverData.text} />
-          {/* Aap yahan hoverData.text bhi display karwa sakte hain agar zaroorat ho */}
         </div>
       )}
     </section>

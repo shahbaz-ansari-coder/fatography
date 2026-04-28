@@ -13,7 +13,7 @@ const galleryVideos = [
   ],
   [
     {
-      id: 3,
+      id: 2,
       videoUrl:
         "https://res.cloudinary.com/djlshebp8/video/upload/q_auto/f_auto/v1776358990/Professional_Photography_Videography_in_Dubai_11_zdvxni.mp4",
       width: 450,
@@ -22,16 +22,16 @@ const galleryVideos = [
   ],
   [
     {
-      id: 5,
+      id: 3,
       videoUrl:
-        "https://res.cloudinary.com/djlshebp8/video/upload/q_auto/f_auto/v1776358977/Professional_Photography_Videography_in_Dubai_9_sma8kp.mp4",
+        "https://res.cloudinary.com/djlshebp8/video/upload/q_auto/f_auto/v1777324230/An_unplanned_shoot_with_such_star_models_anastasijaizabela_silakucukvatan_all_thanks_to_r_bfv6zu.mp4",
       width: 450,
       height: 625,
     },
   ],
   [
     {
-      id: 7,
+      id: 4,
       videoUrl:
         "https://res.cloudinary.com/djlshebp8/video/upload/q_auto/f_auto/v1776358975/Professional_Photography_Videography_in_Dubai_12_tuouvf.mp4",
       width: 450,

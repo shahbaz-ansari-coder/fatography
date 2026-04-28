@@ -571,3 +571,79 @@
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
+
+/* Video badge on card */
+.cs-video-badge {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Video preview in form */
+.cs-video-preview {
+  margin: 8px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cs-video-player {
+  width: 100%;
+  max-height: 240px;
+  border-radius: 8px;
+  background: #000;
+}
+
+.cs-remove-video {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #e53e3e;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  width: fit-content;
+}
+
+/* Optional label */
+.cs-optional {
+  font-size: 12px;
+  color: #888;
+  font-weight: normal;
+}
+
+/* Hint text above thumbnail grid */
+.cs-hint {
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 6px;
+}
+
+/* View modal video section */
+.cs-view-video {
+  margin: 12px 0;
+}
+
+.cs-view-video h4 {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+  font-size: 15px;
+}
+
+.cs-form-group span{
+  display: inline !important;
+}

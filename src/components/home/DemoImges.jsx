@@ -5,6 +5,19 @@ import DomeGallery from "../react-bits/DomeGallery";
 const DemoImges = () => {
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [minRadius, setMinRadius] = useState(350);
+
+  useEffect(() => {
+    const update = () => {
+      const w = window.innerWidth;
+      if (w < 480) setMinRadius(150);
+      else if (w < 768) setMinRadius(220);
+      else setMinRadius(350);
+    };
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
 
   useEffect(() => {
     const fetchImages = async () => {
@@ -42,14 +55,14 @@ const DemoImges = () => {
   }
 
   return (
-    <div style={{ width: "100vw", height: "100vh" }} id="all-pictures">
+    <div style={{ width: "100vw", height: "55vh" }}id="all-pictures">
       <DomeGallery
         images={images}
         fit={1}
-        minRadius={350}
+        minRadius={minRadius}
         maxVerticalRotationDeg={0}
         segments={34}
-        dragDampening={2}
+        dragDampening={20}
         grayscale
       />
     </div>

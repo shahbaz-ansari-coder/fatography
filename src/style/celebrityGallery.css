@@ -199,11 +199,11 @@
 
 .main-glow-btn {
   position: relative;
-  padding: 18px 45px;
+  padding: 10px 45px;
   background: transparent;
   color: white;
   border: 2px solid var(--neon-pink);
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 3px;
@@ -367,11 +367,7 @@ display:none;
     font-size: 0.8rem;
     letter-spacing: 2px;
   }
-}
-
-/* Extra small devices ke liye height aur choti kar sakte hain */
-@media (max-width: 480px) {
-  .celeb-card-v3 {
-    height: 240px; 
-  }
+      .celebrity-grid-v3 {
+        padding: 0 !important;
+      }
 }

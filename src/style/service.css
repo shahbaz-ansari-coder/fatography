@@ -2,11 +2,7 @@
   --clr-bg: #000000;
   --clr-accent: rgb(216 116 112);
   --clr-text: #e8dcc8;
-  /* Cards ka size chota kar diya */
-  --card-w: 220px; 
-  --card-h: 300px;
   --gap: 20px;
-  --speed: 25s;
 }
 
 .service {
@@ -15,7 +11,6 @@
   overflow: hidden;
 }
 
-/* Container for width and padding */
 .service-container {
   max-width: 1280px;
   margin: 0 auto;
@@ -48,135 +43,83 @@
   font-style: italic;
 }
 
-/* --- Infinite Marquee --- */
-.marquee-wrapper {
-  display: flex;
-  overflow: hidden;
-  user-select: none;
-  margin-bottom: var(--gap); /* Rows ke darmiyan gap */
-  mask-image: linear-gradient(
-    to right,
-    transparent,
-    black 10%,
-    black 90%,
-    transparent
-  );
+/* ===== GRID ===== */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
 }
 
-.marquee-content {
-  display: flex;
-  gap: var(--gap);
-  padding: 10px 0;
-  animation: scroll var(--speed) linear infinite;
-}
-
-.marquee-content.reverse {
-  animation-direction: reverse;
-}
-
-.marquee-wrapper:hover .marquee-content {
-  animation-play-state: paused;
-}
-
-@keyframes scroll {
-  from { transform: translateX(0); }
-  to { transform: translateX(calc(-50% - var(--gap) / 2)); }
-}
-
-/* --- Card Styling --- */
+/* ===== CARD ===== */
 .service-card {
-  flex-shrink: 0;
-  width: var(--card-w);
-  height: var(--card-h);
+  width: 100%;
+  aspect-ratio: 3 / 4;
   border-radius: 10px;
   overflow: hidden;
   position: relative;
   background: #000;
   border: 2px solid rgb(216 116 112);
-}
-
-.card-inner-swiper, .full-card-img {
-  width: var(--card-w) !important;
-  height: var(--card-h) !important;
-  object-fit: cover;
   display: block;
 }
 
+/* Swiper absolute fill — yahi asli fix hai */
+.service-card .card-inner-swiper {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.service-card .card-inner-swiper .swiper-wrapper {
+  height: 100% !important;
+}
+
+.service-card .card-inner-swiper .swiper-slide {
+  height: 100% !important;
+  width: 100% !important;
+}
+
+.service-card .card-inner-swiper .swiper-slide img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  display: block !important;
+}
+
+/* Overlay */
 .card-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, transparent 50%);
+  z-index: 10;
+  background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 55%);
   display: flex;
   align-items: flex-end;
-  padding: 15px;
+  justify-content: center;
+  padding: 14px;
   pointer-events: none;
 }
 
 .card-name {
-  font-size: 14px;
-  padding: 5px 20px;
+  font-size: 13px;
+  width: 92%;
+  text-align: center;
+  padding: 5px 8px;
   border-radius: 50px;
-  z-index: 1;
+  z-index: 11;
   background: rgba(216, 116, 112, 0.568);
   border: 2px solid rgb(216 116 112);
-  color: rgb(255, 255, 255);
+  color: white;
   margin: 0;
+  line-height: 1.3;
 }
 
-/* Mobile adjustments */
-@media (max-width: 600px) {
-  :root {
-    --card-w: 180px;
-    --card-h: 240px;
-    --speed: 15s;
-  }
-}
-
-
-/* ... baki purani CSS ... */
-
-/* Jab animation na ho to cards center mein rahein */
-.marquee-wrapper.no-animate {
-  mask-image: none;
-  overflow: visible;
-  justify-content: center;
-}
-
-.marquee-content.static-grid {
-  animation: none;
-  justify-content: center;
-  flex-wrap: wrap; /* Kam cards hone par wo agli line mein aa sakte hain */
-}
-
-/* Row separation */
-.service-rows-container {
-  display: flex;
-  flex-direction: column;
-  gap: var(--gap);
-}
-
-
-/* --- Baki Purani CSS Same Rakhein --- */
-
-:root {
-  --clr-bg: #080b0f;
-  --clr-accent: rgb(216 116 112);
-  --clr-text: #e8dcc8;
-  --card-w: 220px; 
-  --card-h: 300px;
-  --gap: 20px;
-  --speed: 25s;
-}
-
-/* ... (Your Desktop CSS here) ... */
-
-/* --- Optimized Responsive Section --- */
+/* ===== RESPONSIVE ===== */
 
 @media (max-width: 1024px) {
-  :root {
-    --card-w: 200px;
-    --card-h: 270px;
-    --gap: 15px;
+  .services-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
   }
 }
 
@@ -184,55 +127,71 @@
   .service {
     padding: 60px 0;
   }
-
   .service-container {
-    padding: 0 10px; /* Mobile par side space kam */
+    padding: 0 14px;
   }
-
-  :root {
-    /* Mobile screen ki width ke hisaab se 2 cards fix karne ka formula */
-    /* (100vw - 3 gaps - 20px padding) / 2 */
-    --card-w: calc((100vw - 50px) / 2); 
-    --card-h: calc(var(--card-w) * 1.35); /* Aspect ratio maintain rakha */
-    --gap: 10px;
-    --speed: 15s; /* Mobile par choti screen ki wajah se speed tez lagti hai, toh adjust kiya */
+  .services-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
   }
-
-  .marquee-wrapper {
-    /* Mobile par mask ko thoda kam kiya taaki cards zyada clear dikhein */
-    mask-image: linear-gradient(
-      to right,
-      transparent,
-      black 5%,
-      black 95%,
-      transparent
-    );
-  }
-
   .card-name {
-    font-size: 12px; /* Text size chota kiya */
-    padding: 4px 12px;
+    font-size: 12px;
+    padding: 4px 6px;
+    width: 95%;
   }
-
   .card-overlay {
     padding: 10px;
   }
 }
 
-/* Extra Small Devices */
-@media (max-width: 400px) {
-  :root {
-    --card-h: calc(var(--card-w) * 1.4);
+@media (max-width: 600px) {
+  .services-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
   }
-  
-  .rev-title {
-    font-size: 24px;
+  .service-container {
+    padding: 0 10px;
+  }
+  .card-name {
+    font-size: 10px;
+    padding: 3px 4px;
+    width: 98%;
   }
 }
 
-/* Smooth Swiper for Mobile */
-.card-inner-swiper, .full-card-img {
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: cover;
+@media (max-width: 480px) {
+  .service {
+    padding: 50px 0;
+  }
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  .card-name {
+    font-size: 12px;
+    padding: 4px 8px;
+    width: 90%;
+  }
+  .card-overlay {
+    padding: 10px;
+  }
+  .services-grid > a:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    justify-self: center;
+    width: 50%;
+  }
+}
+
+@media (max-width: 360px) {
+  .services-grid {
+    gap: 8px;
+  }
+  .service-container {
+    padding: 0 8px;
+  }
+  .card-name {
+    font-size: 11px;
+    width: 100%;
+    padding: 3px 6px;
+  }
 }

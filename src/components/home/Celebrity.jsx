@@ -2,6 +2,20 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../../style/celebrityGallery.css";
 import Category from "./Category";
+import { Link } from "react-router";
+
+/* ORDER OF CELEBRITIES */
+
+const CELEBRITY_ORDER = [
+  "Cengiz Coşkun",
+  "Bilal Abbas Khan",
+  "Momina Mustehsan",
+  "Farhan Saeed",
+  "Shehzad Roy",
+  "Sadia Khan",
+];
+
+/* CARD */
 
 const CelebrityCard = ({ item }) => {
   const [currentImg, setCurrentImg] = useState(0);
@@ -17,7 +31,7 @@ const CelebrityCard = ({ item }) => {
   }, [item]);
 
   return (
-    <div className="celeb-card-v3 card-flip">
+    <Link to={`actor/${item._id}`} className="celeb-card-v3 card-flip">
       <div className="image-container-v3">
         {item.thumbnails?.map((img, index) => (
           <img
@@ -35,9 +49,11 @@ const CelebrityCard = ({ item }) => {
         <h3 className="celeb-name-text">{item.celebrityName}</h3>
         <span className="celeb-subtext">View Shoot</span>
       </div>
-    </div>
+    </Link>
   );
 };
+
+/* MAIN COMPONENT */
 
 export default function CelebrityGallery() {
   const [celebrityData, setCelebrityData] = useState([]);
@@ -53,7 +69,22 @@ export default function CelebrityGallery() {
         "https://fatography-backend.vercel.app/api/celebrity-shoot/all-no-images",
       );
 
-      setCelebrityData(res.data.data);
+      const apiData = res.data.data || [];
+
+      /* FILTER ONLY REQUIRED CELEBRITIES */
+
+      const filtered = apiData.filter((item) =>
+        CELEBRITY_ORDER.includes(item.celebrityName),
+      );
+
+      /* SORT BY GIVEN ORDER */
+
+      const sorted = CELEBRITY_ORDER.map((name) =>
+        filtered.find((item) => item.celebrityName === name),
+      ).filter(Boolean);
+
+      setCelebrityData(sorted);
+
       setLoading(false);
     } catch (error) {
       console.error(error);
@@ -66,6 +97,7 @@ export default function CelebrityGallery() {
       <div className="celeb-container">
         <div className="reviews-header">
           <p className="rev-eyebrow">Celebrity Shoots</p>
+
           <h2 className="rev-title">
             Capturing Stars in Their <em>Best Light</em>
           </h2>
@@ -86,10 +118,12 @@ export default function CelebrityGallery() {
         </div>
 
         <div className="button-wrapper-center">
+          <Link to={"/celebrity-shoots"}>
           <button className="main-glow-btn">
             Our Celebrity Shoots
             <div className="btn-glow-effect"></div>
           </button>
+          </Link>
         </div>
       </div>
     </section>

@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import "../../style/servicesPage.css";
+import Header from "../../components/home/Header";
+import Footer from "../../components/home/Footer";
 
 /* ═══════════════════════════════════
    LIGHTBOX
@@ -285,6 +287,8 @@ export default function ServicesPage() {
   );
 
   return (
+    <>
+    <Header/>
     <div className="fsg-page">
       <Lightbox src={lightboxSrc} onClose={() => setLightboxSrc(null)} />
 
@@ -297,12 +301,6 @@ export default function ServicesPage() {
         {/* diagonal overlay */}
         <div className="fsg-hero-gradient" />
 
-        {/* top-left brand pill */}
-        <div className="fsg-hero-brand">
-          <span className="fsg-hero-brand-dot" />
-          Fatography Studio
-        </div>
-
         {/* centre content */}
         <div className="fsg-hero-content">
           <div className="fsg-hero-tag">
@@ -313,9 +311,9 @@ export default function ServicesPage() {
           <h1 className="fsg-hero-title">{serviceData.title}</h1>
           <p className="fsg-hero-sub">Crafted with vision. Built for legacy.</p>
           <div className="fsg-hero-cta-row">
-            <a href="/contact" className="fsg-hero-btn fsg-hero-btn--filled">
+            <Link to="/contact-us" className="fsg-hero-btn fsg-hero-btn--filled">
               Book a Session
-            </a>
+            </Link>
             <a href="#gallery" className="fsg-hero-btn fsg-hero-btn--outline">
               View Gallery
             </a>
@@ -379,7 +377,9 @@ export default function ServicesPage() {
             <span className="fsg-section-label fsg-label--center">
               Visual Gallery
             </span>
-            <h2 className="fsg-gallery-title">Selected Works</h2>
+            <h2 className="fsg-gallery-title">
+              Explore Our Photography Collection
+            </h2>
           </div>
           <div className="fsg-cards-grid">
             {allImages.map((img, i) => (
@@ -393,28 +393,8 @@ export default function ServicesPage() {
           </div>
         </section>
       )}
-
-      {/* ══ FOOTER ══ */}
-      <footer className="fsg-footer">
-        <div className="fsg-footer-inner">
-          <p className="fsg-section-label fsg-label--center">
-            Ready to create?
-          </p>
-          <h2 className="fsg-footer-title">Let's Build Something Iconic</h2>
-          <a href="/contact" className="fsg-cta-btn">
-            Book a Session
-            <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
-              <path
-                d="M2 7.5h11M8 3l4.5 4.5L8 12"
-                stroke="currentColor"
-                strokeWidth="1.6"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </a>
-        </div>
-      </footer>
     </div>
+    <Footer/>
+    </>
   );
 }

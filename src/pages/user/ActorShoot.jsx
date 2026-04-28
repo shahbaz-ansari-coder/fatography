@@ -1,118 +1,537 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import axios from "axios";
-import {
-  ArrowLeft,
-  Sparkles,
-  Quote,
-} from "lucide-react";
 import "../../style/actorShoot.css";
+import Header from "../../components/home/Header";
+import Footer from "../../components/home/Footer";
 
-const ActorShoot = () => {
-  const { id } = useParams();
-  const navigate = useNavigate();
-  const [actorData, setActorData] = useState(null);
-  const [loading, setLoading] = useState(true);
+/* ═══════════════════════════════════
+   LIGHTBOX  — with arrow navigation
+═══════════════════════════════════ */
+function Lightbox({ images, startIndex, onClose }) {
+  const [current, setCurrent] = useState(startIndex);
 
   useEffect(() => {
-    const fetchActorDetails = async () => {
+    setCurrent(startIndex);
+  }, [startIndex]);
+
+  useEffect(() => {
+    if (!images.length) return;
+    const handler = (e) => {
+      if (e.key === "Escape") onClose();
+      if (e.key === "ArrowRight") setCurrent((c) => (c + 1) % images.length);
+      if (e.key === "ArrowLeft")
+        setCurrent((c) => (c - 1 + images.length) % images.length);
+    };
+    window.addEventListener("keydown", handler);
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", handler);
+      document.body.style.overflow = "";
+    };
+  }, [images, onClose]);
+
+  if (!images.length) return null;
+  return (
+    <div className="fsg-lb-overlay" onClick={onClose}>
+      <button className="fsg-lb-close" onClick={onClose}>
+        ✕
+      </button>
+
+      {images.length > 1 && (
+        <button
+          className="asp-lb-arrow asp-lb-arrow--left"
+          onClick={(e) => {
+            e.stopPropagation();
+            setCurrent((c) => (c - 1 + images.length) % images.length);
+          }}
+        >
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path
+              d="M12.5 4.5L7 10l5.5 5.5"
+              stroke="#fff"
+              strokeWidth="1.8"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </button>
+      )}
+
+      <img
+        src={images[current]}
+        alt={`preview-${current + 1}`}
+        className="fsg-lb-img"
+        onClick={(e) => e.stopPropagation()}
+      />
+
+      {images.length > 1 && (
+        <button
+          className="asp-lb-arrow asp-lb-arrow--right"
+          onClick={(e) => {
+            e.stopPropagation();
+            setCurrent((c) => (c + 1) % images.length);
+          }}
+        >
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path
+              d="M7.5 4.5L13 10l-5.5 5.5"
+              stroke="#fff"
+              strokeWidth="1.8"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </button>
+      )}
+
+      <div className="asp-lb-counter">
+        {current + 1} / {images.length}
+      </div>
+    </div>
+  );
+}
+
+/* ═══════════════════════════════════
+   VIDEO PLAYER  — custom controls
+═══════════════════════════════════ */
+function VideoPlayer({ src, poster }) {
+  const videoRef = useRef(null);
+  const [playing, setPlaying] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [muted, setMuted] = useState(false);
+
+  // ▶️ Play / Pause toggle
+  const toggle = () => {
+    if (!videoRef.current) return;
+
+    if (playing) {
+      videoRef.current.pause();
+      setPlaying(false);
+    } else {
+      videoRef.current.play();
+      setPlaying(true);
+    }
+  };
+
+  // 📊 Progress update
+  const onTimeUpdate = () => {
+    if (!videoRef.current) return;
+
+    const { currentTime, duration } = videoRef.current;
+    if (duration) setProgress((currentTime / duration) * 100);
+  };
+
+  // ⏩ Seek bar
+  const onSeek = (e) => {
+    if (!videoRef.current) return;
+
+    const rect = e.currentTarget.getBoundingClientRect();
+    const ratio = (e.clientX - rect.left) / rect.width;
+
+    videoRef.current.currentTime =
+      ratio * (videoRef.current.duration || 0);
+  };
+
+  // 🔇 Mute toggle
+  const toggleMute = (e) => {
+    e.stopPropagation();
+    if (!videoRef.current) return;
+
+    videoRef.current.muted = !muted;
+    setMuted(!muted);
+  };
+
+  // 👀 Scroll auto pause (IMPORTANT FEATURE)
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) {
+          video.pause();
+          setPlaying(false);
+        }
+      },
+      {
+        threshold: 0.5, // 50% visible = active
+      }
+    );
+
+    observer.observe(video);
+
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div className="asp-video-wrap">
+      <div className="asp-video-inner" onClick={toggle}>
+        <video
+          ref={videoRef}
+          src={src}
+          poster={poster}
+          className="asp-video-el"
+          playsInline
+          loop
+          onTimeUpdate={onTimeUpdate}
+          onEnded={() => setPlaying(false)}
+          onClick={(e) => e.stopPropagation()}
+        />
+
+        {/* ▶️ Play Overlay */}
+        {!playing && (
+          <div className="asp-video-play-overlay">
+            <div className="asp-video-play-btn">
+              <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+                <path d="M8 5.5l14 7.5-14 7.5V5.5z" fill="#000" />
+              </svg>
+            </div>
+            <p className="asp-video-play-label">Play Showreel</p>
+          </div>
+        )}
+
+        {/* 📌 Badge */}
+        <div className="asp-video-badge">
+          <span className="asp-video-badge-dot" />
+          Behind The Lens
+        </div>
+      </div>
+
+      {/* 🎛 Controls */}
+      <div className="asp-video-controls">
+        <button className="asp-vc-btn" onClick={toggle}>
+          {playing ? (
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <rect x="3" y="2" width="3.5" height="12" rx="1" fill="currentColor" />
+              <rect x="9.5" y="2" width="3.5" height="12" rx="1" fill="currentColor" />
+            </svg>
+          ) : (
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M4 2.5l10 5.5-10 5.5V2.5z" fill="currentColor" />
+            </svg>
+          )}
+        </button>
+
+        {/* Progress Bar */}
+        <div className="asp-vc-bar" onClick={onSeek}>
+          <div
+            className="asp-vc-bar-fill"
+            style={{ width: `${progress}%` }}
+          />
+        </div>
+
+        {/* 🔊 Mute */}
+        <button className="asp-vc-btn" onClick={toggleMute}>
+          {muted ? (
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M2 5.5h2.5L8 2v12l-3.5-3.5H2V5.5z" fill="currentColor" />
+              <path
+                d="M10.5 6L13.5 9M13.5 6L10.5 9"
+                stroke="currentColor"
+                strokeWidth="1.4"
+                strokeLinecap="round"
+              />
+            </svg>
+          ) : (
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M2 5.5h2.5L8 2v12l-3.5-3.5H2V5.5z" fill="currentColor" />
+              <path
+                d="M10 5.5c1.1.7 1.8 1.9 1.8 3.5S11.1 11.8 10 12.5"
+                stroke="currentColor"
+                strokeWidth="1.4"
+                strokeLinecap="round"
+              />
+            </svg>
+          )}
+        </button>
+      </div>
+    </div>
+  );
+}
+
+
+/* ═══════════════════════════════════
+   GALLERY CARD  — identical to ServicesPage
+═══════════════════════════════════ */
+const ROTATIONS = [
+  "-5deg",
+  "3deg",
+  "-4deg",
+  "6deg",
+  "-2deg",
+  "4deg",
+  "-6deg",
+  "3deg",
+  "-3deg",
+  "5deg",
+];
+
+function GalleryCard({ src, index, onImageClick }) {
+  const rot = ROTATIONS[index % ROTATIONS.length];
+  const cardRef = useRef(null);
+
+  useEffect(() => {
+    const el = cardRef.current;
+    if (!el) return;
+    el.style.opacity = "0";
+    el.style.transform = `rotate(${rot}) translateY(28px)`;
+    const t = setTimeout(
+      () => {
+        el.style.transition = "opacity 0.45s ease, transform 0.45s ease";
+        el.style.opacity = "1";
+        el.style.transform = `rotate(${rot})`;
+        const t2 = setTimeout(() => {
+          el.style.transition = "";
+          el.style.transform = "";
+          el.style.setProperty("--fsg-rot", rot);
+        }, 480);
+        return () => clearTimeout(t2);
+      },
+      50 + index * 60,
+    );
+    return () => clearTimeout(t);
+  }, [rot, index]);
+
+  return (
+    <div
+      ref={cardRef}
+      className="fsg-card"
+      style={{ "--fsg-rot": rot }}
+      onClick={() => onImageClick(index)}
+    >
+      <img src={src} alt={`frame-${index + 1}`} loading="lazy" />
+      <div className="fsg-card-shine" />
+      <div className="fsg-card-overlay">
+        <div className="fsg-card-overlay-circle">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <path
+              d="M3.75 9h10.5M9 3.75l5.25 5.25L9 14.25"
+              stroke="#000"
+              strokeWidth="1.6"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ═══════════════════════════════════
+   MAIN PAGE
+═══════════════════════════════════ */
+export default function ActorShootPage() {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [lbIndex, setLbIndex] = useState(-1);
+  const heroRef = useRef(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
       try {
-        const res = await axios.get(
+        const res = await fetch(
           `https://fatography-backend.vercel.app/api/celebrity-shoot/get/${id}`,
         );
-        setActorData(res.data.data);
+        const result = await res.json();
+        if (result.success) setData(result.data);
       } catch (err) {
-        console.error("Error fetching actor details", err);
+        console.error("Fetch error:", err);
       } finally {
         setLoading(false);
       }
     };
-    fetchActorDetails();
+    if (id) fetchData();
   }, [id]);
+
+  /* parallax */
+  useEffect(() => {
+    const hero = heroRef.current;
+    if (!hero) return;
+    const onScroll = () => {
+      hero.style.backgroundPositionY = `${window.scrollY * 0.35}px`;
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [data]);
 
   if (loading)
     return (
-      <div className="actor-loader">
-        <div className="spinner"></div>
+      <div className="fsg-loader">
+        <div className="fsg-loader-ring">
+          <span />
+          <span />
+        </div>
+        <p className="fsg-loader-text">Loading Studio</p>
       </div>
     );
-  if (!actorData)
-    return <div className="actor-error">Shoot Profile Not Found.</div>;
 
-  const allMedia = [...actorData.thumbnails, ...actorData.images];
+  if (!data)
+    return (
+      <div className="fsg-error-screen">
+        <span className="fsg-error-code">404</span>
+        <p>Shoot Not Found</p>
+      </div>
+    );
+
+  const images = data.images || [];
+  const thumbnails = data.thumbnails || [];
+  const hasVideo = Boolean(data.video);
+  const coverSrc = images[0] || thumbnails[0] || "";
+  const videoPoster = thumbnails[0] || images[0] || "";
 
   return (
-    <div className="actor-page-container">
-      {/* Mini Top Bar */}
-      <div className="actor-top-nav">
-        <button onClick={() => navigate(-1)} className="back-circle">
-          <ArrowLeft size={20} />
-        </button>
-        <div className="nav-center-text">EDITORIAL SERIES '26</div>
-        <div className="nav-right-empty"></div>
+    <>
+    <Header/>
+    <div className="fsg-page asp-page">
+      {lbIndex >= 0 && (
+        <Lightbox
+          images={images}
+          startIndex={lbIndex}
+          onClose={() => setLbIndex(-1)}
+        />
+      )}
+
+      {/* ══ HERO ══ */}
+      <header
+        ref={heroRef}
+        className="fsg-hero asp-hero"
+        style={{ backgroundImage: `url(${coverSrc})` }}
+      >
+        <div className="fsg-hero-gradient asp-hero-gradient-boost" />
+
+        <div className="fsg-hero-content">
+          <div className="fsg-hero-tag">
+            <span />
+            <p>Celebrity Shoot</p>
+            <span />
+          </div>
+          <h1 className="fsg-hero-title">{data.celebrityName}</h1>
+          <p className="fsg-hero-sub">Frames that define icons.</p>
+
+          <div className="asp-hero-meta">
+            {data.photographer && (
+              <div className="asp-hero-meta-item">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                  <circle
+                    cx="7"
+                    cy="5"
+                    r="2.5"
+                    stroke="currentColor"
+                    strokeWidth="1.3"
+                  />
+                  <path
+                    d="M2 12c0-2.76 2.24-5 5-5s5 2.24 5 5"
+                    stroke="currentColor"
+                    strokeWidth="1.3"
+                    strokeLinecap="round"
+                  />
+                </svg>
+                <span>{data.photographer}</span>
+              </div>
+            )}
+            {data.location && (
+              <div className="asp-hero-meta-item">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                  <path
+                    d="M7 1.5C4.79 1.5 3 3.29 3 5.5c0 3.25 4 7 4 7s4-3.75 4-7c0-2.21-1.79-4-4-4z"
+                    stroke="currentColor"
+                    strokeWidth="1.3"
+                  />
+                  <circle cx="7" cy="5.5" r="1.2" fill="currentColor" />
+                </svg>
+                <span>{data.location}</span>
+              </div>
+            )}
+          </div>
+
+          <div className="fsg-hero-cta-row">
+            <a href="/contact" className="fsg-hero-btn fsg-hero-btn--filled">
+              Book a Session
+            </a>
+            <a href="#gallery" className="fsg-hero-btn fsg-hero-btn--outline">
+              View Gallery
+            </a>
+          </div>
+        </div>
+
+        <div className="fsg-hero-scroll">
+          <span className="fsg-hero-scroll-label">Scroll</span>
+          <span className="fsg-hero-scroll-line" />
+        </div>
+      </header>
+
+      {/* ══ VIDEO SECTION ══ */}
+{hasVideo && (
+  <section className="asp-video-section">
+    <div className="asp-video-section-inner">
+      <div className="asp-video-text">
+        <span className="fsg-section-label">Pre-Wedding Film</span>
+
+        <h2 className="asp-video-heading">
+          Pre-Wedding Photography Video in Dubai
+        </h2>
+
+        <p className="asp-video-sub">
+          Experience how Fatography captures love stories in cinematic style.
+          This pre-wedding highlight showcases real emotions, creative direction,
+          and premium storytelling — crafted with detail, passion, and elegance.
+        </p>
+
+        <div className="asp-video-info-row">
+          {data.photographer && (
+            <div className="asp-vi-item">
+              <span className="asp-vi-label">Photographer</span>
+              <span className="asp-vi-val">{data.photographer}</span>
+            </div>
+          )}
+
+          {data.location && (
+            <div className="asp-vi-item">
+              <span className="asp-vi-label">Location</span>
+              <span className="asp-vi-val">{data.location}</span>
+            </div>
+          )}
+
+          <div className="asp-vi-item">
+            <span className="asp-vi-label">Total Frames</span>
+            <span className="asp-vi-val">{images.length} Photos</span>
+          </div>
+        </div>
       </div>
 
-      <main className="actor-main-content">
-        {/* Section 1: Split Header */}
-        <section className="actor-split-header">
-          <div className="header-left-info">
-            <div className="brand-badge">
-              <Sparkles size={12} /> Premier Shoot
-            </div>
-            <h1 className="actor-title-main">{actorData.celebrityName}</h1>
+      <VideoPlayer src={data.video} poster={videoPoster} />
+    </div>
+  </section>
+)}
 
-            <div className="shoot-specs">
-              <div className="spec-item">
-                <label>Photographer</label>
-                <p>{actorData.photographer || "Fatimah Haroon"}</p>
-              </div>
-              <div className="spec-item">
-                <label>Location</label>
-                <p>{actorData.location || "International"}</p>
-              </div>
-            </div>
-
-            <div className="brand-philosophy">
-              <Quote className="quote-icon" size={24} />
-              <p>
-                We define celebrity aesthetics through a lens of sophistication.
-                Our brand captures the raw essence of icons, blending cinematic
-                lighting with high-fashion storytelling.
-              </p>
-            </div>
+      {/* ══ GALLERY ══ */}
+      {images.length > 0 && (
+        <section className="fsg-gallery" id="gallery">
+          <div className="fsg-gallery-header">
+            <span className="fsg-section-label fsg-label--center">
+              Full Portfolio
+            </span>
+            <h2 className="fsg-gallery-title">
+              {data.celebrityName} — Selected Frames
+            </h2>
           </div>
-
-          <div className="header-right-image">
-            <div className="main-frame">
-              <img src={actorData.thumbnails[0]} alt="Hero" />
-              <div className="frame-overlay-tag">Cover Story</div>
-            </div>
-          </div>
-        </section>
-
-        {/* Section 2: Image Showcase */}
-        <section className="actor-gallery-section">
-          <div className="gallery-intro">
-            <div className="line-divider"></div>
-            <span>THE COLLECTION</span>
-            <div className="line-divider"></div>
-          </div>
-
-          <div className="actor-gallery-grid">
-            {allMedia.map((img, index) => (
-              <div key={index} className={`gallery-box box-${(index % 6) + 1}`}>
-                <img src={img} alt="Gallery Shot" loading="lazy" />
-                <div className="box-hover">
-                  <span className="shot-number">NO. {index + 1}</span>
-                </div>
-              </div>
+          <div className="fsg-cards-grid">
+            {images.map((url, i) => (
+              <GalleryCard
+                key={i}
+                src={url}
+                index={i}
+                onImageClick={setLbIndex}
+              />
             ))}
           </div>
         </section>
-      </main>
-
+      )}
     </div>
+    <Footer/>
+    </>
   );
-};
-
-export default ActorShoot;
+}

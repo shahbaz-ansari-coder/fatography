@@ -23,14 +23,14 @@ const galleryVideos = [
     {
       id: 3,
       videoUrl:
-        "https://res.cloudinary.com/djlshebp8/video/upload/q_auto/f_auto/v1776357697/Professional_Photography___Videography_in_Dubai_2_n0qmjl.mp4",
+        "https://res.cloudinary.com/djlshebp8/video/upload/q_auto/f_auto/v1776357703/Professional_Photography___Videography_in_Dubai_3_cske1g.mp4",
       width: 450,
       height: 625,
     },
     {
       id: 4,
       videoUrl:
-        "https://res.cloudinary.com/djlshebp8/video/upload/q_auto/f_auto/v1776357694/Professional_Photography___Videography_in_Dubai_5_jnftwb.mp4",
+        "https://res.cloudinary.com/djlshebp8/video/upload/q_auto/f_auto/v1776357697/Professional_Photography___Videography_in_Dubai_2_n0qmjl.mp4",
       width: 450,
       height: 625,
     },
@@ -39,14 +39,15 @@ const galleryVideos = [
     {
       id: 5,
       videoUrl:
-        "https://res.cloudinary.com/djlshebp8/video/upload/q_auto/f_auto/v1776357692/Professional_Photography___Videography_in_Dubai_8_ctwwqq.mp4",
+        "https://res.cloudinary.com/djlshebp8/video/upload/q_auto/f_auto/v1776357711/Professional_Photography___Videography_in_Dubai_4_w72ttl.mp4",
       width: 450,
       height: 625,
     },
     {
       id: 6,
       videoUrl:
-        "https://res.cloudinary.com/djlshebp8/video/upload/q_auto/f_auto/v1776357711/Professional_Photography___Videography_in_Dubai_4_w72ttl.mp4",
+        "https://res.cloudinary.com/djlshebp8/video/upload/q_auto/f_auto/v1776358721/Professional_Photography_Videography_in_Dubai_7_ebltlm.mp4",
+
       width: 450,
       height: 625,
     },
@@ -55,14 +56,14 @@ const galleryVideos = [
     {
       id: 7,
       videoUrl:
-        "https://res.cloudinary.com/djlshebp8/video/upload/q_auto/f_auto/v1776357703/Professional_Photography___Videography_in_Dubai_3_cske1g.mp4",
+        "https://res.cloudinary.com/djlshebp8/video/upload/q_auto/f_auto/v1776357694/Professional_Photography___Videography_in_Dubai_5_jnftwb.mp4",
       width: 450,
       height: 625,
     },
     {
       id: 8,
       videoUrl:
-        "https://res.cloudinary.com/djlshebp8/video/upload/q_auto/f_auto/v1776358721/Professional_Photography_Videography_in_Dubai_7_ebltlm.mp4",
+        "https://res.cloudinary.com/djlshebp8/video/upload/q_auto/f_auto/v1776357692/Professional_Photography___Videography_in_Dubai_8_ctwwqq.mp4",
       width: 450,
       height: 625,
     },
