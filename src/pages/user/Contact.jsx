@@ -124,7 +124,7 @@ export default function ContactPage() {
     const form = e.target;
     const data = new FormData(form);
     try {
-      const response = await fetch("https://formspree.io/f/mnjlvppa", {
+      const response = await fetch("https://formspree.io/f/xykoykdw", {
         method: "POST",
         body: data,
         headers: { Accept: "application/json" },
@@ -144,7 +144,7 @@ export default function ContactPage() {
 
   return (
     <>
-    <Preloader/>
+      <Preloader />
       <Header />
 
       <div className="cp-page !py-5 !sm:py-10">
@@ -241,12 +241,27 @@ export default function ContactPage() {
                       />
                     </div>
                     <div className="cp-field">
-                      <label>Event Type</label>
-                      <input
-                        name="eventType"
-                        type="text"
-                        placeholder="Wedding, Brand Shoot…"
-                      />
+                      <label>Service Type</label>
+                      <select name="serviceType" defaultValue="">
+                        <option value="" disabled>
+                          Select Service Type
+                        </option>
+
+                        <option>Fashion Photography</option>
+                        <option>Pre Wedding Shoots</option>
+                        <option>Wedding Events</option>
+                        <option>Lifestyle Photography</option>
+                        <option>Food Photography</option>
+                        <option>Black & White</option>
+                        <option>Product Photography</option>
+                        <option>Family Photography</option>
+                        <option>Event Coverage</option>
+                        <option>Neon Photography</option>
+                        <option>Corporate & LinkedIn</option>
+                        <option>Retouching Guide</option>
+                        <option>Fitness Photography</option>
+                        <option>Real Estate</option>
+                      </select>
                     </div>
                   </div>
 

@@ -15,15 +15,15 @@ const SERVICE_ORDER = [
   "Lifestyle Photography",
   "Food Photography",
   "Black & White",
-  "Maternity & Baby Photography",
+  "Maternity Photography",
   "Product Photography",
   "Family Photography",
   "Event Coverage",
-  "Real Estate Photography",
+  "Real Estate",
   "Neon Photography",
   "Corporate & LinkedIn",
-  "Retouching Guide",
   "Fitness Photography",
+  "Retouching Guide",
 ];
 
 function ServiceCard({ data }) {

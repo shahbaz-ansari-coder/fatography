@@ -100,6 +100,7 @@ const Sidebar = () => {
       {/* ── Sidebar ── */}
       <aside
         className={`fatoadmin__sidebar ${isOpen ? "fatoadmin__sidebar--open" : ""}`}
+        style={{ zIndex: 1111 }}
       >
         <div className="fatoadmin__sidebar-header">
           <Link to="/" onClick={() => setIsOpen(false)}>

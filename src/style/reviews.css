@@ -28,7 +28,7 @@
 .rev-title {
   font-family: 'Cormorant Garamond', serif;
   color: #e8dcc8;
-  font-size: clamp(30px, 5vw, 50px);
+  font-size: 40px;
   font-weight: 300;
 }
 

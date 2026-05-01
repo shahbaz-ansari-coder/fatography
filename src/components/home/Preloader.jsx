@@ -22,7 +22,7 @@ function Preloader() {
     // Maximum wait time (1.5s)
     const maxTimer = setTimeout(() => {
       hideLoader();
-    }, 1500);
+    }, 2000);
 
     if (document.readyState === "complete") {
       handleLoad();

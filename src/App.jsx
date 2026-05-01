@@ -12,7 +12,6 @@ import SliderManager from "./pages/admin/SliderManager";
 import ShootImagesManager from "./pages/admin/ShootimagesManager";
 import AccountSettings from "./pages/admin/AccountSettings";
 import ServicesManagement from "./pages/admin/ServicesManagement";
-import AboutUs from "./pages/user/AboutUs";
 import ServicesPage from "./pages/user/ServicesPage";
 import ContactPage from "./pages/user/Contact";
 import Preloader from "./components/home/Preloader";
@@ -20,7 +19,7 @@ import TestimonialsPage from "./pages/user/TestimonialsPage";
 import AllServicesPage from "./pages/user/AllServicesPage";
 import CelebrityShootsPage from "./pages/user/CelebrityShootsPage";
 import AboutPage from "./pages/user/AboutPage";
-import VideographyPage from "./pages/user/VideographyPage";
+
 import ServicePage from "./pages/user/Service";
 import PreWedding from "./pages/user/PreWedding";
 import WeddingEvent from "./pages/user/WeddingEvent";
@@ -37,7 +36,7 @@ function App() {
           element: <Home />,
         },
         {
-          path: "/actor/:id",
+          path: "/celebrity-shoots/:id",
           element: <ActorShoot />,
         },
         {
@@ -67,10 +66,6 @@ function App() {
         {
           path: "/about-us",
           element: <AboutPage />,
-        },
-        {
-          path: "/videography",
-          element: <VideographyPage />,
         },
         {
           path: "/contact-us",

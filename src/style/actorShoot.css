@@ -1,4 +1,3 @@
-
 /* ═══════════════════════════════════
    BACK BUTTON
 ═══════════════════════════════════ */
@@ -7,8 +6,8 @@
   top: 32px;
   left: calc(5% + 140px);
   z-index: 4;
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 50%;
   width: 40px;
   height: 40px;
@@ -16,21 +15,28 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background 0.25s ease, border-color 0.25s ease;
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease;
 }
-.asp-back-btn:hover { background: var(--p); border-color: var(--p); }
+.asp-back-btn:hover {
+  background: var(--p);
+  border-color: var(--p);
+}
 
 /* ═══════════════════════════════════
    HERO TWEAKS
 ═══════════════════════════════════ */
-.asp-hero { background-position: center 20%; }
+.asp-hero {
+  background-position: center 20%;
+}
 
 /* extra dark vignette — portrait images need more contrast */
 .asp-hero-gradient-boost {
   background:
-    linear-gradient(to right, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 60%),
-    linear-gradient(to top,   rgba(0,0,0,0.98) 0%, rgba(0,0,0,0)   52%),
-    linear-gradient(to bottom,rgba(0,0,0,0.5)  0%, rgba(0,0,0,0)   28%) !important;
+    linear-gradient(to right, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.2) 60%),
+    linear-gradient(to top, rgba(0, 0, 0, 0.98) 0%, rgba(0, 0, 0, 0) 52%),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0) 28%) !important;
 }
 
 /* photographer / location row below tagline */
@@ -44,11 +50,14 @@
   display: flex;
   align-items: center;
   gap: 7px;
-  font-size: 0.82rem;
-  color: rgba(255,255,255,0.55);
+  font-size: 16px !important;
+  color: rgba(255, 255, 255, 0.55);
   font-weight: 300;
 }
-.asp-hero-meta-item svg { opacity: 0.6; flex-shrink: 0; }
+.asp-hero-meta-item svg {
+  opacity: 0.6;
+  flex-shrink: 0;
+}
 
 /* ═══════════════════════════════════
    LIGHTBOX ARROWS + COUNTER
@@ -58,8 +67,8 @@
   top: 50%;
   transform: translateY(-50%);
   z-index: 10001;
-  background: rgba(255,255,255,0.07);
-  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 50%;
   width: 46px;
   height: 46px;
@@ -67,12 +76,21 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background 0.2s ease, border-color 0.2s ease;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
   color: #fff;
 }
-.asp-lb-arrow:hover { background: var(--p); border-color: var(--p); }
-.asp-lb-arrow--left  { left: 28px; }
-.asp-lb-arrow--right { right: 28px; }
+.asp-lb-arrow:hover {
+  background: var(--p);
+  border-color: var(--p);
+}
+.asp-lb-arrow--left {
+  left: 28px;
+}
+.asp-lb-arrow--right {
+  right: 28px;
+}
 
 .asp-lb-counter {
   position: absolute;
@@ -82,7 +100,7 @@
   font-family: "Unbounded", sans-serif;
   font-size: 0.62rem;
   letter-spacing: 3px;
-  color: rgba(255,255,255,0.4);
+  color: rgba(255, 255, 255, 0.4);
   pointer-events: none;
 }
 
@@ -104,10 +122,11 @@
 }
 
 /* left text column */
-.asp-video-text {}
+.asp-video-text {
+}
 .asp-video-heading {
   font-family: "Unbounded", sans-serif;
-  font-size: clamp(1.8rem, 3.5vw, 3rem);
+  font-size: 25px;
   font-weight: 900;
   line-height: 1.08;
   margin-bottom: 20px;
@@ -117,7 +136,7 @@
   background-clip: text;
 }
 .asp-video-sub {
-  font-size: 1rem;
+  font-size: 16px;
   color: #888;
   line-height: 1.85;
   font-weight: 300;
@@ -137,13 +156,14 @@
 }
 .asp-vi-label {
   font-family: "Unbounded", sans-serif;
-  font-size: 0.52rem;
+  font-size: 10px;
   letter-spacing: 3px;
   text-transform: uppercase;
   color: var(--dim);
 }
 .asp-vi-val {
-  font-size: 0.95rem;
+  font-size: 18px;
+  margin-top: -10px;
   font-weight: 600;
   color: var(--txt);
 }
@@ -151,17 +171,17 @@
 /* video player */
 .asp-video-wrap {
   border-radius: 16px;
-    max-width: 380px;  /* keeps reel-style narrow look */
+  max-width: 380px; /* keeps reel-style narrow look */
   margin: 0 auto;
   overflow: hidden;
   background: #000;
   border: 1px solid var(--bdr);
-  box-shadow: 0 24px 64px rgba(0,0,0,0.6);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6);
 }
 .asp-video-inner {
   position: relative;
   aspect-ratio: 9 / 16;
-    max-height: 450px; 
+  max-height: 450px;
   cursor: pointer;
   overflow: hidden;
 }
@@ -181,7 +201,7 @@
   align-items: center;
   justify-content: center;
   gap: 14px;
-  background: rgba(0,0,0,0.35);
+  background: rgba(0, 0, 0, 0.35);
   backdrop-filter: blur(2px);
 }
 .asp-video-play-btn {
@@ -192,7 +212,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s ease;
+  transition:
+    transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.3s ease;
   box-shadow: 0 0 0 0 var(--p35);
 }
 .asp-video-play-btn:hover,
@@ -205,7 +227,7 @@
   font-size: 0.6rem;
   letter-spacing: 4px;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.7);
+  color: rgba(255, 255, 255, 0.7);
 }
 
 /* top-right badge */
@@ -213,16 +235,16 @@
   position: absolute;
   top: 16px;
   right: 16px;
-  background: rgba(0,0,0,0.55);
+  background: rgba(0, 0, 0, 0.55);
   backdrop-filter: blur(8px);
-  border: 1px solid rgba(255,255,255,0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 100px;
   padding: 6px 14px;
   font-family: "Unbounded", sans-serif;
   font-size: 0.52rem;
   letter-spacing: 3px;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.6);
+  color: rgba(255, 255, 255, 0.6);
   display: flex;
   align-items: center;
   gap: 8px;
@@ -237,8 +259,15 @@
   display: inline-block;
 }
 @keyframes asp-dot-pulse {
-  0%,100% { opacity: 1; transform: scale(1); }
-  50%      { opacity: 0.4; transform: scale(0.75); }
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(0.75);
+  }
 }
 
 /* controls bar */
@@ -248,7 +277,7 @@
   gap: 12px;
   padding: 10px 16px;
   background: var(--s1);
-  border-top: 1px solid rgba(255,255,255,0.05);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 .asp-vc-btn {
   background: none;
@@ -262,11 +291,13 @@
   transition: color 0.2s ease;
   flex-shrink: 0;
 }
-.asp-vc-btn:hover { color: var(--p); }
+.asp-vc-btn:hover {
+  color: var(--p);
+}
 .asp-vc-bar {
   flex: 1;
   height: 3px;
-  background: rgba(255,255,255,0.1);
+  background: rgba(255, 255, 255, 0.1);
   border-radius: 10px;
   cursor: pointer;
   position: relative;
@@ -303,15 +334,18 @@
   height: 260px;
   border-radius: 12px;
   overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.07);
+  border: 1px solid rgba(255, 255, 255, 0.07);
   cursor: pointer;
   flex-shrink: 0;
-  transition: border-color 0.25s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    border-color 0.25s ease,
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 .asp-thumb-card:hover {
   border-color: var(--p35);
   transform: translateY(-6px);
-  box-shadow: 0 16px 40px rgba(0,0,0,0.5);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
 }
 .asp-thumb-card img {
   width: 100%;
@@ -320,18 +354,22 @@
   display: block;
   transition: transform 0.4s ease;
 }
-.asp-thumb-card:hover img { transform: scale(1.07); }
+.asp-thumb-card:hover img {
+  transform: scale(1.07);
+}
 .asp-thumb-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,0.4);
+  background: rgba(0, 0, 0, 0.4);
   display: flex;
   align-items: center;
   justify-content: center;
   opacity: 0;
   transition: opacity 0.25s ease;
 }
-.asp-thumb-card:hover .asp-thumb-overlay { opacity: 1; }
+.asp-thumb-card:hover .asp-thumb-overlay {
+  opacity: 1;
+}
 
 /* ═══════════════════════════════════
    GALLERY — inherits all fsg-gallery,
@@ -350,19 +388,352 @@
 }
 
 @media (max-width: 860px) {
-  .asp-back-btn { left: calc(5% + 120px); }
-  .asp-video-section { padding: 72px 5%; }
-  .asp-thumbs-row { gap: 12px; }
-  .asp-thumb-card { width: 160px; height: 210px; }
+  .asp-back-btn {
+    left: calc(5% + 120px);
+  }
+  .asp-video-section {
+    padding: 72px 5%;
+  }
+  .asp-thumbs-row {
+    gap: 12px;
+  }
+  .asp-thumb-card {
+    width: 160px;
+    height: 210px;
+  }
 }
 
 @media (max-width: 600px) {
-  .asp-back-btn  { left: 5%; top: 72px; }
-  .asp-lb-arrow  { width: 38px; height: 38px; }
-  .asp-lb-arrow--left  { left: 12px; }
-  .asp-lb-arrow--right { right: 12px; }
-  .asp-video-section { padding: 56px 5%; }
-  .asp-thumbs-section { padding: 44px 5%; }
-  .asp-thumb-card { width: 130px; height: 170px; }
-  .asp-video-info-row { gap: 10px; }
+  .asp-back-btn {
+    left: 5%;
+    top: 72px;
+  }
+  .asp-lb-arrow {
+    width: 38px;
+    height: 38px;
+  }
+  .asp-lb-arrow--left {
+    left: 12px;
+  }
+  .asp-lb-arrow--right {
+    right: 12px;
+  }
+  .asp-video-section {
+    padding: 56px 5%;
+  }
+  .asp-thumbs-section {
+    padding: 44px 5%;
+  }
+  .asp-thumb-card {
+    width: 130px;
+    height: 170px;
+  }
+  .asp-video-info-row {
+    gap: 10px;
+  }
+}
+
+/* ================================================================
+   FATOGRAPHY — Celebrity Hero Section
+   Unique prefix: fato-celeb__
+   Font: Unbounded, sans-serif
+   ================================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;900&display=swap');
+
+/* ── Root ─────────────────────────────────────────────────────── */
+.fato-celeb__hero {
+  position: relative;
+  width: 100%;
+  height: 60vh;
+  min-height: 420px;
+  background-color: #080808;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  font-family: 'Unbounded', sans-serif;
+}
+
+/* ── LEFT: Content ────────────────────────────────────────────── */
+.fato-celeb__content {
+  position: relative;
+  z-index: 3;
+  flex: 0 0 55%;
+  max-width: 55%;
+  padding: 40px 50px 40px 70px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0;
+}
+
+/* ── Tag ──────────────────────────────────────────────────────── */
+.fato-celeb__tag {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+  animation: fatoCelebFadeUp 0.7s ease both;
+  animation-delay: 0.1s;
+}
+
+.fato-celeb__tag p {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgb(182, 82, 79);
+  margin: 0;
+  white-space: nowrap;
+}
+
+.fato-celeb__tag-line {
+  display: block;
+  height: 1px;
+  width: 36px;
+  background: rgb(182, 82, 79);
+  opacity: 0.6;
+  flex-shrink: 0;
+}
+
+/* ── Title ────────────────────────────────────────────────────── */
+.fato-celeb__title {
+  font-family: 'Unbounded', sans-serif;
+  font-size: clamp(24px, 3.8vw, 54px);
+  font-weight: 900;
+  color: #ffffff;
+  line-height: 1.08;
+  margin: 0 0 12px 0;
+  letter-spacing: -1px;
+  text-transform: uppercase;
+  animation: fatoCelebFadeUp 0.7s ease both;
+  animation-delay: 0.22s;
+}
+
+/* ── Subtitle ─────────────────────────────────────────────────── */
+.fato-celeb__sub {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.4);
+  margin: 0 0 20px 0;
+  font-style: italic;
+  letter-spacing: 0.5px;
+  font-weight: 400;
+  animation: fatoCelebFadeUp 0.7s ease both;
+  animation-delay: 0.34s;
+}
+
+/* ── Meta ─────────────────────────────────────────────────────── */
+.fato-celeb__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-bottom: 28px;
+  animation: fatoCelebFadeUp 0.7s ease both;
+  animation-delay: 0.44s;
+}
+
+.fato-celeb__meta-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: rgba(255, 255, 255, 0.5);
+  font-family: 'Unbounded', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.5px;
+  font-weight: 400;
+}
+
+.fato-celeb__meta-item svg {
+  flex-shrink: 0;
+  opacity: 0.7;
+}
+
+/* ── CTA Row ──────────────────────────────────────────────────── */
+.fato-celeb__cta-row {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  animation: fatoCelebFadeUp 0.7s ease both;
+  animation-delay: 0.56s;
+}
+
+.fato-celeb__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 11px 26px;
+  font-family: 'Unbounded', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none !important;
+  border-radius: 3px;
+  transition: all 0.25s ease;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.fato-celeb__btn--filled {
+  background: rgb(182, 82, 79);
+  color: #ffffff !important;
+  border: 2px solid rgb(182, 82, 79);
+}
+
+.fato-celeb__btn--filled:hover {
+  background: rgb(200, 95, 92);
+  border-color: rgb(200, 95, 92);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(182, 82, 79, 0.4);
+}
+
+.fato-celeb__btn--outline {
+  background: transparent;
+  color: #ffffff !important;
+  border: 2px solid rgba(255, 255, 255, 0.22);
+}
+
+.fato-celeb__btn--outline:hover {
+  border-color: rgba(255, 255, 255, 0.65);
+  transform: translateY(-2px);
+}
+
+/* ── RIGHT: Image ─────────────────────────────────────────────── */
+.fato-celeb__img-wrap {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 52%;
+  height: 100%;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.fato-celeb__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  animation: fatoCelebZoom 1.2s ease both;
+}
+
+/* Gradient: fades image into black on the left */
+.fato-celeb__img-fade {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(
+    to right,
+    #080808 0%,
+    #080808 8%,
+    rgba(8, 8, 8, 0.88) 28%,
+    rgba(8, 8, 8, 0.25) 60%,
+    rgba(8, 8, 8, 0) 100%
+  );
+  pointer-events: none;
+}
+
+/* ── Scroll Indicator ─────────────────────────────────────────── */
+.fato-celeb__scroll {
+  position: absolute;
+  bottom: 28px;
+  left: 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  z-index: 4;
+  animation: fatoCelebFadeUp 0.7s ease both;
+  animation-delay: 0.8s;
+}
+
+.fato-celeb__scroll-label {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.28);
+  writing-mode: vertical-rl;
+}
+
+.fato-celeb__scroll-line {
+  display: block;
+  width: 1px;
+  height: 36px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.28), transparent);
+  animation: fatoCelebScrollPulse 2s ease infinite;
+}
+
+/* ── Animations ───────────────────────────────────────────────── */
+@keyframes fatoCelebFadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fatoCelebZoom {
+  from { opacity: 0; transform: scale(1.06); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes fatoCelebScrollPulse {
+  0%, 100% { opacity: 0.28; }
+  50%       { opacity: 0.7; }
+}
+
+/* ── Responsive: Tablet ───────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .fato-celeb__content {
+    flex: 0 0 65%;
+    max-width: 65%;
+    padding: 40px 30px 40px 40px;
+  }
+  .fato-celeb__img-wrap {
+    width: 45%;
+  }
+}
+
+/* ── Responsive: Mobile ───────────────────────────────────────── */
+@media (max-width: 768px) {
+  .fato-celeb__hero {
+    height: auto;
+    min-height: unset;
+    padding: 90px 0 50px 0;
+    align-items: center;
+  }
+
+  /* Hide image on mobile */
+  .fato-celeb__img-wrap {
+    display: none;
+  }
+
+  .fato-celeb__content {
+    flex: unset;
+    max-width: 100%;
+    width: 100%;
+    padding: 0 22px;
+    background: #080808;
+  }
+
+  .fato-celeb__title {
+    font-size: clamp(20px, 8vw, 36px);
+    letter-spacing: -0.5px;
+  }
+
+  .fato-celeb__cta-row {
+    flex-direction: column;
+  }
+
+  .fato-celeb__btn {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .fato-celeb__scroll {
+    display: none;
+  }
 }

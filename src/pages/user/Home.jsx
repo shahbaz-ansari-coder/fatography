@@ -1,6 +1,7 @@
 // ─── Import all main page sections
 import About from "../../components/home/About";
 import CelebrityGallery from "../../components/home/Celebrity";
+import ContactSection from "../../components/home/ContactSection";
 import DemoImges from "../../components/home/DemoImges";
 import FloatingButtons from "../../components/home/FloatingButtons ";
 import Footer from "../../components/home/Footer";
@@ -31,6 +32,7 @@ function Home() {
           <ReviewSection />
         </article>
       </main>
+      <ContactSection/>
       <Footer />
     </div>
   );

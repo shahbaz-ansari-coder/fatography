@@ -588,9 +588,11 @@ body.active {
 }
 
 .about .main-glow-btn {
-  /* display: n; */
-  padding: 10px 20px !important;
-  font-size: 11px !important;
+  background: rgb(241, 113, 109);
+  font-family: "Gordita", sans-serif;
+  border-radius: 5px;
+  padding: 5px 20px !important;
+  font-size: 14px !important;
 }
 
 .about .section-text .em {
@@ -2096,4 +2098,28 @@ img {
 ────────────────────────────────────────── */
 body.nav-open {
   overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .rev-title {
+    font-family: 'Cormorant Garamond', serif;
+    color: #e8dcc8;
+    font-size: 35px !important;
+    font-weight: 300;
+    margin-top: 20px;
+    line-height: 30px;
+}
+}
+@media (max-width: 425px) {
+  .rev-title {
+    font-family: 'Cormorant Garamond', serif;
+    color: #e8dcc8;
+    font-size: 25px !important;
+    font-weight: 300;
+    margin-top: 25px;
+    line-height: 30px;
+}
+.rev-eyebrow{
+  font-size: 12px !important;
+}
 }

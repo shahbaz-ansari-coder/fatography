@@ -70,7 +70,7 @@
 .cp-eyebrow {
   display: block;
   font-family: "Unbounded", sans-serif;
-  font-size: 0.6rem;
+  font-size: 12px;
   letter-spacing: 5px;
   text-transform: uppercase;
   color: var(--p);
@@ -232,18 +232,16 @@
 /* ═══════════════════════════════════
    LEFT  —  FAQ + MAP
 ═══════════════════════════════════ */
-.cp-left {
-}
 
 .cp-left-title {
   font-family: "Unbounded", sans-serif;
-  font-size: clamp(1.6rem, 2.8vw, 2.4rem);
+  font-size: 25px;
   font-weight: 900;
-  line-height: 1.1;
+  line-height: 1;
   margin-bottom: 14px;
 }
 .cp-left-desc {
-  font-size: 14px;
+  font-size: 16px;
   color: #888;
   line-height: 1.8;
   font-weight: 300;
@@ -275,7 +273,7 @@
   color: var(--txt);
   cursor: pointer;
   font-family: "DM Sans", sans-serif;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 500;
   text-align: left;
   transition: color 0.2s ease;
@@ -314,14 +312,15 @@
 }
 .cp-faq-list li {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 10px;
-  font-size: 14px;
+  font-size: 16px;
   color: #888;
   font-weight: 300;
   line-height: 1.55;
 }
 .cp-faq-dot {
+  margin-top: -5px !important;
   width: 5px;
   height: 5px;
   border-radius: 50%;
@@ -401,14 +400,15 @@
 }
 .cp-form-title {
   font-family: "Unbounded", sans-serif;
-  font-size: 18px;
+  font-size: 25px;
   font-weight: 900;
 }
 .cp-form-sub {
-  font-size: 14px;
+  font-size: 16px;
   color: var(--dim);
   font-weight: 300;
   margin-bottom: 0;
+  margin-top: -10px;
 }
 
 /* form */
@@ -441,7 +441,7 @@
   text-transform: uppercase;
   color: var(--dim);
 }
-.cp-field input,
+.cp-field input, .cp-field select,
 .cp-field textarea {
   background: var(--s3);
   border: 1px solid rgba(255, 255, 255, 0.06);
@@ -449,7 +449,7 @@
   padding: 13px 15px;
   color: var(--txt);
   font-family: "DM Sans", sans-serif;
-  font-size: 12px;
+  font-size: 16px;
   font-weight: 300;
   outline: none;
   transition:
@@ -458,12 +458,17 @@
   width: 100%;
   resize: none;
 }
-.cp-field input::placeholder,
+
+ .cp-field select{
+  height: 100% !important;
+ }
+
+.cp-field input::placeholder, 
 .cp-field textarea::placeholder {
   color: #444;
 }
 
-.cp-field input:focus,
+.cp-field input:focus, .cp-field select:focus,
 .cp-field textarea:focus {
   border-color: var(--p35);
   box-shadow: 0 0 0 3px var(--p10);

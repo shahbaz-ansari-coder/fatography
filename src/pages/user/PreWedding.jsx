@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "../../style/preWedding.css";
 import Header from "../../components/home/Header";
 import Footer from "../../components/home/Footer";
+import ContactSection from "../../components/home/ContactSection";
 
 /* ═══════════════════════════════════
    DATA — replace banner URL & video URLs
@@ -282,6 +283,106 @@ function VideoLightbox({ url, onClose }) {
 }
 
 /* ═══════════════════════════════════
+   FAQ SECTION
+═══════════════════════════════════ */
+function FaqSection() {
+  const [openIdx, setOpenIdx] = useState(null);
+
+  const faqs = [
+    {
+      q: "What makes Fatography different from other studios?",
+      a: `we combine cinematic post-production, professional art direction, and a dedicated creative team to deliver imagery that goes far beyond ordinary photography. Every project is a visual story.`,
+    },
+    {
+      q: "How do I book a session?",
+      a: "Simply click 'Book a Session' on any service page or visit our Contact page. We'll schedule a discovery call to understand your vision, goals, and timeline before anything else.",
+    },
+    {
+      q: "What is included in post-production?",
+      a: "Every project includes meticulous retouching, cinematic colour grading, and a final quality review by our in-house editors. We don't just deliver raw files — we deliver polished, gallery-ready images.",
+    },
+    {
+      q: "How long does delivery take?",
+      a: "Turnaround depends on the package and scope, but most projects are delivered within 5–10 business days after the shoot. Rush delivery options are available on request.",
+    },
+    {
+      q: "Do you travel for shoots outside Dubai?",
+      a: "Yes. While we are based in Dubai, UAE, we regularly travel for destination weddings, celebrity shoots, and commercial projects. Travel packages can be discussed during your discovery call.",
+    },
+    {
+      q: "Can I customise a package for my needs?",
+      a: "Absolutely. We offer fully flexible packages designed around your creative needs, timeline, and budget — without ever compromising on quality.",
+    },
+  ];
+
+  return (
+    <section className="fsg-faq">
+      <div className="fsg-faq-top">
+        <div className="fsg-section-label fsg-label--center">
+          <span />
+          FAQ
+          <span />
+        </div>
+        <h2 className="fsg-faq-heading">
+          Frequently Asked <em>Questions</em>
+        </h2>
+      </div>
+
+      <div className="fsg-faq-list">
+        {faqs.map((faq, i) => (
+          <div
+            key={i}
+            className={`fsg-faq-item ${openIdx === i ? "fsg-faq-item--open" : ""}`}
+          >
+            <button
+              className="fsg-faq-q"
+              onClick={() => setOpenIdx(openIdx === i ? null : i)}
+              aria-expanded={openIdx === i}
+            >
+              <span className="fsg-faq-q-num">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <span className="fsg-faq-q-text">{faq.q}</span>
+              <span className="fsg-faq-icon">
+                <svg
+                  className="fsg-faq-arrow"
+                  width="14"
+                  height="14"
+                  viewBox="0 0 14 14"
+                  fill="none"
+                >
+                  <path
+                    d="M3 5l4 4 4-4"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </span>
+            </button>
+            <div className="fsg-faq-body">
+              <div>
+                <p className="fsg-faq-ans">{faq.a}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="fsg-faq-cta-row">
+        <div className="fsg-faq-cta-line" />
+        <span className="fsg-faq-cta-text">Still have questions?</span>
+        <Link to="/contact-us" className="fsg-faq-cta-link">
+          Contact Us →
+        </Link>
+        <div className="fsg-faq-cta-line" />
+      </div>
+    </section>
+  );
+}
+
+/* ═══════════════════════════════════
    MAIN PAGE
 ═══════════════════════════════════ */
 export default function PreWedding() {
@@ -436,6 +537,8 @@ export default function PreWedding() {
           </div>
         </section>
       </div>
+      <FaqSection />
+      <ContactSection />
       <Footer />
     </>
   );

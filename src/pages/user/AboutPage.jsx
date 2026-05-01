@@ -4,6 +4,7 @@ import Footer from "../../components/home/Footer";
 import Header from "../../components/home/Header";
 import Preloader from "../../components/home/Preloader";
 import { Link } from "react-router";
+import ContactSection from "../../components/home/ContactSection";
 
 /* ─── animated counter ─── */
 function Counter({ target, suffix = "", duration = 2000 }) {
@@ -323,7 +324,7 @@ export default function AboutPage() {
             </div>
           </div>
         </section>
-
+        <ContactSection />
         <Footer />
       </div>
     </>

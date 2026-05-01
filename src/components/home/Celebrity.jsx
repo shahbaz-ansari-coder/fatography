@@ -1,128 +1,117 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
+import "swiper/css";
 import "../../style/celebrityGallery.css";
-import Category from "./Category";
-import { Link } from "react-router";
-
-/* ORDER OF CELEBRITIES */
+import { Link } from "react-router-dom";
 
 const CELEBRITY_ORDER = [
   "Cengiz Coşkun",
   "Bilal Abbas Khan",
+  "Ebraheem Al Samadi",
   "Momina Mustehsan",
   "Farhan Saeed",
   "Shehzad Roy",
   "Sadia Khan",
+  "Ahsan Khan",
+  "Mikaal Zulfiqar",
+  "Hareem Farooq",
 ];
 
-/* CARD */
-
-const CelebrityCard = ({ item }) => {
-  const [currentImg, setCurrentImg] = useState(0);
-
-  useEffect(() => {
-    if (!item?.thumbnails?.length) return;
-
-    const interval = setInterval(() => {
-      setCurrentImg((prev) => (prev + 1) % item.thumbnails.length);
-    }, 3500);
-
-    return () => clearInterval(interval);
-  }, [item]);
+function CelebrityShootCard({ item }) {
+  const displayImages =
+    item?.thumbnails?.length > 0
+      ? item.thumbnails
+      : item?.thumbnail
+        ? [item.thumbnail]
+        : [];
 
   return (
-    <Link to={`actor/${item._id}`} className="celeb-card-v3 card-flip">
-      <div className="image-container-v3">
-        {item.thumbnails?.map((img, index) => (
-          <img
-            key={index}
-            src={img}
-            alt={item.celebrityName}
-            className={`celeb-img-v3 ${index === currentImg ? "active" : ""}`}
-          />
-        ))}
+    <Link to={`/celebrity-shoots/${item._id}`}>
+      <article className="celeb-shoot-card">
+        <Swiper
+          className="celeb-shoot-swiper"
+          modules={[Autoplay]}
+          autoplay={{ delay: 2500, disableOnInteraction: false }}
+          loop={displayImages.length > 1}
+        >
+          {displayImages.map((src, i) => (
+            <SwiperSlide key={i}>
+              <img src={src} alt={item.celebrityName} loading="lazy" />
+            </SwiperSlide>
+          ))}
+        </Swiper>
 
-        <div className="glass-overlay"></div>
-      </div>
-
-      <div className="celeb-name-container">
-        <h3 className="celeb-name-text">{item.celebrityName}</h3>
-        <span className="celeb-subtext">View Shoot</span>
-      </div>
+        <div className="celeb-shoot-overlay">
+          <h3 className="celeb-shoot-name">{item.celebrityName}</h3>
+        </div>
+      </article>
     </Link>
   );
-};
+}
 
-/* MAIN COMPONENT */
-
-export default function CelebrityGallery() {
-  const [celebrityData, setCelebrityData] = useState([]);
+export default function CelebrityShoot() {
+  const [celebrities, setCelebrities] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchCelebrityShoots();
+    const fetchData = async () => {
+      try {
+        const res = await axios.get(
+          "https://fatography-backend.vercel.app/api/celebrity-shoot/all-no-images",
+        );
+        const apiData = res?.data?.data || [];
+
+        const filtered = apiData.filter((item) =>
+          CELEBRITY_ORDER.includes(item.celebrityName),
+        );
+
+        const sorted = CELEBRITY_ORDER.map((name) =>
+          filtered.find((item) => item.celebrityName === name),
+        ).filter(Boolean);
+
+        setCelebrities(sorted);
+      } catch (err) {
+        console.error("Error fetching celebrities:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
   }, []);
 
-  const fetchCelebrityShoots = async () => {
-    try {
-      const res = await axios.get(
-        "https://fatography-backend.vercel.app/api/celebrity-shoot/all-no-images",
-      );
-
-      const apiData = res.data.data || [];
-
-      /* FILTER ONLY REQUIRED CELEBRITIES */
-
-      const filtered = apiData.filter((item) =>
-        CELEBRITY_ORDER.includes(item.celebrityName),
-      );
-
-      /* SORT BY GIVEN ORDER */
-
-      const sorted = CELEBRITY_ORDER.map((name) =>
-        filtered.find((item) => item.celebrityName === name),
-      ).filter(Boolean);
-
-      setCelebrityData(sorted);
-
-      setLoading(false);
-    } catch (error) {
-      console.error(error);
-      setLoading(false);
-    }
-  };
+  if (loading) {
+    return (
+      <div style={{ textAlign: "center", padding: "40px", color: "#fff" }}>
+        Loading...
+      </div>
+    );
+  }
 
   return (
-    <section className="celebrity-page" id="celebrity-shoots">
-      <div className="celeb-container">
+    <section className="celeb-shoot-section" id="celebrity-shoots">
+      <div className="celeb-shoot-container">
         <div className="reviews-header">
           <p className="rev-eyebrow">Celebrity Shoots</p>
-
           <h2 className="rev-title">
             Capturing Stars in Their <em>Best Light</em>
           </h2>
         </div>
 
-        <div className="celebrity-grid-v3">
-          {loading ? (
-            <p>Loading...</p>
-          ) : (
-            celebrityData.map((item) => (
-              <CelebrityCard key={item._id} item={item} />
-            ))
-          )}
+        <div className="celeb-shoot-grid">
+          {celebrities.map((item) => (
+            <CelebrityShootCard key={item._id} item={item} />
+          ))}
         </div>
 
-        <div className="celebrity-name-gallery">
-          <Category />
-        </div>
-
-        <div className="button-wrapper-center">
-          <Link to={"/celebrity-shoots"}>
-          <button className="main-glow-btn">
-            Our Celebrity Shoots
-            <div className="btn-glow-effect"></div>
-          </button>
+        <div className="celeb-shoot-btn-wrapper">
+          <Link to="/celebrity-shoots">
+            <button className="celeb-shoot-btn">
+              Our Celebrity Shoots
+              <div className="celeb-shoot-btn-glow"></div>
+            </button>
           </Link>
         </div>
       </div>
