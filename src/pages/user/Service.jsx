@@ -330,7 +330,7 @@ function FaqSection({ serviceTitle }) {
    MAIN PAGE
 ═══════════════════════════════════ */
 export default function ServicePage() {
-  const { id } = useParams();
+  const { title } = useParams();
   const [serviceData, setServiceData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [lightboxSrc, setLightboxSrc] = useState(null);
@@ -338,32 +338,46 @@ export default function ServicePage() {
   const handleClose = useCallback(() => setLightboxSrc(null), []);
 
   useEffect(() => {
-    if (!id) return;
-    (async () => {
+    if (!title) {
+      setLoading(false);
+      return;
+    }
+
+    const fetchService = async () => {
       try {
         const res = await fetch(
-          `https://fatography-backend.vercel.app/api/services/${id}`,
+          `https://fatography-backend.vercel.app/api/services/single-data/${title}`,
         );
+
         const result = await res.json();
-        if (result.success) setServiceData(result.data);
+        console.log("API RESPONSE:", result);
+
+        if (result.success) {
+          setServiceData(result.data);
+        } else {
+          setServiceData(null);
+        }
       } catch (err) {
         console.error("Fetch error:", err);
+        setServiceData(null);
       } finally {
         setLoading(false);
       }
-    })();
-  }, [id]);
+    };
 
-    /* parallax */
-    useEffect(() => {
-      const hero = heroRef.current;
-      if (!hero) return;
-      const onScroll = () => {
-        hero.style.backgroundPositionY = `${window.scrollY * 0.35}px`;
-      };
-      window.addEventListener("scroll", onScroll, { passive: true });
-      return () => window.removeEventListener("scroll", onScroll);
-    }, [serviceData]);
+    fetchService();
+  }, [title]);
+
+  /* parallax */
+  useEffect(() => {
+    const hero = heroRef.current;
+    if (!hero) return;
+    const onScroll = () => {
+      hero.style.backgroundPositionY = `${window.scrollY * 0.35}px`;
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [serviceData]);
 
   if (loading) {
     return (
@@ -441,7 +455,7 @@ export default function ServicePage() {
             </div>
             <div className="fsg-hero-stat-divider" />
             <div className="fsg-hero-stat">
-              <strong>8+</strong>
+              <strong>17+</strong>
               <span>Years Experience</span>
             </div>
             <div className="fsg-hero-stat-divider" />

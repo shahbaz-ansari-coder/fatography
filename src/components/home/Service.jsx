@@ -42,8 +42,8 @@ function ServiceCard({ data }) {
   const slug = data?.title?.toLowerCase().trim().replace(/\s+/g, "-");
 
   const link = specialServices.includes(data?.title?.toLowerCase())
-    ? `/services/${slug}/${data._id}`
-    : `/services/${data._id}`;
+    ? `/services/${slug}`
+    : `/service/${slug}`;
 
   return (
     <Link to={link}>

@@ -425,7 +425,7 @@ function FaqSection() {
    MAIN PAGE
 ═══════════════════════════════════ */
 export default function ActorShootPage() {
-  const { id } = useParams();
+  const { name } = useParams();
   const navigate = useNavigate();
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -436,7 +436,7 @@ export default function ActorShootPage() {
     const fetchData = async () => {
       try {
         const res = await fetch(
-          `https://fatography-backend.vercel.app/api/celebrity-shoot/get/${id}`,
+          `https://fatography-backend.vercel.app/api/celebrity-shoot/get/${name}`,
         );
         const result = await res.json();
         if (result.success) setData(result.data);
@@ -446,8 +446,8 @@ export default function ActorShootPage() {
         setLoading(false);
       }
     };
-    if (id) fetchData();
-  }, [id]);
+    if (name) fetchData();
+  }, [name]);
 
   /* parallax */
   useEffect(() => {

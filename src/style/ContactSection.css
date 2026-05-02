@@ -107,7 +107,7 @@
 
         /* ── The form card — full width ── */
         .cs-card {
-          background: var(--s2);
+          background: #101010 !important;
           border: 1px solid var(--bdr);
           border-radius: 20px;
           overflow: hidden;

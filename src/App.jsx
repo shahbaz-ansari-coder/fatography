@@ -36,7 +36,7 @@ function App() {
           element: <Home />,
         },
         {
-          path: "/celebrity-shoots/:id",
+          path: "/celebrity-shoots/:name",
           element: <ActorShoot />,
         },
         {
@@ -56,11 +56,11 @@ function App() {
           element: <PreWedding />,
         },
         {
-          path: "/services/:id",
+          path: "/service/:title",
           element: <ServicesPage />,
         },
         {
-          path: "/services/:title/:id",
+          path: "/services/:title",
           element: <ServicePage />,
         },
         {

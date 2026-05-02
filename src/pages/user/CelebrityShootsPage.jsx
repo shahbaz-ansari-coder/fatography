@@ -21,8 +21,18 @@ function CelebrityShootCard({ item }) {
         ? [item.thumbnail]
         : [];
 
+   const createSlug = (text) => {
+    return text
+      ?.toString()
+      .toLowerCase()
+      .trim()
+      .replace(/['"]/g, "")
+      .replace(/\s+/g, "-")
+      .replace(/-+/g, "-");
+  };
+
   return (
-    <Link to={`/celebrity-shoots/${item._id}`}>
+    <Link to={`/celebrity-shoots/${createSlug(item.celebrityName)}`}>
       <article className="celeb-shoot-card">
         <Swiper
           className="celeb-shoot-swiper"

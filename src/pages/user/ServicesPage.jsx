@@ -330,7 +330,7 @@ function FaqSection({ serviceTitle }) {
    MAIN PAGE
 ═══════════════════════════════════ */
 export default function ServicesPage() {
-  const { id } = useParams();
+  const { title } = useParams();
   const [serviceData, setServiceData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [lightboxSrc, setLightboxSrc] = useState(null);
@@ -339,7 +339,9 @@ export default function ServicesPage() {
   useEffect(() => {
     const fetchService = async () => {
       try {
-        const res = await fetch(`https://fatography-backend.vercel.app/api/services/${id}`);
+        const res = await fetch(
+          `https://fatography-backend.vercel.app/api/services/single-data/${title}`,
+        );
         const result = await res.json();
         if (result.success) setServiceData(result.data);
       } catch (err) {
@@ -348,8 +350,8 @@ export default function ServicesPage() {
         setLoading(false);
       }
     };
-    if (id) fetchService();
-  }, [id]);
+    if (title) fetchService();
+  }, [title]);
 
   /* parallax */
   useEffect(() => {
@@ -441,7 +443,7 @@ export default function ServicesPage() {
             </div>
             <div className="fsg-hero-stat-divider" />
             <div className="fsg-hero-stat">
-              <strong>8+</strong>
+              <strong>17+</strong>
               <span>Years Experience</span>
             </div>
             <div className="fsg-hero-stat-divider" />

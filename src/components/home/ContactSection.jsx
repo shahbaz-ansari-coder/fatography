@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Send } from "lucide-react";
 import "../../style/ContactSection.css";
+
 const ContactSection = () => {
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
@@ -8,32 +9,54 @@ const ContactSection = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSending(true);
-    await new Promise((r) => setTimeout(r, 1800));
-    setSending(false);
-    setSent(true);
-    setTimeout(() => setSent(false), 4000);
-    e.target.reset();
+
+    const form = e.target;
+    const data = new FormData(form);
+
+    try {
+      const response = await fetch("https://formspree.io/f/xykoykdw", {
+        method: "POST",
+        body: data,
+        headers: {
+          Accept: "application/json",
+        },
+      });
+
+      if (response.ok) {
+        setSent(true);
+        form.reset();
+
+        setTimeout(() => {
+          setSent(false);
+        }, 4000);
+      } else {
+        alert("Something went wrong. Try again.");
+      }
+    } catch (error) {
+      alert("Network error. Please try again.");
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
     <>
       <section className="cs-section">
-        {/* <div className="cs-blob cs-blob--1" /> */}
-        {/* <div className="cs-blob cs-blob--2" /> */}
-
         <div className="cs-inner">
           {/* Header */}
           <div className="reviews-header">
             <p className="rev-eyebrow">Get In Touch</p>
             <h2 className="rev-title">
-              Frame Your <em>Moments</em> With Us
+              Let us <em>capture</em> your memories
             </h2>
           </div>
+
           {/* Card */}
           <div className="cs-card">
             <div className="cs-card-top" />
 
             <div className="cs-form-wrap">
+              {/* SUCCESS MESSAGE */}
               {sent && (
                 <div className="cs-success">
                   <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -50,7 +73,7 @@ const ContactSection = () => {
               )}
 
               <form onSubmit={handleSubmit}>
-                {/* Row 1: Name · Email · Phone */}
+                {/* ROW 1 */}
                 <div className="cs-row-3">
                   <div className="cs-field">
                     <label>Full Name</label>
@@ -61,6 +84,7 @@ const ContactSection = () => {
                       required
                     />
                   </div>
+
                   <div className="cs-field">
                     <label>Email Address</label>
                     <input
@@ -72,7 +96,7 @@ const ContactSection = () => {
                   </div>
                 </div>
 
-                {/* Row 2: Service · Date */}
+                {/* ROW 2 */}
                 <div className="cs-row-2">
                   <div className="cs-field">
                     <label>Phone Number</label>
@@ -82,6 +106,7 @@ const ContactSection = () => {
                       placeholder="+971 XX XXX XXXX"
                     />
                   </div>
+
                   <div className="cs-field">
                     <label>Service Type</label>
                     <select name="serviceType" defaultValue="">
@@ -93,13 +118,13 @@ const ContactSection = () => {
                       <option>Wedding Events</option>
                       <option>Lifestyle Photography</option>
                       <option>Food Photography</option>
-                      <option>Black &amp; White</option>
+                      <option>Black & White</option>
                       <option>Maternity Photography</option>
                       <option>Product Photography</option>
                       <option>Family Photography</option>
                       <option>Event Coverage</option>
                       <option>Neon Photography</option>
-                      <option>Corporate &amp; LinkedIn</option>
+                      <option>Corporate & LinkedIn</option>
                       <option>Retouching Guide</option>
                       <option>Fitness Photography</option>
                       <option>Real Estate</option>
@@ -107,7 +132,7 @@ const ContactSection = () => {
                   </div>
                 </div>
 
-                {/* Row 3: Message */}
+                {/* MESSAGE */}
                 <div className="cs-row-full">
                   <div className="cs-field">
                     <label>Your Message</label>
@@ -120,7 +145,7 @@ const ContactSection = () => {
                   </div>
                 </div>
 
-                {/* Bottom: submit + trust badges */}
+                {/* SUBMIT */}
                 <div className="cs-bottom">
                   <button
                     type="submit"
@@ -141,8 +166,10 @@ const ContactSection = () => {
               </form>
             </div>
 
+            {/* DIVIDER */}
             <div className="cs-divider" />
 
+            {/* FOOTER BADGES */}
             <div className="cs-card-footer">
               <div className="cs-badges">
                 <div className="cs-badge">
@@ -163,6 +190,7 @@ const ContactSection = () => {
                   </svg>
                   Quick response
                 </div>
+
                 <div className="cs-badge">
                   <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                     <path
@@ -174,6 +202,7 @@ const ContactSection = () => {
                   </svg>
                   100% confidential
                 </div>
+
                 <div className="cs-badge">
                   <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                     <path
