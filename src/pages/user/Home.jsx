@@ -10,31 +10,39 @@ import Header from "../../components/home/Header";
 import Hero from "../../components/home/Hero";
 import Preloader from "../../components/home/Preloader";
 import ReviewSection from "../../components/home/Reviews";
+import SEO from "../../components/home/SEO";
 import Service from "../../components/home/Service";
 import Slider from "../../components/home/Slider";
 import VideoTestimonials from "../../components/home/VideoTestimonials";
 // ─── Main application layout
 function Home() {
   return (
-    <div id="top" className="home-page">
-      <Header />
-      <Preloader />
-      <main>
-        <article>
-          <Slider />
-          <Hero />
-          <About />
-          <Gallery />
-          <Service />
-          <CelebrityGallery />
-          <DemoImges />
-          <VideoTestimonials />
-          <ReviewSection />
-        </article>
-      </main>
-      <ContactSection/>
-      <Footer />
-    </div>
+    <>
+      <SEO
+        title="Best Photography Services in Pakistan | Fatography"
+        description="Professional wedding, fashion and celebrity photography services in Pakistan."
+        url="https://fatography.co/"
+      />
+      <div id="top" className="home-page">
+        <Header />
+        <Preloader />
+        <main>
+          <article>
+            <Slider />
+            <Hero />
+            <About />
+            <Gallery />
+            <Service />
+            <CelebrityGallery />
+            <DemoImges />
+            <VideoTestimonials />
+            <ReviewSection />
+          </article>
+        </main>
+        <ContactSection />
+        <Footer />
+      </div>
+    </>
   );
 }
 

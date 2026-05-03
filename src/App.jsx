@@ -59,6 +59,7 @@ import MaryamNafeesShoot from "./pages/user/MaryamNafeesShoot";
 import RababHashimShoot from "./pages/user/RababHashimShoot";
 import Blogs from "./pages/user/Blogs";
 import FatographyBlog from "./pages/user/FatographyBlog";
+import { HelmetProvider } from "react-helmet-async";
 
 function App() {
   const router = createBrowserRouter([
@@ -104,6 +105,7 @@ function App() {
           path: "/videography/wedding-events",
           element: <WeddingEvent />,
         },
+        // Blog
         {
           path: "/blog",
           element: <Blogs />,
@@ -287,7 +289,9 @@ function App() {
   return (
     <>
       <Preloader />
-      <RouterProvider router={router} />
+      <HelmetProvider>
+        <RouterProvider router={router} />
+      </HelmetProvider>
     </>
   );
 }

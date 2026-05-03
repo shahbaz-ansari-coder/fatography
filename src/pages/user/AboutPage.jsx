@@ -5,6 +5,7 @@ import Header from "../../components/home/Header";
 import Preloader from "../../components/home/Preloader";
 import { Link } from "react-router";
 import ContactSection from "../../components/home/ContactSection";
+import SEO from "../../components/home/SEO";
 
 /* ─── animated counter ─── */
 function Counter({ target, suffix = "", duration = 2000 }) {
@@ -113,6 +114,10 @@ export default function AboutPage() {
   return (
     <>
       <Preloader />
+      <SEO
+        title="Best Photography Services in Pakistan | Fatography"
+        description="Professional wedding, fashion and celebrity photography services in Pakistan."
+      />
       <div className="ab-page">
         <Header />
         {/* scroll progress line */}
