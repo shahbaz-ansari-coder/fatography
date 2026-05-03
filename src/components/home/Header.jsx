@@ -38,9 +38,9 @@ function Header() {
   ];
 
   const videographySubLinks = [
-    { to: "/pre-wedding", label: "Pre Wedding" },
-    { to: "/wedding-events", label: "Wedding Events" },
-    { to: "/food-videography", label: "Food Videography" },
+    { to: "/videography/pre-wedding", label: "Pre Wedding" },
+    { to: "/videography/wedding-events", label: "Wedding Events" },
+    { to: "/videography/food-videography", label: "Food Videography" },
   ];
 
   const isVideographyActive = videographySubLinks.some(

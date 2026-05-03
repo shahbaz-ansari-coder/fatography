@@ -43,7 +43,7 @@ function ServiceCard({ data }) {
 
   const link = specialServices.includes(data?.title?.toLowerCase())
     ? `/services/${slug}`
-    : `/service/${slug}`;
+    : `/services/${slug}`;
 
   return (
     <Link to={link}>
