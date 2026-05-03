@@ -21,6 +21,16 @@ const SEO = ({
 
       {/* Canonical */}
       <link rel="canonical" href={currentUrl} />
+
+      {/* Open Graph (Facebook, WhatsApp, etc) */}
+      <meta property="og:type" content="website" />
+      <meta property="og:title" content={title} />
+      <meta property="og:description" content={description} />
+      <meta property="og:url" content={currentUrl} />
+
+      {/* Twitter SEO */}
+      <meta name="twitter:title" content={title} />
+      <meta name="twitter:description" content={description} />
     </Helmet>
   );
 };
