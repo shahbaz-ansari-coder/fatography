@@ -4,6 +4,7 @@ import "../../style/actorShoot.css";
 import Header from "../../components/home/Header";
 import Footer from "../../components/home/Footer";
 import ContactSection from "../../components/home/ContactSection";
+import SEO from "../../components/home/SEO";
 
 /* ═══════════════════════════════════
    LIGHTBOX  — with arrow navigation
@@ -493,6 +494,10 @@ export default function MiraSethiShoot() {
 
   return (
     <>
+      <SEO
+        title="Mira Sethi Photoshoot Dubai | Fatography"
+        description="Elegant celebrity photoshoot of Mira Sethi in Dubai by Fatography. Creative fashion portraits. Explore full collection!"
+      />
       <Header />
       <div className="fsg-page asp-page">
         {lbIndex >= 0 && (

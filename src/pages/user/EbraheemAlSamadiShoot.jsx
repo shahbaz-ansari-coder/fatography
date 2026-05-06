@@ -4,6 +4,7 @@ import "../../style/actorShoot.css";
 import Header from "../../components/home/Header";
 import Footer from "../../components/home/Footer";
 import ContactSection from "../../components/home/ContactSection";
+import SEO from "../../components/home/SEO";
 
 /* ═══════════════════════════════════
    LIGHTBOX  — with arrow navigation
@@ -493,6 +494,10 @@ export default function EbraheemAlSamadiShoot() {
 
   return (
     <>
+      <SEO
+        title="Ebraheem Al Samadi Photoshoot Dubai | Fatography"
+        description="Premium celebrity photoshoot of Ebraheem Al Samadi in Dubai by Fatography. Luxury portrait visuals. View full shoot now!"
+      />
       <Header />
       <div className="fsg-page asp-page">
         {lbIndex >= 0 && (

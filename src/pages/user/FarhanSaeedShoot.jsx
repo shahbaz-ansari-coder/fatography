@@ -4,6 +4,7 @@ import "../../style/actorShoot.css";
 import Header from "../../components/home/Header";
 import Footer from "../../components/home/Footer";
 import ContactSection from "../../components/home/ContactSection";
+import SEO from "../../components/home/SEO";
 
 /* ═══════════════════════════════════
    LIGHTBOX  — with arrow navigation
@@ -493,6 +494,10 @@ export default function FarhanSaeedShoot() {
 
   return (
     <>
+      <SEO
+        title="Farhan Saeed Photoshoot Dubai | Fatography"
+        description="Exclusive celebrity photoshoot of Farhan Saeed in Dubai by Fatography. Premium portraits & visuals. View full portfolio today!"
+      />
       <Header />
       <div className="fsg-page asp-page">
         {lbIndex >= 0 && (

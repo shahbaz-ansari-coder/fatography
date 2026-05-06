@@ -4,6 +4,7 @@ import "../../style/servicesPage.css";
 import Header from "../../components/home/Header";
 import Footer from "../../components/home/Footer";
 import ContactSection from "../../components/home/ContactSection";
+import SEO from "../../components/home/SEO";
 
 /* ═══════════════════════════════════
    LIGHTBOX
@@ -391,6 +392,10 @@ export default function BlackAndWhiteServices() {
 
   return (
     <>
+      <SEO
+        title="Black & White Photography Dubai | Fatography"
+        description="Timeless black & white photography in Dubai with artistic depth. Create stunning visuals with Fatography. Book your shoot now!"
+      />
       <Header />
       <div className="fsg-page">
         <Lightbox src={lightboxSrc} onClose={() => setLightboxSrc(null)} />

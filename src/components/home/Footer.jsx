@@ -28,7 +28,7 @@ const Footer = () => {
               <img src="/logo.png" alt="icon" />
             </div>
 
-            <h1 className="serif-title">Learn Photography with Us</h1>
+            <h2 className="serif-title">Learn Photography with Us</h2>
             <h2 className="main-title">Master the Art Behind the Lens</h2>
 
             <p className="description-text">

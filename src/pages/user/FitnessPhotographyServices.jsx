@@ -4,6 +4,7 @@ import "../../style/servicesPage.css";
 import Header from "../../components/home/Header";
 import Footer from "../../components/home/Footer";
 import ContactSection from "../../components/home/ContactSection";
+import SEO from "../../components/home/SEO";
 
 /* ═══════════════════════════════════
    LIGHTBOX
@@ -391,6 +392,10 @@ export default function FitnessPhotographyServices() {
 
   return (
     <>
+      <SEO
+        title="Corporate Photography Dubai | Fatography"
+        description="Professional corporate & LinkedIn photography in Dubai. Build your brand image with Fatography. Book your session today!"
+      />
       <Header />
       <div className="fsg-page">
         <Lightbox src={lightboxSrc} onClose={() => setLightboxSrc(null)} />

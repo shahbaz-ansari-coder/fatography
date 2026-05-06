@@ -4,6 +4,7 @@ import "../../style/servicesPage.css";
 import Header from "../../components/home/Header";
 import Footer from "../../components/home/Footer";
 import ContactSection from "../../components/home/ContactSection";
+import SEO from "../../components/home/SEO";
 
 /* ═══════════════════════════════════
    LIGHTBOX
@@ -392,6 +393,10 @@ export default function WeddingEventsServices() {
 
   return (
     <>
+      <SEO
+        title="Wedding Photography Dubai | Fatography"
+        description="Professional wedding photography in Dubai capturing every moment beautifully. Trust Fatography for your big day. Book now!"
+      />
       <Header />
       <div className="fsg-page">
         <Lightbox src={lightboxSrc} onClose={() => setLightboxSrc(null)} />

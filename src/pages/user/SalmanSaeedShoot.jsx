@@ -4,6 +4,7 @@ import "../../style/actorShoot.css";
 import Header from "../../components/home/Header";
 import Footer from "../../components/home/Footer";
 import ContactSection from "../../components/home/ContactSection";
+import SEO from "../../components/home/SEO";
 
 /* ═══════════════════════════════════
    LIGHTBOX  — with arrow navigation
@@ -493,6 +494,10 @@ export default function SalmanSaeedShoot() {
 
   return (
     <>
+      <SEO
+        title="Salman Saeed Photoshoot Dubai | Fatography"
+        description="Professional celebrity photoshoot of Salman Saeed in Dubai by Fatography. Stylish visuals & portraits. View full gallery!"
+      />
       <Header />
       <div className="fsg-page asp-page">
         {lbIndex >= 0 && (

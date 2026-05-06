@@ -4,6 +4,7 @@ import "../../style/servicesPage.css";
 import Header from "../../components/home/Header";
 import Footer from "../../components/home/Footer";
 import ContactSection from "../../components/home/ContactSection";
+import SEO from "../../components/home/SEO";
 
 /* ═══════════════════════════════════
    LIGHTBOX
@@ -391,6 +392,10 @@ export default function ProductPhotographySevices() {
 
   return (
     <>
+      <SEO
+        title="Product Photography Services in Dubai | Fatography"
+        description="Showcase your products beautifully with Fatography in Dubai. Capture every detail perfectly book your product shoot today!"
+      />
       <Header />
       <div className="fsg-page">
         <Lightbox src={lightboxSrc} onClose={() => setLightboxSrc(null)} />

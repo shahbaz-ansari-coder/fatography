@@ -4,6 +4,7 @@ import "../../style/actorShoot.css";
 import Header from "../../components/home/Header";
 import Footer from "../../components/home/Footer";
 import ContactSection from "../../components/home/ContactSection";
+import SEO from "../../components/home/SEO";
 
 /* ═══════════════════════════════════
    LIGHTBOX  — with arrow navigation
@@ -493,6 +494,10 @@ export default function SaadQureshiShoot() {
 
   return (
     <>
+      <SEO
+        title="Saad Qureshi Photoshoot Dubai | Fatography"
+        description="Exclusive celebrity photoshoot of Saad Qureshi in Dubai by Fatography. High-quality visuals. Explore full portfolio today!"
+      />
       <Header />
       <div className="fsg-page asp-page">
         {lbIndex >= 0 && (

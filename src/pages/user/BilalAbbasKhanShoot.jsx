@@ -4,6 +4,7 @@ import "../../style/actorShoot.css";
 import Header from "../../components/home/Header";
 import Footer from "../../components/home/Footer";
 import ContactSection from "../../components/home/ContactSection";
+import SEO from "../../components/home/SEO";
 
 /* ═══════════════════════════════════
    LIGHTBOX  — with arrow navigation
@@ -493,6 +494,10 @@ export default function BilalAbbasKhanShoot() {
 
   return (
     <>
+      <SEO
+        title="Bilal Abbas Khan Photoshoot Dubai | Fatography"
+        description="Discover exclusive photoshoot of Bilal Abbas Khan in Dubai by Fatography. High-end celebrity photography. Check the gallery today!"
+      />
       <Header />
       <div className="fsg-page asp-page">
         {lbIndex >= 0 && (

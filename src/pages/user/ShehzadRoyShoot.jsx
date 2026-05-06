@@ -4,6 +4,7 @@ import "../../style/actorShoot.css";
 import Header from "../../components/home/Header";
 import Footer from "../../components/home/Footer";
 import ContactSection from "../../components/home/ContactSection";
+import SEO from "../../components/home/SEO";
 
 /* ═══════════════════════════════════
    LIGHTBOX  — with arrow navigation
@@ -493,6 +494,10 @@ export default function ShehzadRoyShoot() {
 
   return (
     <>
+      <SEO
+        title="Shehzad Roy Photoshoot Dubai | Fatography"
+        description="View professional photoshoot of Shehzad Roy in Dubai captured by Fatography. Creative celebrity visuals. Explore the collection now!"
+      />
       <Header />
       <div className="fsg-page asp-page">
         {lbIndex >= 0 && (

@@ -4,6 +4,7 @@ import "../../style/actorShoot.css";
 import Header from "../../components/home/Header";
 import Footer from "../../components/home/Footer";
 import ContactSection from "../../components/home/ContactSection";
+import SEO from "../../components/home/SEO";
 
 /* ═══════════════════════════════════
    LIGHTBOX  — with arrow navigation
@@ -493,6 +494,10 @@ export default function SadiaKhanShoot() {
 
   return (
     <>
+      <SEO
+        title="Sadia Khan Photoshoot Dubai | Fatography"
+        description="Stunning celebrity photoshoot of Sadia Khan in Dubai by Fatography. Elegant and creative visuals. Explore the gallery now!"
+      />
       <Header />
       <div className="fsg-page asp-page">
         {lbIndex >= 0 && (

@@ -115,8 +115,8 @@ export default function AboutPage() {
     <>
       <Preloader />
       <SEO
-        title="Best Photography Services in Pakistan | Fatography"
-        description="Professional wedding, fashion and celebrity photography services in Pakistan."
+        title="About Fatography | Top Photographers in Dubai"
+        description="Learn about Fatography, a leading photography and videography company in Dubai. Discover our passion, expertise, and creative approach. Contact us today!"
       />
       <div className="ab-page">
         <Header />

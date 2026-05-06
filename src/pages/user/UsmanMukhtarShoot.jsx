@@ -4,6 +4,7 @@ import "../../style/actorShoot.css";
 import Header from "../../components/home/Header";
 import Footer from "../../components/home/Footer";
 import ContactSection from "../../components/home/ContactSection";
+import SEO from "../../components/home/SEO";
 
 /* ═══════════════════════════════════
    LIGHTBOX  — with arrow navigation
@@ -493,6 +494,10 @@ export default function UsmanMukhtarShoot() {
 
   return (
     <>
+      <SEO
+        title="Usman Mukhtar Photoshoot Dubai | Fatography"
+        description="Cinematic celebrity photoshoot of Usman Mukhtar in Dubai by Fatography. Premium portrait visuals. View gallery now!"
+      />
       <Header />
       <div className="fsg-page asp-page">
         {lbIndex >= 0 && (

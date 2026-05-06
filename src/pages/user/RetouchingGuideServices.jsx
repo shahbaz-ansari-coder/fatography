@@ -4,6 +4,7 @@ import "../../style/servicesPage.css";
 import Header from "../../components/home/Header";
 import Footer from "../../components/home/Footer";
 import ContactSection from "../../components/home/ContactSection";
+import SEO from "../../components/home/SEO";
 
 /* ═══════════════════════════════════
    LIGHTBOX
@@ -391,6 +392,10 @@ export default function RetouchingGuideServices() {
 
   return (
     <>
+      <SEO
+        title="Photo Retouching Services Dubai | Fatography"
+        description="Expert photo retouching services in Dubai for flawless results. Enhance your images with Fatography. Get started today!"
+      />
       <Header />
       <div className="fsg-page">
         <Lightbox src={lightboxSrc} onClose={() => setLightboxSrc(null)} />

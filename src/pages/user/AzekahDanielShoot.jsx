@@ -4,6 +4,7 @@ import "../../style/actorShoot.css";
 import Header from "../../components/home/Header";
 import Footer from "../../components/home/Footer";
 import ContactSection from "../../components/home/ContactSection";
+import SEO from "../../components/home/SEO";
 
 /* ═══════════════════════════════════
    LIGHTBOX  — with arrow navigation
@@ -493,6 +494,10 @@ export default function AzekahDanielShoot() {
 
   return (
     <>
+      <SEO
+        title="Azekah Daniel Photoshoot Dubai | Fatography"
+        description="Elegant celebrity photoshoot of Azekah Daniel in Dubai by Fatography. Premium portrait photography. Explore now!"
+      />
       <Header />
       <div className="fsg-page asp-page">
         {lbIndex >= 0 && (

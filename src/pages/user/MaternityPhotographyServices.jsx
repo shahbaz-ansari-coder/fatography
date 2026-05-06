@@ -4,6 +4,7 @@ import "../../style/servicesPage.css";
 import Header from "../../components/home/Header";
 import Footer from "../../components/home/Footer";
 import ContactSection from "../../components/home/ContactSection";
+import SEO from "../../components/home/SEO";
 
 /* ═══════════════════════════════════
    LIGHTBOX
@@ -391,6 +392,10 @@ export default function MaternityPhotographyServices() {
 
   return (
     <>
+      <SEO
+        title="Maternity Photography Dubai | Fatography"
+        description="Beautiful maternity photography in Dubai capturing your special journey. Elegant shoots by Fatography. Book your session today!"
+      />
       <Header />
       <div className="fsg-page">
         <Lightbox src={lightboxSrc} onClose={() => setLightboxSrc(null)} />

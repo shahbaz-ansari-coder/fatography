@@ -19,9 +19,8 @@ function Home() {
   return (
     <>
       <SEO
-        title="Best Photography Services in Pakistan | Fatography"
-        description="Professional wedding, fashion and celebrity photography services in Pakistan."
-        url="https://fatography.co/"
+        title="Professional Photography & Videography Dubai | Fatography"
+        description="Fatography is a top photography and videography company in Dubai. Capture every moment with expert visuals. Book your session today for stunning results."
       />
       <div id="top" className="home-page">
         <Header />

@@ -4,6 +4,7 @@ import "../../style/actorShoot.css";
 import Header from "../../components/home/Header";
 import Footer from "../../components/home/Footer";
 import ContactSection from "../../components/home/ContactSection";
+import SEO from "../../components/home/SEO";
 
 /* ═══════════════════════════════════
    LIGHTBOX  — with arrow navigation
@@ -493,6 +494,10 @@ export default function MikaalZulfiqarShoot() {
 
   return (
     <>
+      <SEO
+        title="Mikaal Zulfiqar Photoshoot Dubai | Fatography"
+        description="Exclusive celebrity photoshoot of Mikaal Zulfiqar in Dubai by Fatography. Cinematic portraits & visuals. View gallery today!"
+      />
       <Header />
       <div className="fsg-page asp-page">
         {lbIndex >= 0 && (

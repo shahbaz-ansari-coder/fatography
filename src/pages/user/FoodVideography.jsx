@@ -4,6 +4,7 @@ import "../../style/foodVideography.css";
 import Header from "../../components/home/Header";
 import Footer from "../../components/home/Footer";
 import ContactSection from "../../components/home/ContactSection";
+import SEO from "../../components/home/SEO";
 
 /* ═══════════════════════════════════
    DATA — replace with real URLs
@@ -376,6 +377,10 @@ export default function FoodVideography() {
 
   return (
     <>
+      <SEO
+        title="Food Videography Dubai | Fatography"
+        description="High-quality food videography in Dubai for brands & restaurants. Boost engagement with Fatography. Get started today!"
+      />
       <Header />
       <div className="fdv-page">
         <VideoLightbox url={activeVideo} onClose={() => setActiveVideo(null)} />

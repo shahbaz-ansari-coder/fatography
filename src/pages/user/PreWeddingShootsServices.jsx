@@ -9,6 +9,7 @@ import Header from "../../components/home/Header";
 import Footer from "../../components/home/Footer";
 import { ArrowUpToLine } from "lucide-react";
 import ContactSection from "../../components/home/ContactSection";
+import SEO from "../../components/home/SEO";
 
 /* ═══════════════════════════════════
    WHY POINTS
@@ -399,6 +400,10 @@ export default function PreWeddingShootsServices() {
 
   return (
     <>
+      <SEO
+        title="Pre Wedding Shoots Dubai | Fatography"
+        description="Looking for a pre-wedding shoot in Dubai? Fatography captures natural, cinematic portraits that reflect your story and style. Book your photoshoot today."
+      />
       <Header />
       <div className="ftg-page">
         <Lightbox src={lightboxSrc} onClose={handleClose} />

@@ -4,6 +4,7 @@ import "../../style/weddingEvent.css";
 import Header from "../../components/home/Header";
 import Footer from "../../components/home/Footer";
 import ContactSection from "../../components/home/ContactSection";
+import SEO from "../../components/home/SEO";
 
 /* ═══════════════════════════════════
    DATA — replace banner URL & video URLs
@@ -413,6 +414,10 @@ export default function WeddingEvent() {
 
   return (
     <>
+      <SEO
+        title="Wedding Videography Dubai | Fatography"
+        description="Professional wedding videography in Dubai with cinematic storytelling. Capture your big day with Fatography. Book now!"
+      />
       <Header />
       <div className="wev-page">
         <VideoLightbox url={activeVideo} onClose={() => setActiveVideo(null)} />

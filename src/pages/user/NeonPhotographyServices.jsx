@@ -4,6 +4,7 @@ import "../../style/servicesPage.css";
 import Header from "../../components/home/Header";
 import Footer from "../../components/home/Footer";
 import ContactSection from "../../components/home/ContactSection";
+import SEO from "../../components/home/SEO";
 
 /* ═══════════════════════════════════
    LIGHTBOX
@@ -391,6 +392,10 @@ export default function NeonPhotographyServices() {
 
   return (
     <>
+      <SEO
+        title="Neon Photography Dubai | Fatography"
+        description="Creative neon photography in Dubai with vibrant lighting effects. Unique shoots by Fatography. Book your session today!"
+      />
       <Header />
       <div className="fsg-page">
         <Lightbox src={lightboxSrc} onClose={() => setLightboxSrc(null)} />

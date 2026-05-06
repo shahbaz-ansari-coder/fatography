@@ -4,6 +4,7 @@ import "../../style/actorShoot.css";
 import Header from "../../components/home/Header";
 import Footer from "../../components/home/Footer";
 import ContactSection from "../../components/home/ContactSection";
+import SEO from "../../components/home/SEO";
 
 /* ═══════════════════════════════════
    LIGHTBOX  — with arrow navigation
@@ -493,6 +494,10 @@ export default function RababHashimShoot() {
 
   return (
     <>
+      <SEO
+        title="Rabab Hashim Photoshoot Dubai | Fatography"
+        description="Stunning celebrity photoshoot of Rabab Hashim in Dubai by Fatography. Premium portrait photography. View gallery today!"
+      />
       <Header />
       <div className="fsg-page asp-page">
         {lbIndex >= 0 && (

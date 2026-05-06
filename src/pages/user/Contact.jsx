@@ -6,6 +6,7 @@ import "../../style/contactPage.css";
 import Header from "../../components/home/Header";
 import Footer from "../../components/home/Footer";
 import Preloader from "../../components/home/Preloader";
+import SEO from "../../components/home/SEO";
 
 /* ─── FAQ DATA ─── */
 const FAQ_ITEMS = [
@@ -144,6 +145,10 @@ export default function ContactPage() {
 
   return (
     <>
+      <SEO
+        title="Contact Fatography Dubai | Book a Shoot"
+        description="Get in touch with Fatography Dubai for photography & videography services. Book your shoot or request a quote today!"
+      />
       <Preloader />
       <Header />
 

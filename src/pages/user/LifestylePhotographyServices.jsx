@@ -9,6 +9,7 @@ import Header from "../../components/home/Header";
 import Footer from "../../components/home/Footer";
 import { ArrowUpToLine } from "lucide-react";
 import ContactSection from "../../components/home/ContactSection";
+import SEO from "../../components/home/SEO";
 
 /* ═══════════════════════════════════
    WHY POINTS
@@ -399,6 +400,10 @@ export default function LifestylePhotographyServices() {
 
   return (
     <>
+      <SEO
+        title="Lifestyle Photography Dubai – Natural Shoots | Fatography"
+        description="Book lifestyle photography in Dubai with Fatography. We capture moments, emotions, and natural beauty for couples, families, and influencers."
+      />
       <Header />
       <div className="ftg-page">
         <Lightbox src={lightboxSrc} onClose={handleClose} />

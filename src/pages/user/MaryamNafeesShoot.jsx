@@ -4,6 +4,7 @@ import "../../style/actorShoot.css";
 import Header from "../../components/home/Header";
 import Footer from "../../components/home/Footer";
 import ContactSection from "../../components/home/ContactSection";
+import SEO from "../../components/home/SEO";
 
 /* ═══════════════════════════════════
    LIGHTBOX  — with arrow navigation
@@ -493,6 +494,10 @@ export default function MaryamNafeesShoot() {
 
   return (
     <>
+      <SEO
+        title="Maryam Nafees Photoshoot Dubai | Fatography"
+        description="Professional celebrity photoshoot of Maryam Nafees in Dubai by Fatography. Stylish and modern visuals. Check now!"
+      />
       <Header />
       <div className="fsg-page asp-page">
         {lbIndex >= 0 && (

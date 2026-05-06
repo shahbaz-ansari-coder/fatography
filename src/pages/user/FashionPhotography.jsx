@@ -4,6 +4,7 @@ import "../../style/servicesPage.css";
 import Header from "../../components/home/Header";
 import Footer from "../../components/home/Footer";
 import ContactSection from "../../components/home/ContactSection";
+import SEO from "../../components/home/SEO";
 
 /* ═══════════════════════════════════
    LIGHTBOX
@@ -392,6 +393,10 @@ export default function FashionServices() {
 
   return (
     <>
+      <SEO
+        title="Fashion Photography Dubai | Model Shoots – Fatography"
+        description="Studio and outdoor fashion photography in Dubai. Get pro model shoots, portfolios, and brand campaigns with Fatography. Book your session today!"
+      />
       <Header />
       <div className="fsg-page">
         <Lightbox src={lightboxSrc} onClose={() => setLightboxSrc(null)} />

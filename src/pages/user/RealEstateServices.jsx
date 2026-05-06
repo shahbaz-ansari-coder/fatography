@@ -4,6 +4,7 @@ import "../../style/servicesPage.css";
 import Header from "../../components/home/Header";
 import Footer from "../../components/home/Footer";
 import ContactSection from "../../components/home/ContactSection";
+import SEO from "../../components/home/SEO";
 
 /* ═══════════════════════════════════
    LIGHTBOX
@@ -391,6 +392,10 @@ export default function RealEstateServices() {
 
   return (
     <>
+      <SEO
+        title="Best Real Estate Photography in Dubai | Fatography"
+        description="Get stunning real estate photos in Dubai with Fatography. Showcase your property’s best features, attract buyers, and elevate your listing."
+      />
       <Header />
       <div className="fsg-page">
         <Lightbox src={lightboxSrc} onClose={() => setLightboxSrc(null)} />

@@ -9,6 +9,7 @@ import Header from "../../components/home/Header";
 import Footer from "../../components/home/Footer";
 import { ArrowUpToLine } from "lucide-react";
 import ContactSection from "../../components/home/ContactSection";
+import SEO from "../../components/home/SEO";
 
 /* ═══════════════════════════════════
    WHY POINTS
@@ -399,6 +400,10 @@ export default function FamilyPhotographyServices() {
 
   return (
     <>
+      <SEO
+        title="Professional Family Photography Dubai | Fatography"
+        description="Create lasting memories with Fatography’s family photography in Dubai. Capture your special moments beautifully book your family photo session now!"
+      />
       <Header />
       <div className="ftg-page">
         <Lightbox src={lightboxSrc} onClose={handleClose} />
