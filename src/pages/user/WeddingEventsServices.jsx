@@ -128,7 +128,7 @@ const WHY_POINTS = [
         />
       </svg>
     ),
-    label: "",
+        label: "Premium Post-Production",
     desc: "Meticulous retouching and cinematic colour grading by our in-house editors.",
   },
   {

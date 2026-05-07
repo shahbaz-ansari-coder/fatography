@@ -64,9 +64,9 @@ function Hero() {
     <section className="section hero">
       <div className="container">
         <div className="hero-content">
-          <h1 className="hero-text-logo">
+          <div className="hero-text-logo">
             <img src="/text_logo.png" alt="a" />
-          </h1>
+          </div>
 
           {/* Parent Wrapper par hover logic */}
           <div

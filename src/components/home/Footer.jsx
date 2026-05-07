@@ -183,7 +183,7 @@ const Footer = () => {
             </a>
 
             <a
-              href="https://www.google.com/maps?ll=25.062861,55.234648&z=16&t=m&hl=en-GB&gl=US&mapclient=embed&cid=13986067380139648242"
+              href="https://www.google.com/maps/place/Fatography+%E2%80%93+Photography+%26+Videography+Studio+Dubai/@25.062861,55.234648,16z/data=!4m6!3m5!1s0x46860ec2445a01:0xc2187e2e4de6e4f2!8m2!3d25.0628609!4d55.2346483!16s%2Fg%2F11y4bhk8sx?hl=en-GB&entry=ttu&g_ep=EgoyMDI2MDUwMi4wIKXMDSoASAFQAw%3D%3D"
               target="_blank"
               rel="noreferrer"
               className="contact-item"
