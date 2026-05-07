@@ -146,16 +146,16 @@ const Footer = () => {
 
             <ul>
               <li>
-                <a href="/services">Wedding Photography</a>
+                <a href="/services/pre-wedding-shoots">Wedding Photography</a>
               </li>
               <li>
-                <a href="/services">Product Photography</a>
+                <a href="/services/product-photography">Product Photography</a>
               </li>
               <li>
-                <a href="/services">Event Coverage</a>
+                <a href="/services/event-coverage">Event Coverage</a>
               </li>
               <li>
-                <a href="/services">Corporate Shoots</a>
+                <a href="/services/corporate-&-linkedin">Corporate Shoots</a>
               </li>
             </ul>
           </div>
