@@ -1,9 +1,7 @@
 User-agent: *
 Allow: /
 
-# Important folders block (optional future use)
 Disallow: /admin
-Disallow: /dashboard
+Disallow: /login
 
-# Sitemap location
 Sitemap: https://fatography.co/sitemap.xml

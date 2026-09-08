@@ -1,311 +1,292 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
+  <!-- Homepage -->
   <url>
     <loc>https://fatography.co/</loc>
-    <lastmod>2026-05-01</lastmod>
+    <lastmod>2026-09-08</lastmod>
     <priority>1.0</priority>
   </url>
 
+  <!-- Core pages -->
   <url>
     <loc>https://fatography.co/about-us</loc>
-    <lastmod>2026-05-01</lastmod>
+    <lastmod>2026-09-08</lastmod>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://fatography.co/our-services</loc>
-    <lastmod>2026-05-01</lastmod>
+    <lastmod>2026-09-08</lastmod>
     <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://fatography.co/fashion-photography</loc>
-    <lastmod>2026-05-01</lastmod>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://fatography.co/pre-wedding-shoots</loc>
-    <lastmod>2026-05-01</lastmod>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://fatography.co/wedding-events</loc>
-    <lastmod>2026-05-01</lastmod>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://fatography.co/lifestyle-photography</loc>
-    <lastmod>2026-05-01</lastmod>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://fatography.co/digital-video-commercials</loc>
-    <lastmod>2026-05-01</lastmod>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://fatography.co/our-services/fashion-photography</loc>
-    <lastmod>2026-05-01</lastmod>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://fatography.co/our-services/pre-wedding-shoots</loc>
-    <lastmod>2026-05-01</lastmod>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://fatography.co/our-services/wedding-events</loc>
-    <lastmod>2026-05-01</lastmod>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://fatography.co/our-services/lifestyle-photography</loc>
-    <lastmod>2026-05-01</lastmod>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://fatography.co/our-services/black-%26-white</loc>
-    <lastmod>2026-05-01</lastmod>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://fatography.co/our-services/maternity-photography</loc>
-    <lastmod>2026-05-01</lastmod>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://fatography.co/our-services/product-photography</loc>
-    <lastmod>2026-05-01</lastmod>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://fatography.co/our-services/family-photography</loc>
-    <lastmod>2026-05-01</lastmod>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://fatography.co/our-services/event-coverage</loc>
-    <lastmod>2026-05-01</lastmod>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://fatography.co/our-services/real-estate</loc>
-    <lastmod>2026-05-01</lastmod>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://fatography.co/our-services/neon-photography</loc>
-    <lastmod>2026-05-01</lastmod>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://fatography.co/our-services/corporate-%26-linkedin</loc>
-    <lastmod>2026-05-01</lastmod>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://fatography.co/our-services/fitness-photography</loc>
-    <lastmod>2026-05-01</lastmod>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://fatography.co/our-services/retouching-guide</loc>
-    <lastmod>2026-05-01</lastmod>
-    <priority>0.9</priority>
-  </url>
-
-
-  <url>
-    <loc>https://fatography.co/contact-us</loc>
-    <lastmod>2026-05-01</lastmod>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://fatography.co/pre-wedding-videography</loc>
-    <lastmod>2026-05-01</lastmod>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://fatography.co/wedding-events-videography</loc>
-    <lastmod>2026-05-01</lastmod>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://fatography.co/food-videography</loc>
-    <lastmod>2026-05-01</lastmod>
-    <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://fatography.co/celebrity-shoots</loc>
-    <lastmod>2026-05-01</lastmod>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://fatography.co/celebrity-shoots/cengiz-coskun</loc>
-    <lastmod>2026-05-01</lastmod>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://fatography.co/celebrity-shoots/bilal-abbas-khan</loc>
-    <lastmod>2026-05-01</lastmod>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://fatography.co/celebrity-shoots/shehzad-roy</loc>
-    <lastmod>2026-05-01</lastmod>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://fatography.co/celebrity-shoots/momina-mustehsan</loc>
-    <lastmod>2026-05-01</lastmod>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://fatography.co/celebrity-shoots/farhan-saeed</loc>
-    <lastmod>2026-05-01</lastmod>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://fatography.co/celebrity-shoots/sadia-khan</loc>
-    <lastmod>2026-05-01</lastmod>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://fatography.co/celebrity-shoots/ebraheem-al-samadi</loc>
-    <lastmod>2026-05-01</lastmod>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://fatography.co/celebrity-shoots/ahsan-khan</loc>
-    <lastmod>2026-05-01</lastmod>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://fatography.co/celebrity-shoots/mikaal-zulfiqar</loc>
-    <lastmod>2026-05-01</lastmod>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://fatography.co/celebrity-shoots/azekah-daniel</loc>
-    <lastmod>2026-05-01</lastmod>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://fatography.co/celebrity-shoots/salman-saeed</loc>
-    <lastmod>2026-05-01</lastmod>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://fatography.co/celebrity-shoots/hareem-farooq</loc>
-    <lastmod>2026-05-01</lastmod>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://fatography.co/celebrity-shoots/saad-qureshi</loc>
-    <lastmod>2026-05-01</lastmod>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://fatography.co/celebrity-shoots/mira-sethi</loc>
-    <lastmod>2026-05-01</lastmod>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://fatography.co/celebrity-shoots/maryam-nafees</loc>
-    <lastmod>2026-05-01</lastmod>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://fatography.co/celebrity-shoots/rabab-hashim</loc>
-    <lastmod>2026-05-01</lastmod>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://fatography.co/celebrity-shoots/hasnain-lehri</loc>
-    <lastmod>2026-05-01</lastmod>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://fatography.co/celebrity-shoots/farhana-bodi</loc>
-    <lastmod>2026-05-01</lastmod>
+    <lastmod>2026-09-08</lastmod>
     <priority>0.9</priority>
   </url>
 
   <url>
     <loc>https://fatography.co/testimonials</loc>
-    <lastmod>2026-05-01</lastmod>
+    <lastmod>2026-09-08</lastmod>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://fatography.co</loc>
-    <lastmod>2026-05-01</lastmod>
+    <loc>https://fatography.co/contact-us</loc>
+    <lastmod>2026-09-08</lastmod>
     <priority>0.7</priority>
+  </url>
+
+  <!-- Videography pages -->
+  <url>
+    <loc>https://fatography.co/pre-wedding-videography</loc>
+    <lastmod>2026-09-08</lastmod>
+    <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://fatography.co/pakistan</loc>
-    <lastmod>2026-05-01</lastmod>
-    <priority>0.7</priority>
+    <loc>https://fatography.co/wedding-events-videography</loc>
+    <lastmod>2026-09-08</lastmod>
+    <priority>0.8</priority>
   </url>
 
+  <url>
+    <loc>https://fatography.co/digital-video-commercials</loc>
+    <lastmod>2026-09-08</lastmod>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Service detail pages: /our-services/:title -->
+  <url>
+    <loc>https://fatography.co/our-services/fashion-photography</loc>
+    <lastmod>2026-09-08</lastmod>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://fatography.co/our-services/pre-wedding-shoots</loc>
+    <lastmod>2026-09-08</lastmod>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://fatography.co/our-services/wedding-events</loc>
+    <lastmod>2026-09-08</lastmod>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://fatography.co/our-services/lifestyle-photography</loc>
+    <lastmod>2026-09-08</lastmod>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://fatography.co/our-services/family-photography</loc>
+    <lastmod>2026-09-08</lastmod>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://fatography.co/our-services/product-photography</loc>
+    <lastmod>2026-09-08</lastmod>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://fatography.co/our-services/food-photography</loc>
+    <lastmod>2026-09-08</lastmod>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://fatography.co/our-services/black-%26-white</loc>
+    <lastmod>2026-09-08</lastmod>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://fatography.co/our-services/maternity-photography</loc>
+    <lastmod>2026-09-08</lastmod>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://fatography.co/our-services/event-coverage</loc>
+    <lastmod>2026-09-08</lastmod>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://fatography.co/our-services/real-estate</loc>
+    <lastmod>2026-09-08</lastmod>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://fatography.co/our-services/neon-photography</loc>
+    <lastmod>2026-09-08</lastmod>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://fatography.co/our-services/corporate-%26-linkedin</loc>
+    <lastmod>2026-09-08</lastmod>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://fatography.co/our-services/fitness-photography</loc>
+    <lastmod>2026-09-08</lastmod>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://fatography.co/our-services/retouching-guide</loc>
+    <lastmod>2026-09-08</lastmod>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://fatography.co/our-services/fashion-weeks</loc>
+    <lastmod>2026-09-08</lastmod>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Celebrity detail pages: /celebrity-shoots/:name -->
+  <url>
+    <loc>https://fatography.co/celebrity-shoots/cengiz-coskun</loc>
+    <lastmod>2026-09-08</lastmod>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://fatography.co/celebrity-shoots/bilal-abbas-khan</loc>
+    <lastmod>2026-09-08</lastmod>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://fatography.co/celebrity-shoots/shehzad-roy</loc>
+    <lastmod>2026-09-08</lastmod>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://fatography.co/celebrity-shoots/momina-mustehsan</loc>
+    <lastmod>2026-09-08</lastmod>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://fatography.co/celebrity-shoots/farhan-saeed</loc>
+    <lastmod>2026-09-08</lastmod>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://fatography.co/celebrity-shoots/sadia-khan</loc>
+    <lastmod>2026-09-08</lastmod>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://fatography.co/celebrity-shoots/ebraheem-al-samadi</loc>
+    <lastmod>2026-09-08</lastmod>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://fatography.co/celebrity-shoots/ahsan-khan</loc>
+    <lastmod>2026-09-08</lastmod>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://fatography.co/celebrity-shoots/mikaal-zulfiqar</loc>
+    <lastmod>2026-09-08</lastmod>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://fatography.co/celebrity-shoots/azekah-daniel</loc>
+    <lastmod>2026-09-08</lastmod>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://fatography.co/celebrity-shoots/salman-saeed</loc>
+    <lastmod>2026-09-08</lastmod>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://fatography.co/celebrity-shoots/hareem-farooq</loc>
+    <lastmod>2026-09-08</lastmod>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://fatography.co/celebrity-shoots/saad-qureshi</loc>
+    <lastmod>2026-09-08</lastmod>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://fatography.co/celebrity-shoots/usman-mukhtar</loc>
+    <lastmod>2026-09-08</lastmod>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://fatography.co/celebrity-shoots/mira-sethi</loc>
+    <lastmod>2026-09-08</lastmod>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://fatography.co/celebrity-shoots/maryam-nafees</loc>
+    <lastmod>2026-09-08</lastmod>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://fatography.co/celebrity-shoots/rabab-hashim</loc>
+    <lastmod>2026-09-08</lastmod>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://fatography.co/celebrity-shoots/hasnain-lehri</loc>
+    <lastmod>2026-09-08</lastmod>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://fatography.co/celebrity-shoots/farhana-bodi</loc>
+    <lastmod>2026-09-08</lastmod>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://fatography.co/celebrity-shoots/faisal-kapadia</loc>
+    <lastmod>2026-09-08</lastmod>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Blog -->
   <url>
     <loc>https://fatography.co/blogs</loc>
-    <lastmod>2026-05-01</lastmod>
-    <priority>0.7</priority>
+    <lastmod>2026-09-08</lastmod>
+    <priority>0.6</priority>
   </url>
 
   <url>
     <loc>https://fatography.co/blogs/fashion-photography-dubai-17-years</loc>
-    <lastmod>2026-05-01</lastmod>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://fatography.co/blogs/fashion-weeks</loc>
-    <lastmod>2026-05-01</lastmod>
-    <priority>0.7</priority>
+    <lastmod>2026-09-08</lastmod>
+    <priority>0.6</priority>
   </url>
 
 </urlset>
