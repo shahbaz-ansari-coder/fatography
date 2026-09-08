@@ -30,6 +30,26 @@
   color: #e8dcc8;
   font-size: 40px;
   font-weight: 300;
+  margin-top: -10px;
+  font-family: 'Cormorant Garamond', serif;
+}
+
+.rev-para{
+    font-family: 'DM Sans', sans-serif;
+    line-height: 1.4;
+    max-width: 700px;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 50px !important;
+    padding: 0 10px;
+  color: #777;
+}
+
+.rev-title {
+  font-family: 'Cormorant Garamond', serif;
+  color: #e8dcc8;
+  font-size: 40px;
+  font-weight: 300;
 }
 
 .rev-title em { color: rgb(216 116 112); font-style: italic; }
@@ -89,7 +109,7 @@
   font-weight: 700;
 }
 
-.rev-meta h4 {
+.rev-meta .rev-name {
   margin-bottom: -10px;
   font-size: 16px;
   color: #222;

@@ -59,8 +59,13 @@ export default function ReviewSection() {
         <div className="reviews-header">
           <p className="rev-eyebrow">Testimonials</p>
           <h2 className="rev-title">
-            What Our <em>Clients</em> Say
+            What Our <em>Clients</em> Say About Fatography
           </h2>
+          <p className="rev-para !-mb-3">
+            With a 5-star reputation built over 15 years, Fatography is a
+            trusted photography and videography studio serving clients across
+            Dubai and Pakistan.
+          </p>
         </div>
 
         {loading && (
@@ -146,7 +151,7 @@ export default function ReviewSection() {
                         )}
 
                         <div className="rev-meta">
-                          <h4>{rev.name}</h4>
+                          <div className="rev-name">{rev.name}</div>
                           <span>{timeAgo(rev.createdAt)}</span>
                         </div>
                       </div>
@@ -177,11 +182,11 @@ export default function ReviewSection() {
                     {/* MESSAGE WITH READ MORE LOGIC */}
                     <div className="rev-content">
                       <p className="rev-text">
-                        "
+                        
                         {isExpanded || !isLong
                           ? rev.message
                           : `${rev.message.slice(0, 150)}...`}
-                        "
+                        
                       </p>
 
                       {isLong && (

@@ -60,6 +60,33 @@ import RababHashimShoot from "./pages/user/RababHashimShoot";
 import Blogs from "./pages/user/Blogs";
 import FatographyBlog from "./pages/user/FatographyBlog";
 import { HelmetProvider } from "react-helmet-async";
+import HasnainLehriShoot from "./pages/user/HasnainLehriShoot";
+import BackStageServices from "./pages/user/BackStageServices";
+import FashionWeeksServices from "./pages/user/FashionWeeksServices";
+import FarhanaBodi from "./pages/user/FarhanaBodi";
+import DigitalVideoCommercials from "./pages/user/DigitalVideoCommercials";
+import FashionPhotographyBlog from "./pages/blogs/FashionPhotographyBlog";
+import PakistanPage from "./pages/user/Pakistan";
+import DubaiPage from "./pages/user/dubai";
+import PakistanPreWeddingShootsServices from "./pages/user/pakistan-services/PreWeddingShootsServices";
+import PakistanLifestylePhotographyServices from "./pages/user/pakistan-services/LifestylePhotographyServices";
+import PakistanFamilyPhotographyServices from "./pages/user/pakistan-services/FamilyPhotographyServices";
+import PakistanProductPhotographySevices from "./pages/user/pakistan-services/ProductPhotographySevices";
+// import PakistanWeddingEventsServices from "./pages/user/pakistan-services/WeddingEventsServices";
+import PakistanFoodPhotographyServices from "./pages/user/pakistan-services/FoodPhotographyServices";
+import PakistanFashionServices from "./pages/user/pakistan-services/FashionServices";
+import PakistanBlackAndWhiteServices from "./pages/user/pakistan-services/BlackAndWhiteServices";
+import PakistanMaternityPhotographyServices from "./pages/user/pakistan-services/MaternityPhotographyServices";
+import PakistanEventCoverageServices from "./pages/user/pakistan-services/EventCoverageServices";
+import PakistanRealEstateServices from "./pages/user/pakistan-services/RealEstateServices";
+import PakistanNeonPhotographyServices from "./pages/user/pakistan-services/NeonPhotographyServices";
+import PakistanCorporateAndLinkedinServices from "./pages/user/pakistan-services/CorporateAndLinkedinServices";
+import PakistanFitnessPhotographyServices from "./pages/user/pakistan-services/FitnessPhotographyServices";
+import PakistanFashionWeeksServices from "./pages/user/pakistan-services/FashionWeeksServices";
+import PakistanRetouchingGuideServices from "./pages/user/pakistan-services/RetouchingGuideServices";
+import PakistanWeddingEventsServices from "./pages/user/pakistan-services/WeddingEventsServices";
+import FaisalKapadia from "./pages/user/FaisalKapadiaShoot";
+import ActorShootPage from "./pages/user/ActorShoot";
 
 function App() {
   const router = createBrowserRouter([
@@ -75,8 +102,16 @@ function App() {
           path: "/about-us",
           element: <AboutPage />,
         },
+        // {
+        //   path: "/pakistan",
+        //   element: <PakistanPage />,
+        // },
+        // {
+        //   path: "/dubai",
+        //   element: <DubaiPage />,
+        // },
         {
-          path: "/services",
+          path: "/our-services",
           element: <AllServicesPage />,
         },
         {
@@ -91,162 +126,257 @@ function App() {
           path: "/contact-us",
           element: <ContactPage />,
         },
+        {
+          path: "/login",
+          element: <Login />,
+        },
         // videography Pages
         {
-          path: "/videography/food-videography",
-          element: <FoodVideography />,
-        },
-
-        {
-          path: "/videography/pre-wedding",
+          path: "/pre-wedding-videography",
           element: <PreWedding />,
         },
         {
-          path: "/videography/wedding-events",
+          path: "/wedding-events-videography",
           element: <WeddingEvent />,
+        },
+        {
+          path: "/digital-video-commercials",
+          element: <DigitalVideoCommercials />,
         },
         // Blog
         {
-          path: "/blog",
+          path: "/blogs",
           element: <Blogs />,
         },
         {
-          path: "/blog/welcome-to-fatography",
-          element: <FatographyBlog />,
+          path: "/blogs/fashion-photography-dubai-17-years",
+          element: <FashionPhotographyBlog />,
         },
 
-        // Services Pages
+        // Dubai Services Pages
         // Slider Type
         {
-          path: "/services/pre-wedding-shoots",
-          element: <PreWeddingShootsServices />,
+          path: "/our-services/:title",
+          element: <ServicePage />,
         },
         {
-          path: "/services/lifestyle-photography",
-          element: <LifestylePhotographyServices />,
+          path: "/celebrity-shoots/:name",
+          element: <ActorShootPage />,
         },
-        {
-          path: "/services/family-photography",
-          element: <FamilyPhotographyServices />,
-        },
-        // Gallery Type
-        {
-          path: "/services/wedding-events",
-          element: <WeddingEventsServices />,
-        },
-        {
-          path: "/services/fashion-photography",
-          element: <FashionServices />,
-        },
-        {
-          path: "/services/food-photography",
-          element: <FoodPhotographyServices />,
-        },
-        {
-          path: "/services/black-&-white",
-          element: <BlackAndWhiteServices />,
-        },
-        {
-          path: "/services/maternity-photography",
-          element: <MaternityPhotographyServices />,
-        },
-        {
-          path: "/services/product-photography",
-          element: <ProductPhotographySevices />,
-        },
-        {
-          path: "/services/event-coverage",
-          element: <EventCoverageServices />,
-        },
-        {
-          path: "/services/real-estate",
-          element: <RealEstateServices />,
-        },
-        {
-          path: "/services/neon-photography",
-          element: <NeonPhotographyServices />,
-        },
-        {
-          path: "/services/corporate-&-linkedin",
-          element: <CorporateAndLinkedinServices />,
-        },
-        {
-          path: "/services/fitness-photography",
-          element: <FitnessPhotographyServices />,
-        },
-        {
-          path: "/services/retouching-guide",
-          element: <RetouchingGuideServices />,
-        },
+        // {
+        //   path: "/pre-wedding-shoots",
+        //   element: <PreWeddingShootsServices />,
+        // },
+        // {
+        //   path: "/lifestyle-photography",
+        //   element: <LifestylePhotographyServices />,
+        // },
+        // {
+        //   path: "/family-photography",
+        //   element: <FamilyPhotographyServices />,
+        // },
+        // {
+        //   path: "/product-photography",
+        //   element: <ProductPhotographySevices />,
+        // },
+        // // Gallery Type
+        // {
+        //   path: "/wedding-events",
+        //   element: <WeddingEventsServices />,
+        // },
+        // {
+        //   path: "/fashion-photography",
+        //   element: <FashionServices />,
+        // },
+        // {
+        //   path: "/food-photography",
+        //   element: <FoodPhotographyServices />,
+        // },
+        // {
+        //   path: "/black-&-white",
+        //   element: <BlackAndWhiteServices />,
+        // },
+        // {
+        //   path: "/maternity-photography",
+        //   element: <MaternityPhotographyServices />,
+        // },
+        // {
+        //   path: "/event-coverage",
+        //   element: <EventCoverageServices />,
+        // },
+        // {
+        //   path: "/real-estate",
+        //   element: <RealEstateServices />,
+        // },
+        // {
+        //   path: "/neon-photography",
+        //   element: <NeonPhotographyServices />,
+        // },
+        // {
+        //   path: "/corporate-&-linkedin",
+        //   element: <CorporateAndLinkedinServices />,
+        // },
+        // {
+        //   path: "/fitness-photography",
+        //   element: <FitnessPhotographyServices />,
+        // },
+        // {
+        //   path: "/retouching-guide",
+        //   element: <RetouchingGuideServices />,
+        // },
+        // {
+        //   path: "/fashion-weeks",
+        //   element: <FashionWeeksServices />,
+        // },
+        // // Pakistan Services Pages
+        // // Slider Type
+        // {
+        //   path: "/pakistan/pre-wedding-shoots",
+        //   element: <PakistanPreWeddingShootsServices />,
+        // },
+        // {
+        //   path: "/pakistan/lifestyle-photography",
+        //   element: <PakistanLifestylePhotographyServices />,
+        // },
+        // {
+        //   path: "/pakistan/family-photography",
+        //   element: <PakistanFamilyPhotographyServices />,
+        // },
+        // {
+        //   path: "/pakistan/product-photography",
+        //   element: <PakistanProductPhotographySevices />,
+        // },
+        // // // Gallery Type
+        // {
+        //   path: "/pakistan/wedding-events",
+        //   element: <PakistanWeddingEventsServices />,
+        // },
+        // {
+        //   path: "/pakistan/fashion-photography",
+        //   element: <PakistanFashionServices />,
+        // },
+        // {
+        //   path: "/pakistan/food-photography",
+        //   element: <PakistanFoodPhotographyServices />,
+        // },
+        // {
+        //   path: "/pakistan/black-&-white",
+        //   element: <PakistanBlackAndWhiteServices />,
+        // },
+        // {
+        //   path: "/pakistan/maternity-photography",
+        //   element: <PakistanMaternityPhotographyServices />,
+        // },
+        // {
+        //   path: "/pakistan/event-coverage",
+        //   element: <PakistanEventCoverageServices />,
+        // },
+        // {
+        //   path: "/pakistan/real-estate",
+        //   element: <PakistanRealEstateServices />,
+        // },
+        // {
+        //   path: "/pakistan/neon-photography",
+        //   element: <PakistanNeonPhotographyServices />,
+        // },
+        // {
+        //   path: "/pakistan/corporate-&-linkedin",
+        //   element: <PakistanCorporateAndLinkedinServices />,
+        // },
+        // {
+        //   path: "/pakistan/fitness-photography",
+        //   element: <PakistanFitnessPhotographyServices />,
+        // },
+        // {
+        //   path: "/pakistan/retouching-guide",
+        //   element: <PakistanRetouchingGuideServices />,
+        // },
+        // {
+        //   path: "/pakistan/fashion-weeks",
+        //   element: <PakistanFashionWeeksServices />,
+        // },
+
         // Celebrity Shoots
-        {
-          path: "/celebrity-shoots/cengiz-coşkun",
-          element: <CengizCoskunShoot />,
-        },
-        {
-          path: "/celebrity-shoots/bilal-abbas-khan",
-          element: <BilalAbbasKhanShoot />,
-        },
-        {
-          path: "/celebrity-shoots/shehzad-roy",
-          element: <ShehzadRoyShoot />,
-        },
-        {
-          path: "/celebrity-shoots/momina-mustehsan",
-          element: <MominaMustehsanShoot />,
-        },
-        {
-          path: "/celebrity-shoots/farhan-saeed",
-          element: <FarhanSaeedShoot />,
-        },
-        {
-          path: "/celebrity-shoots/sadia-khan",
-          element: <SadiaKhanShoot />,
-        },
-        {
-          path: "/celebrity-shoots/ebraheem-al-samadi",
-          element: <EbraheemAlSamadiShoot />,
-        },
-        {
-          path: "/celebrity-shoots/ahsan-khan",
-          element: <AhsanKhanShoot />,
-        },
-        {
-          path: "/celebrity-shoots/mikaal-zulfiqar",
-          element: <MikaalZulfiqarShoot />,
-        },
-        {
-          path: "/celebrity-shoots/azekah-daniel",
-          element: <AzekahDanielShoot />,
-        },
-        {
-          path: "/celebrity-shoots/salman-saeed",
-          element: <SalmanSaeedShoot />,
-        },
-        {
-          path: "/celebrity-shoots/hareem-farooq",
-          element: <HareemFarooqShoot />,
-        },
-        {
-          path: "/celebrity-shoots/saad-qureshi",
-          element: <SaadQureshiShoot />,
-        },
-        {
-          path: "/celebrity-shoots/usman-mukhtar",
-          element: <UsmanMukhtarShoot />,
-        },
-        {
-          path: "/celebrity-shoots/mira-sethi",
-          element: <MiraSethiShoot />,
-        },
-        {
-          path: "/celebrity-shoots/maryam-nafees",
-          element: <MaryamNafeesShoot />,
-        },
-        {
-          path: "/celebrity-shoots/rabab-hashim",
-          element: <RababHashimShoot />,
-        },
+        // {
+        //   path: "/celebrity-shoots/cengiz-coşkun",
+        //   element: <CengizCoskunShoot />,
+        // },
+        // {
+        //   path: "/celebrity-shoots/bilal-abbas-khan",
+        //   element: <BilalAbbasKhanShoot />,
+        // },
+        // {
+        //   path: "/celebrity-shoots/shehzad-roy",
+        //   element: <ShehzadRoyShoot />,
+        // },
+        //  {
+        //  path: "/celebrity-shoots/momina-mustehsan",
+        //   element: <MominaMustehsanShoot />,
+        // },
+        // {
+        //   path: "/celebrity-shoots/farhan-saeed",
+        //   element: <FarhanSaeedShoot />,
+        // },
+        // {
+        //   path: "/celebrity-shoots/sadia-khan",
+        //   element: <SadiaKhanShoot />,
+        // },
+        // {
+        //   path: "/celebrity-shoots/ebraheem-al-samadi",
+        //   element: <EbraheemAlSamadiShoot />,
+        // },
+        // {
+        //   path: "/celebrity-shoots/ahsan-khan",
+        //   element: <AhsanKhanShoot />,
+        // },
+        // {
+        //   path: "/celebrity-shoots/mikaal-zulfiqar",
+        //   element: <MikaalZulfiqarShoot />,
+        // },
+        // {
+        //   path: "/celebrity-shoots/azekah-daniel",
+        //   element: <AzekahDanielShoot />,
+        // },
+        // {
+        //   path: "/celebrity-shoots/salman-saeed",
+        //   element: <SalmanSaeedShoot />,
+        // },
+        // {
+        //   path: "/celebrity-shoots/hareem-farooq",
+        //   element: <HareemFarooqShoot />,
+        // },
+        // {
+        //   path: "/celebrity-shoots/saad-qureshi",
+        //   element: <SaadQureshiShoot />,
+        // },
+        // {
+        //   path: "/celebrity-shoots/usman-mukhtar",
+        //   element: <UsmanMukhtarShoot />,
+        // },
+        // {
+        //   path: "/celebrity-shoots/mira-sethi",
+        //   element: <MiraSethiShoot />,
+        // },
+        // {
+        //   path: "/celebrity-shoots/maryam-nafees",
+        //   element: <MaryamNafeesShoot />,
+        // },
+        // {
+        //   path: "/celebrity-shoots/rabab-hashim",
+        //   element: <RababHashimShoot />,
+        // },
+        // {
+        //   path: "/celebrity-shoots/hasnain-lehri",
+        //   element: <HasnainLehriShoot />,
+        // },
+        // {
+        //   path: "/celebrity-shoots/farhana-bodi",
+        //   element: <FarhanaBodi />,
+        // },
+        // {
+        //   path: "/celebrity-shoots/faisal-kapadia",
+        //   element: <FaisalKapadia />,
+        // },
       ],
     },
 

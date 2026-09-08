@@ -5,22 +5,22 @@ function Hero() {
     {
       text: "Wedding Photography",
       image:
-        "https://res.cloudinary.com/djlshebp8/image/upload/v1776375629/services/banner/uo9dcyvv1oufn5ak9nwo.jpg",
+        "https://res.cloudinary.com/djlshebp8/image/upload/w_250,h_250,c_fill,f_auto,q_auto/v1776375726/services/shoots/idnb0cf352sf6pzl5at3.jpg",
     },
     {
       text: "Pre Wedding Shoots",
       image:
-        "https://res.cloudinary.com/djlshebp8/image/upload/q_auto/f_auto/v1777285069/services/shoots/wwcdn7qvmbiyjisg0phd.jpg",
+        "https://res.cloudinary.com/djlshebp8/image/upload/q_auto/w_250,h_250,c_fill,f_auto,q_auto/v1777285069/services/shoots/wwcdn7qvmbiyjisg0phd.jpg",
     },
     {
       text: "Fashion Photography",
       image:
-        "https://res.cloudinary.com/djlshebp8/image/upload/v1776884899/services/banner/fnxjodalixwp47elkppn.jpg",
+        "https://res.cloudinary.com/djlshebp8/image/upload/q_auto/w_250,h_250,c_fill,f_auto,q_auto/v1778627128/services/shoots/tsqkapvtproozoai5ybj.jpg",
     },
     {
       text: "Food Photography",
       image:
-        "https://res.cloudinary.com/djlshebp8/image/upload/v1776376702/services/shoots/qml9b0efrwhmmm2g52yx.jpg",
+        "https://res.cloudinary.com/djlshebp8/image/upload/q_auto/w_250,h_250,c_fill,f_auto,q_auto/v1776376698/services/shoots/coo0jfvr4vxrv0femutp.jpg",
     },
   ];
 
@@ -98,7 +98,14 @@ function Hero() {
       {/* State se data utha kar image show karna */}
       {hoverData.img && (
         <div className="hero-hover-image">
-          <img src={hoverData.img} alt={hoverData.text} />
+          <img
+            src={hoverData.img}
+            alt={hoverData.text}
+            loading="lazy"
+            decoding="async"
+            width="250"
+            height="250"
+          />
         </div>
       )}
     </section>

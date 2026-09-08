@@ -737,3 +737,476 @@
     display: none;
   }
 }
+
+/* ════════════════════════════════════════════════════
+   PORTFOLIO 3D SWIPER — modern coverflow carousel
+   Prefix: fsw-
+════════════════════════════════════════════════════ */
+.fsw-wrap {
+  position: relative;
+  width: 100%;
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 40px 0 0;
+}
+
+.fsw-stage {
+  position: relative;
+  height: 480px;
+  perspective: 1400px;
+  perspective-origin: 50% 50%;
+  display: block;
+  outline: none;
+  cursor: grab;
+  user-select: none;
+  touch-action: pan-y;
+}
+.fsw-stage--dragging,
+.fsw-stage:active {
+  cursor: grabbing;
+}
+
+.fsw-card {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 300px;
+  height: 480px;
+  border-radius: 18px;
+  overflow: hidden;
+  background: var(--s1, #111);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.55);
+  transition:
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.6s ease,
+    box-shadow 0.4s ease;
+  will-change: transform, opacity;
+  cursor: pointer;
+}
+
+.fsw-card--active {
+  box-shadow: 0 40px 90px rgba(0, 0, 0, 0.7), 0 0 0 1px var(--p35, rgba(182,82,79,0.35));
+  cursor: zoom-in;
+}
+
+.fsw-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+}
+
+/* subtle shine sweep on active card */
+.fsw-card-shine {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0) 40%,
+    rgba(255, 255, 255, 0.08) 50%,
+    rgba(255, 255, 255, 0) 60%
+  );
+  pointer-events: none;
+}
+
+.fsw-card-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: 18px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0) 35%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+.fsw-card--active:hover .fsw-card-overlay {
+  opacity: 1;
+}
+
+.fsw-card-overlay-circle {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  transform: scale(0.85);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.fsw-card--active:hover .fsw-card-overlay-circle {
+  transform: scale(1);
+}
+
+/* nav arrows */
+.fsw-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 20;
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s ease;
+}
+.fsw-nav:hover {
+  background: var(--p);
+  border-color: var(--p);
+  transform: translateY(-50%) scale(1.08);
+}
+.fsw-nav--prev {
+  left: 2%;
+}
+.fsw-nav--next {
+  right: 2%;
+}
+
+/* footer row: dots + counter */
+.fsw-footer-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  margin-top: 36px;
+}
+
+.fsw-dots {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.fsw-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition:
+    background 0.25s ease,
+    width 0.3s ease;
+}
+.fsw-dot--active {
+  width: 26px;
+  border-radius: 5px;
+  background: var(--p);
+}
+
+.fsw-counter {
+  font-family: "Unbounded", sans-serif;
+  font-size: 0.62rem;
+  letter-spacing: 3px;
+  color: rgba(255, 255, 255, 0.4);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.fsw-counter-sep {
+  opacity: 0.4;
+}
+
+/* ═══════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════ */
+@media (max-width: 1100px) {
+  .fsw-stage {
+    height: 420px;
+  }
+  .fsw-card {
+    width: 260px;
+    height: 420px;
+  }
+}
+
+@media (max-width: 768px) {
+  .fsw-stage {
+    height: 380px;
+    perspective: 1000px;
+  }
+  .fsw-card {
+    width: 230px;
+    height: 380px;
+    border-radius: 14px;
+  }
+  .fsw-nav {
+    width: 42px;
+    height: 42px;
+  }
+  .fsw-nav--prev {
+    left: 1%;
+  }
+  .fsw-nav--next {
+    right: 1%;
+  }
+  .fsw-footer-row {
+    margin-top: 26px;
+    gap: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .fsw-stage {
+    height: 320px;
+  }
+  .fsw-card {
+    width: 190px;
+    height: 320px;
+    border-radius: 12px;
+  }
+  .fsw-nav {
+    width: 36px;
+    height: 36px;
+  }
+  .fsw-card-overlay-circle {
+    width: 34px;
+    height: 34px;
+  }
+}
+
+/* ═══════════════════════════════════
+   ADD THESE RULES TO actorShoot.css
+   Full Portfolio — 3D Swiper coverflow
+   (replaces the old fsg-cards-grid tiles)
+═══════════════════════════════════ */
+
+.asp-portfolio-section {
+  max-width: 1200px !important;
+  overflow: hidden;
+  margin: auto !important;
+  padding-bottom: 60px;
+}
+
+.asp-portfolio-wrap {
+  position: relative;
+  max-width: var(--max);
+  margin: 0 auto;
+  --swiper-theme-color: var(--p);
+  --swiper-navigation-size: 17px;
+  --swiper-pagination-bullet-inactive-color: rgba(255, 255, 255, 0.25);
+  --swiper-pagination-bullet-inactive-opacity: 1;
+}
+
+.asp-portfolio-swiper {
+  padding: 40px 0 70px !important;
+  overflow: visible;
+}
+
+/* ── slides ── */
+.asp-portfolio-slide {
+  width: min(360px, 62vw);
+  aspect-ratio: 3 / 4;
+  border-radius: 18px;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  border: 3px solid rgba(255, 255, 255, 0.06);
+  background: var(--s2);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.55);
+  transition: border-color 0.3s ease;
+}
+.asp-portfolio-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+  transition: transform 0.5s ease;
+}
+
+/* only the active/centered slide gets full colour + zoom-hover;
+   side slides read as gracefully dimmed via Swiper's own
+   coverflow perspective + this subtle desaturation */
+.swiper-slide:not(.swiper-slide-active) .asp-portfolio-slide {
+  filter: brightness(0.55) saturate(0.75);
+}
+.swiper-slide-active .asp-portfolio-slide {
+  border-color: var(--p35);
+}
+.swiper-slide-active .asp-portfolio-slide:hover img {
+  transform: scale(1.06);
+}
+
+.asp-portfolio-slide-shine {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.09) 0%, transparent 45%);
+  pointer-events: none;
+}
+
+/* frame number — bottom-left, editorial style */
+.asp-portfolio-slide-num {
+  position: absolute;
+  bottom: 14px;
+  left: 16px;
+  font-family: "Unbounded", sans-serif;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: rgba(255, 255, 255, 0.55);
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(6px);
+  padding: 5px 10px;
+  border-radius: 100px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* hover overlay with expand icon (matches fsg-card pattern) */
+.asp-portfolio-slide-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0);
+  opacity: 0;
+  transition: opacity 0.25s ease, background 0.25s ease;
+  pointer-events: none;
+}
+.swiper-slide-active .asp-portfolio-slide:hover .asp-portfolio-slide-overlay {
+  background: rgba(0, 0, 0, 0.25);
+  opacity: 1;
+}
+.asp-portfolio-slide-circle {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--p);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── navigation arrows ── */
+.asp-portfolio-swiper .swiper-button-prev,
+.asp-portfolio-swiper .swiper-button-next {
+  width: 48px;
+  height: 48px;
+  padding: 10px !important;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--bdr);
+  border-radius: 50%;
+  transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+}
+.asp-portfolio-swiper .swiper-button-prev svg,
+.asp-portfolio-swiper .swiper-button-next svg {
+  width: 100%;
+  height: 100%;
+  color: #fff;
+  transition: color 0.25s ease;
+}
+.asp-portfolio-swiper .swiper-button-prev:hover,
+.asp-portfolio-swiper .swiper-button-next:hover {
+  background: var(--p);
+  border-color: var(--p);
+  transform: scale(1.08);
+}
+.asp-portfolio-swiper .swiper-button-prev:hover::after,
+.asp-portfolio-swiper .swiper-button-next:hover::after {
+  color: #000;
+}
+.asp-portfolio-swiper .swiper-button-prev::after,
+.asp-portfolio-swiper .swiper-button-next::after {
+  font-size: 15px;
+  font-weight: 900;
+  color: #fff;
+}
+.asp-portfolio-swiper .swiper-button-disabled {
+  opacity: 0.25;
+}
+
+/* ── pagination dots ── */
+.asp-portfolio-swiper .swiper-pagination {
+  bottom: 20px !important;
+}
+.asp-portfolio-swiper .swiper-pagination-bullet {
+  width: 7px;
+  height: 7px;
+  transition: width 0.25s ease, background 0.25s ease;
+}
+.asp-portfolio-swiper .swiper-pagination-bullet-active {
+  width: 22px;
+  border-radius: 4px;
+  background: var(--p);
+}
+
+/* ── frame counter, top-right, editorial style ── */
+.asp-portfolio-counter {
+  position: absolute;
+  top: -8px;
+  right: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-family: "Unbounded", sans-serif;
+  z-index: 2;
+}
+.asp-portfolio-counter-current {
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--p);
+}
+.asp-portfolio-counter-divider {
+  width: 22px;
+  height: 1px;
+  background: var(--bdr);
+  display: inline-block;
+}
+.asp-portfolio-counter-total {
+  font-size: 12px;
+  color: var(--dim);
+  letter-spacing: 1px;
+}
+
+/* ═══════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════ */
+@media (max-width: 860px) {
+  .asp-portfolio-swiper {
+    padding: 30px 0 60px !important;
+  }
+  .asp-portfolio-slide {
+    width: 78vw;
+    border-radius: 14px;
+  }
+  .asp-portfolio-swiper .swiper-button-prev,
+  .asp-portfolio-swiper .swiper-button-next {
+    width: 38px;
+    height: 38px;
+  }
+  .asp-portfolio-counter {
+    top: -2px;
+  }
+  .asp-portfolio-counter-current {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 600px) {
+  .asp-portfolio-slide {
+    width: 84vw;
+  }
+  .asp-portfolio-swiper .swiper-button-prev,
+  .asp-portfolio-swiper .swiper-button-next {
+    display: none; /* rely on swipe + dots on small screens */
+  }
+  .asp-portfolio-slide-num {
+    font-size: 10px;
+    padding: 4px 8px;
+  }
+}

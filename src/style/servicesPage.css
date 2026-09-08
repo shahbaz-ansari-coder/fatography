@@ -107,7 +107,7 @@
 ═══════════════════════════════════ */
 .fsg-section-label {
   font-family: "Unbounded", sans-serif;
-  font-size: 18px;
+  font-size: 14px;
   letter-spacing: 5px;
   text-transform: uppercase;
   color: var(--p);
@@ -200,7 +200,7 @@
 
 .fsg-hero-title {
   font-family: "Unbounded", sans-serif;
-  font-size: clamp(2.8rem, 6vw, 5.8rem);
+  font-size: clamp(2.8rem, 6vw, 4.8rem);
   font-weight: 900;
   line-height: 1.06;
   color: #fff;
@@ -955,3 +955,212 @@
   .fsg-faq-cta-row { flex-wrap: wrap; gap: 8px; }
   .fsg-faq-cta-line { display: none; }
 }
+
+
+
+
+/* ═══════════════════════════════════
+   GALLERY (collections wrapper)
+═══════════════════════════════════ */
+.fsg-gallery {
+  padding: 80px 5% 120px;
+  background: var(--s1);
+  border-top: 1px solid var(--bdr);
+}
+.fsg-gallery-header {
+  text-align: center;
+  margin-bottom: 56px;
+}
+.fsg-gallery-title {
+  font-family: "Unbounded", sans-serif;
+  font-size: clamp(1.8rem, 4vw, 3.2rem);
+  font-weight: 900;
+  background: linear-gradient(135deg, #fff 30%, var(--p) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.fsg-collections-wrap {
+  max-width: var(--max);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+}
+
+/* ── each shoot block ── */
+.fsg-collection-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 26px;
+  padding: 0 5px;
+}
+.fsg-collection-line {
+  height: 1px;
+  width: 36px;
+  background: var(--p);
+  display: block;
+}
+.fsg-collection-tag {
+  font-family: "Unbounded", sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+}
+.fsg-collection-num {
+  font-family: "Unbounded", sans-serif;
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: var(--p);
+  line-height: 1;
+}
+.fsg-collection-count {
+  margin-left: auto;
+  font-size: 13px;
+  color: var(--dim);
+  font-weight: 300;
+  letter-spacing: 0.3px;
+}
+
+/* ═══════════════════════════════════
+   SWIPER — 3D COVERFLOW
+═══════════════════════════════════ */
+.fsg-swiper {
+  padding: 30px 5px 56px;
+}
+.fsg-swiper-slide {
+  border-radius: 14px;
+}
+
+.fsg-slide-card {
+  aspect-ratio: 3 / 4;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 4px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.55);
+  cursor: pointer;
+  position: relative;
+  background: var(--s2);
+  transition: border-color 0.25s ease, box-shadow 0.3s ease;
+}
+.fsg-swiper .swiper-slide-active .fsg-slide-card {
+  border-color: var(--p35);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7), 0 0 0 1px var(--p20);
+}
+.fsg-slide-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+  transition: transform 0.5s ease;
+}
+.fsg-slide-card:hover img {
+  transform: scale(1.06);
+}
+.fsg-slide-shine {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.07) 0%, transparent 50%);
+  pointer-events: none;
+}
+.fsg-slide-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0);
+  opacity: 0;
+  transition: opacity 0.25s ease, background 0.25s ease;
+  pointer-events: none;
+}
+.fsg-slide-card:hover .fsg-slide-overlay {
+  background: rgba(0, 0, 0, 0.25);
+  opacity: 1;
+}
+.fsg-slide-overlay-circle {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--p);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── nav arrows ── */
+.fsg-swiper .swiper-button-next,
+.fsg-swiper .swiper-button-prev {
+  width: 42px;
+  height: 42px;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(6px);
+  border: 1px solid var(--bdr);
+  border-radius: 50%;
+  color: var(--p);
+  transition: background 0.25s ease, border-color 0.25s ease, transform 0.2s ease;
+}
+.fsg-swiper .swiper-button-next:hover,
+.fsg-swiper .swiper-button-prev:hover {
+  background: var(--p);
+  color: #000;
+  border-color: var(--p);
+  transform: scale(1.06);
+}
+.fsg-swiper .swiper-button-next::after,
+.fsg-swiper .swiper-button-prev::after {
+  font-size: 14px;
+  font-weight: 900;
+}
+
+/* ── pagination bullets ── */
+.fsg-swiper .swiper-pagination-bullet {
+  background: rgba(255, 255, 255, 0.25);
+  opacity: 1;
+  width: 7px;
+  height: 7px;
+  transition: background 0.25s ease, width 0.25s ease;
+}
+.fsg-swiper .swiper-pagination-bullet-active {
+  background: var(--p);
+  width: 22px;
+  border-radius: 4px;
+}
+
+/* ── responsive ── */
+@media (max-width: 860px) {
+  .fsg-collections-wrap { gap: 44px; }
+  .fsg-swiper { padding: 24px 5px 48px; }
+  .fsg-swiper .swiper-button-next,
+  .fsg-swiper .swiper-button-prev { width: 36px; height: 36px; }
+}
+
+@media (max-width: 600px) {
+  .fsg-collection-count { display: none; }
+  .fsg-swiper .swiper-button-next,
+  .fsg-swiper .swiper-button-prev { display: none; }
+  .fsg-swiper { padding: 16px 5px 44px; }
+}
+
+
+/* side (non-active) slides thora dim + slight blur so active clearly stand out */
+.fsg-slide-card--side {
+  filter: brightness(0.55) saturate(0.85);
+  transition: filter 0.4s ease, border-color 0.25s ease, box-shadow 0.3s ease;
+}
+.fsg-slide-card--active {
+  filter: brightness(1);
+  border-color: var(--p35);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7), 0 0 0 1px var(--p20);
+}
+.fsg-slide-card--side:hover {
+  filter: brightness(0.8) saturate(1);
+}
+
+/* cursor hints: active = zoom, side = pointer (click to bring to center) */
+.fsg-slide-card--active { cursor: zoom-in; }
+.fsg-slide-card--side { cursor: pointer; }

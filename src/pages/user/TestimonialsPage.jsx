@@ -5,6 +5,7 @@ import ReviewSection from "../../components/home/Reviews";
 import Footer from "../../components/home/Footer";
 import Preloader from "../../components/home/Preloader";
 import SEO from "../../components/home/SEO";
+import ContactSection from "../../components/home/ContactSection";
 
 const TestimonialsPage = () => {
   return (
@@ -18,6 +19,7 @@ const TestimonialsPage = () => {
       <main className="!py-5 !sm:py-10">
         <VideoTestimonials />
         <ReviewSection />
+        <ContactSection/>
       </main>
       <Footer />
     </>

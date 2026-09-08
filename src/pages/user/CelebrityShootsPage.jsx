@@ -93,6 +93,10 @@ export default function CelebrityShootsPage() {
               <h2 className="rev-title">
                 Capturing Stars in Their <em>Best Light</em>
               </h2>
+              <p className="rev-para">
+                Fatography works with celebrated personalities, capturing
+                authentic moments with creativity and professionalism.
+              </p>
             </div>
 
             {/* ALL CARDS */}

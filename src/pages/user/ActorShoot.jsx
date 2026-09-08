@@ -4,6 +4,21 @@ import "../../style/actorShoot.css";
 import Header from "../../components/home/Header";
 import Footer from "../../components/home/Footer";
 import ContactSection from "../../components/home/ContactSection";
+import SEO from "../../components/home/SEO";
+
+/* ══ SWIPER ══ */
+import { Swiper, SwiperSlide } from "swiper/react";
+import {
+  EffectCoverflow,
+  Navigation,
+  Pagination,
+  Autoplay,
+  Keyboard,
+} from "swiper/modules";
+import "swiper/css";
+import "swiper/css/effect-coverflow";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 /* ═══════════════════════════════════
    LIGHTBOX  — with arrow navigation
@@ -129,8 +144,7 @@ function VideoPlayer({ src, poster }) {
     const rect = e.currentTarget.getBoundingClientRect();
     const ratio = (e.clientX - rect.left) / rect.width;
 
-    videoRef.current.currentTime =
-      ratio * (videoRef.current.duration || 0);
+    videoRef.current.currentTime = ratio * (videoRef.current.duration || 0);
   };
 
   // 🔇 Mute toggle
@@ -156,7 +170,7 @@ function VideoPlayer({ src, poster }) {
       },
       {
         threshold: 0.5, // 50% visible = active
-      }
+      },
     );
 
     observer.observe(video);
@@ -203,8 +217,22 @@ function VideoPlayer({ src, poster }) {
         <button className="asp-vc-btn" onClick={toggle}>
           {playing ? (
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <rect x="3" y="2" width="3.5" height="12" rx="1" fill="currentColor" />
-              <rect x="9.5" y="2" width="3.5" height="12" rx="1" fill="currentColor" />
+              <rect
+                x="3"
+                y="2"
+                width="3.5"
+                height="12"
+                rx="1"
+                fill="currentColor"
+              />
+              <rect
+                x="9.5"
+                y="2"
+                width="3.5"
+                height="12"
+                rx="1"
+                fill="currentColor"
+              />
             </svg>
           ) : (
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -215,10 +243,7 @@ function VideoPlayer({ src, poster }) {
 
         {/* Progress Bar */}
         <div className="asp-vc-bar" onClick={onSeek}>
-          <div
-            className="asp-vc-bar-fill"
-            style={{ width: `${progress}%` }}
-          />
+          <div className="asp-vc-bar-fill" style={{ width: `${progress}%` }} />
         </div>
 
         {/* 🔊 Mute */}
@@ -250,75 +275,88 @@ function VideoPlayer({ src, poster }) {
   );
 }
 
-
 /* ═══════════════════════════════════
-   GALLERY CARD  — identical to ServicesPage
+   FULL PORTFOLIO  — premium 3D Swiper
+   coverflow slider. Replaces the old
+   static grid of GalleryCard tiles.
 ═══════════════════════════════════ */
-const ROTATIONS = [
-  "-5deg",
-  "3deg",
-  "-4deg",
-  "6deg",
-  "-2deg",
-  "4deg",
-  "-6deg",
-  "3deg",
-  "-3deg",
-  "5deg",
-];
+function PortfolioSwiper({ images, onImageClick }) {
+  const [activeIndex, setActiveIndex] = useState(0);
+  if (!images.length) return null;
 
-function GalleryCard({ src, index, onImageClick }) {
-  const rot = ROTATIONS[index % ROTATIONS.length];
-  const cardRef = useRef(null);
-
-  useEffect(() => {
-    const el = cardRef.current;
-    if (!el) return;
-    el.style.opacity = "0";
-    el.style.transform = `rotate(${rot}) translateY(28px)`;
-    const t = setTimeout(
-      () => {
-        el.style.transition = "opacity 0.45s ease, transform 0.45s ease";
-        el.style.opacity = "1";
-        el.style.transform = `rotate(${rot})`;
-        const t2 = setTimeout(() => {
-          el.style.transition = "";
-          el.style.transform = "";
-          el.style.setProperty("--fsg-rot", rot);
-        }, 480);
-        return () => clearTimeout(t2);
-      },
-      50 + index * 60,
-    );
-    return () => clearTimeout(t);
-  }, [rot, index]);
+  const canLoop = images.length > 4;
 
   return (
-    <div
-      ref={cardRef}
-      className="fsg-card"
-      style={{ "--fsg-rot": rot }}
-      onClick={() => onImageClick(index)}
-    >
-      <img src={src} alt={`frame-${index + 1}`} loading="lazy" />
-      <div className="fsg-card-shine" />
-      <div className="fsg-card-overlay">
-        <div className="fsg-card-overlay-circle">
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-            <path
-              d="M3.75 9h10.5M9 3.75l5.25 5.25L9 14.25"
-              stroke="#000"
-              strokeWidth="1.6"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </div>
+    <div className="asp-portfolio-wrap">
+      <Swiper
+        modules={[EffectCoverflow, Navigation, Pagination, Autoplay, Keyboard]}
+        effect="coverflow"
+        grabCursor
+        centeredSlides
+        slidesPerView="auto"
+        loop={canLoop}
+        autoplay={{
+          delay: 3800,
+          disableOnInteraction: false,
+          pauseOnMouseEnter: true,
+        }}
+        coverflowEffect={{
+          rotate: 24,
+          stretch: 0,
+          depth: 260,
+          modifier: 1.3,
+          slideShadows: true,
+        }}
+        keyboard={{ enabled: true }}
+        navigation
+        pagination={{
+          clickable: true,
+          dynamicBullets: true,
+          dynamicMainBullets: 3,
+        }}
+        onSlideChange={(sw) => setActiveIndex(sw.realIndex)}
+        className="asp-portfolio-swiper"
+      >
+        {images.map((url, i) => (
+          <SwiperSlide
+            key={i}
+            className="asp-portfolio-slide"
+            onClick={() => onImageClick(i)}
+          >
+            <img src={url} alt={`frame-${i + 1}`} loading="lazy" />
+            <div className="asp-portfolio-slide-shine" />
+            <div className="asp-portfolio-slide-num">
+              {String(i + 1).padStart(2, "0")}
+            </div>
+            <div className="asp-portfolio-slide-overlay">
+              <div className="asp-portfolio-slide-circle">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                  <path
+                    d="M3.75 9h10.5M9 3.75l5.25 5.25L9 14.25"
+                    stroke="#000"
+                    strokeWidth="1.6"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </div>
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+
+      <div className="asp-portfolio-counter">
+        <span className="asp-portfolio-counter-current">
+          {String(activeIndex + 1).padStart(2, "0")}
+        </span>
+        <span className="asp-portfolio-counter-divider" />
+        <span className="asp-portfolio-counter-total">
+          {String(images.length).padStart(2, "0")}
+        </span>
       </div>
     </div>
   );
 }
-
 
 /* ═══════════════════════════════════
    FAQ SECTION
@@ -420,7 +458,6 @@ function FaqSection() {
   );
 }
 
-
 /* ═══════════════════════════════════
    MAIN PAGE
 ═══════════════════════════════════ */
@@ -446,8 +483,8 @@ export default function ActorShootPage() {
         setLoading(false);
       }
     };
-    if (name) fetchData();
-  }, [name]);
+    fetchData();
+  }, []);
 
   /* parallax */
   useEffect(() => {
@@ -487,6 +524,10 @@ export default function ActorShootPage() {
 
   return (
     <>
+      <SEO
+        title={`${data.celebrityName} Photoshoot Dubai | Fatography`}
+        description={`Explore stunning celebrity photoshoot of ${data.celebrityName} in Dubai by Fatography. Premium fashion & portrait visuals. View the portfolio now!`}
+      />
       <Header />
       <div className="fsg-page asp-page">
         {lbIndex >= 0 && (
@@ -580,17 +621,17 @@ export default function ActorShootPage() {
           <section className="asp-video-section">
             <div className="asp-video-section-inner">
               <div className="asp-video-text">
-                <span className="fsg-section-label">Pre-Wedding Film</span>
+                <span className="fsg-section-label">Videography</span>
 
                 <h2 className="asp-video-heading">
-                  Pre-Wedding Photography Video in Dubai
+                  Behind The Lens — Celebrity Shoot in Dubai
                 </h2>
 
                 <p className="asp-video-sub">
-                  Experience how Fatography captures love stories in cinematic
-                  style. This pre-wedding highlight showcases real emotions,
-                  creative direction, and premium storytelling — crafted with
-                  detail, passion, and elegance.
+                  Experience how Fatography brings celebrity portraits to life
+                  through cinematic videography. This exclusive
+                  behind-the-scenes film captures the artistry, direction, and
+                  premium production that define every Fatography shoot.
                 </p>
 
                 <div className="asp-video-info-row">
@@ -620,27 +661,19 @@ export default function ActorShootPage() {
           </section>
         )}
 
-        {/* ══ GALLERY ══ */}
+        {/* ══ FULL PORTFOLIO — 3D Swiper coverflow ══ */}
         {images.length > 0 && (
-          <section className="fsg-gallery" id="gallery">
+          <section className="fsg-gallery asp-portfolio-section" id="gallery">
             <div className="fsg-gallery-header">
               <span className="fsg-section-label fsg-label--center">
                 Full Portfolio
               </span>
               <h2 className="fsg-gallery-title">
-                {data.celebrityName} — Selected Frames
+                {data.celebrityName}
               </h2>
             </div>
-            <div className="fsg-cards-grid">
-              {images.map((url, i) => (
-                <GalleryCard
-                  key={i}
-                  src={url}
-                  index={i}
-                  onImageClick={setLbIndex}
-                />
-              ))}
-            </div>
+
+            <PortfolioSwiper images={images} onImageClick={setLbIndex} />
           </section>
         )}
       </div>

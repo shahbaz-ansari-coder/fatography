@@ -10,27 +10,32 @@ import SEO from "../../components/home/SEO";
    DATA — replace banner URL & video URLs
 ═══════════════════════════════════ */
 const BANNER_URL =
-  "https://res.cloudinary.com/djlshebp8/image/upload/v1776375954/services/shoots/ro5f6km5eb6ajdbhoupu.jpg";
+  "https://res.cloudinary.com/djlshebp8/image/upload/v1778627582/services/shoots/dpuf4njxyf8ok6o1bfde.jpg";
 
 const VIDEO_DATA = [
   {
-    url: "https://res.cloudinary.com/djlshebp8/video/upload/q_auto/f_auto/v1776895540/Wedding_Events_Videography_mgonvt.mp4",
+    url: "./videos-assets/videography-videos/Wedding_Events_Videography_mgonvt.mp4",
     duration: "0:34",
     tag: "Wedding Events",
   },
   {
-    url: "https://res.cloudinary.com/djlshebp8/video/upload/q_auto/f_auto/v1776895554/Pre-Wedding_Videography_in_Dubai_gesofs.mp4",
-    duration: "0:37",
-    tag: "Wedding Events",
-  },
-  {
-    url: "https://res.cloudinary.com/djlshebp8/video/upload/q_auto/f_auto/v1776895522/Wedding_Events_Videography_3_cfbsxo.mp4",
+    url: "./videos-assets/videography-videos/Wedding_Events_Videography_3_cfbsxo.mp4",
     duration: "0:47",
     tag: "Wedding Events",
   },
   {
-    url: "https://res.cloudinary.com/djlshebp8/video/upload/q_auto/f_auto/v1776895516/Wedding_Events_Videography_2_v4o34q.mp4",
-    duration: "0:59",
+    url: "./videos-assets/videography-videos/pre_wedding_and_event_reelmp4_wswxfk.mp4",
+    duration: "0:31",
+    tag: "Wedding Events",
+  },
+  {
+    url: "./videos-assets/videography-videos/VDraw_1976972379613410453_iasomp.mp4",
+    duration: "1:00",
+    tag: "Wedding Events",
+  },
+  {
+    url: "./videos-assets/videography-videos/video_3_xg5eoy.mp4",
+    duration: "6:06",
     tag: "Wedding Events",
   },
 ];
@@ -331,8 +336,8 @@ function FaqSection() {
       a: "Turnaround depends on the package and scope, but most projects are delivered within 5–10 business days after the shoot. Rush delivery options are available on request.",
     },
     {
-      q: "Do you travel for shoots outside Dubai?",
-      a: "Yes. While we are based in Dubai, UAE, we regularly travel for destination weddings, celebrity shoots, and commercial projects. Travel packages can be discussed during your discovery call.",
+      q: "Do you travel for shoots outside Dubai & Pakistan?",
+      a: "Yes. While we are based in Dubai & Pakistan, UAE, we regularly travel for destination weddings, celebrity shoots, and commercial projects. Travel packages can be discussed during your discovery call.",
     },
     {
       q: "Can I customise a package for my needs?",
@@ -415,8 +420,8 @@ export default function WeddingEvent() {
   return (
     <>
       <SEO
-        title="Wedding Videography Dubai | Fatography"
-        description="Professional wedding videography in Dubai with cinematic storytelling. Capture your big day with Fatography. Book now!"
+        title="Wedding Videography Dubai & Pakistan | Fatography"
+        description="Professional wedding videography in Dubai & Pakistan with cinematic storytelling. Capture your big day with Fatography. Book now!"
       />
       <Header />
       <div className="wev-page">
@@ -438,7 +443,7 @@ export default function WeddingEvent() {
           <div className="wev-hero-content">
             <div className="wev-hero-eyebrow">
               <span className="wev-hero-line" />
-              <p>Wedding Events · Dubai</p>
+              <p>Wedding Events</p>
               <span className="wev-hero-line" />
             </div>
             <h1 className="wev-hero-title">

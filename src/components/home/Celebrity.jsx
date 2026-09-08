@@ -10,12 +10,12 @@ const CELEBRITY_ORDER = [
   "Cengiz Coşkun",
   "Bilal Abbas Khan",
   "Ebraheem Al Samadi",
+  "Farhana Bodi",
   "Momina Mustehsan",
   "Farhan Saeed",
   "Shehzad Roy",
   "Sadia Khan",
   "Ahsan Khan",
-  "Mikaal Zulfiqar",
   "Hareem Farooq",
 ];
 
@@ -46,13 +46,20 @@ function CelebrityShootCard({ item }) {
         >
           {displayImages.map((src, i) => (
             <SwiperSlide key={i}>
-              <img src={src} alt={item.celebrityName} loading="lazy" />
+              <img
+                src={src.replace(
+                  "/upload/",
+                  "/upload/w_400,f_auto,q_auto:low/",
+                )}
+                alt={item.celebrityName}
+                loading="lazy"
+              />
             </SwiperSlide>
           ))}
         </Swiper>
 
         <div className="celeb-shoot-overlay">
-          <h3 className="celeb-shoot-name">{item.celebrityName}</h3>
+          <div className="celeb-shoot-name">{item.celebrityName}</div>
         </div>
       </article>
     </Link>
@@ -106,6 +113,10 @@ export default function CelebrityShoot() {
           <h2 className="rev-title">
             Capturing Stars in Their <em>Best Light</em>
           </h2>
+          <p className="rev-para">
+            Fatography works with celebrated personalities, capturing authentic
+            moments with creativity and professionalism.
+          </p>
         </div>
 
         <div className="celeb-shoot-grid">

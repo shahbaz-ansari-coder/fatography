@@ -1,64 +1,155 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { EffectCoverflow, Pagination, Autoplay } from "swiper/modules";
 
 import "swiper/css";
-import "swiper/css/effect-creative";
+import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
+
 import "../../style/Slider.css";
 
-import { EffectCreative, Pagination, Autoplay } from "swiper/modules";
+const sliderImages = [
+  {
+    src: "/banner/pderfoulgocwpesxuxa5.jpg",
+    alt: "Fatography photoshoot",
+  },
+  {
+    src: "/banner/go1hhp3zr1v6jhnq0rnu.jpg",
+    alt: "Fatography photoshoot",
+  },
+  {
+    src: "/banner/tfe9r36lgnjhxkmalnfx.jpg",
+    alt: "Fatography photoshoot",
+  },
+  {
+    src: "/banner/scprnyd6qx4l5bsvlbws.jpg",
+    alt: "Fatography photoshoot",
+  },
+  {
+    src: "/banner/ed31quh27yzdsmvg4r8k.jpg",
+    alt: "Fatography photoshoot",
+  },
+  {
+    src: "/banner/itlqpj1ife9qv4aobtlb.jpg",
+    alt: "Fatography photoshoot",
+  },
+  {
+    src: "/banner/tqrmpdxxpfnvkaarmaku.jpg",
+    alt: "Fatography photoshoot",
+  },
+  {
+    src: "/banner/xme3kpprtjnwmxxhyrsr.jpg",
+    alt: "Fatography photoshoot",
+  },
+  {
+    src: "/banner/nlq6xjxwhfeqslhwoeiz.jpg",
+    alt: "Fatography photoshoot",
+  },
+  {
+    src: "/banner/jdvki6arawqgkoj3mjnq.jpg",
+    alt: "Fatography photoshoot",
+  },
+  {
+    src: "/banner/z6jz0ucs5i98yo4izmen.jpg",
+    alt: "Fatography photoshoot",
+  },
+  {
+    src: "/banner/rfsrp10qoiskcre8lf7d.jpg",
+    alt: "Fatography photoshoot",
+  },
+  {
+    src: "/banner/tl3gqgqibp8ol0io7k39.jpg",
+    alt: "Fatography photoshoot",
+  },
+];
+
+
+const HERO_IMAGE = sliderImages[0]?.src;
+
+if (typeof document !== "undefined" && HERO_IMAGE) {
+  const existingPreload = document.querySelector(
+    `link[rel="preload"][href="${HERO_IMAGE}"]`,
+  );
+
+  if (!existingPreload) {
+    const preload = document.createElement("link");
+
+    preload.rel = "preload";
+    preload.as = "image";
+    preload.href = HERO_IMAGE;
+    preload.fetchPriority = "high";
+
+    document.head.appendChild(preload);
+  }
+}
 
 const Slider = () => {
-  const [images, setImages] = useState([]);
-
-  useEffect(() => {
-    axios
-      .get("https://fatography-backend.vercel.app/api/slider/all")
-      .then((res) => {
-        const allImages = (res.data.data || []).flatMap((s) => s.images || []);
-        setImages(allImages);
-      })
-      .catch((err) => console.error("Slider fetch error:", err));
-  }, []);
-
-  if (images.length === 0) return null;
+  if (!sliderImages.length) {
+    return null;
+  }
 
   return (
-    <div className="slider-container">
+    <section
+      className="slider-container"
+      aria-label="Fatography photography portfolio"
+    >
       <Swiper
-        grabCursor={true}
-        loop={images.length > 1}
-        effect={"creative"}
-        creativeEffect={{
-          prev: {
-            shadow: true,
-            translate: ["-125%", 0, -800],
-            rotate: [0, 0, -90],
-          },
-          next: {
-            shadow: true,
-            translate: ["125%", 0, -800],
-            rotate: [0, 0, 90],
-          },
+        effect="coverflow"
+        grabCursor
+        centeredSlides
+        slidesPerView="auto"
+        loop={sliderImages.length > 1}
+        speed={650}
+        watchSlidesProgress
+        observer
+        observeParents
+
+        autoplay={
+          sliderImages.length > 1
+            ? {
+                delay: 5000,
+                disableOnInteraction: false,
+                pauseOnMouseEnter: true,
+              }
+            : false
+        }
+
+        coverflowEffect={{
+          rotate: 0,
+          stretch: 0,
+          depth: 100,
+          modifier: 2,
+          slideShadows: false,
         }}
-        autoplay={{
-          delay: 4000,
-          disableOnInteraction: false,
+
+
+        pagination={{
+          clickable: true,
+          dynamicBullets: true,
         }}
-        pagination={{ clickable: true }}
-        modules={[EffectCreative, Pagination, Autoplay]}
+        modules={[EffectCoverflow, Pagination, Autoplay]}
         className="heroSwiper"
       >
-        {images.map((img, index) => (
-          <SwiperSlide
-            key={index}
-            className="hero-slide"
-            style={{ backgroundImage: `url(${img})` }}
-          />
+        {sliderImages.map((image, index) => (
+          <SwiperSlide key={image.src} className="hero-slide">
+            <img
+              src={image.src}
+              alt={image.alt}
+              className="slide-img"
+              width="1920"
+              height="1080"
+
+              loading={index === 0 ? "eager" : "lazy"}
+              fetchPriority={index === 0 ? "high" : "low"}
+              decoding={index === 0 ? "sync" : "async"}
+
+              draggable="false"
+              aria-hidden={index !== 0 ? "true" : undefined}
+            />
+          </SwiperSlide>
         ))}
       </Swiper>
-    </div>
+    </section>
   );
 };
 

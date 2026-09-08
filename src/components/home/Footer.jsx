@@ -28,18 +28,25 @@ const Footer = () => {
               <img src="/logo.png" alt="icon" />
             </div>
 
-            <h2 className="serif-title">Learn Photography with Us</h2>
-            <h2 className="main-title">Master the Art Behind the Lens</h2>
-
+            <h2 className="serif-title" style={{ lineHeight: 1.5 }}>
+              Fatography – Photography & Videography Studio in Dubai
+            </h2>
             <p className="description-text">
-              Join our hands-on photography training and discover the skills,
-              techniques, and creative vision that make every shot stand out.
-              Whether you're a beginner or looking to refine your craft.
+              Fatography captures authentic moments with creativity, precision,
+              and heart, transforming them into timeless memories you’ll cherish
+              forever.
             </p>
 
-            <Link href="/contact">
-              <button className="details-btn">Get More Details</button>
-            </Link>
+            <div className="flex flex-col sm:flex-row justify-center gap-10">
+              <a href="tel:+971509396784">
+                <button className="details-btn">Call Fatography Today</button>
+              </a>
+              {/* <Link to="/contact-us"> */}
+              <a href="#contact-section">
+                <button className="secound-btn">Book Your Session</button>
+              </a>
+              {/* </Link> */}
+            </div>
           </div>
 
           {/* Map */}
@@ -118,6 +125,14 @@ const Footer = () => {
               Fatography captures moments with creativity, precision, and heart
               — turning them into timeless stories you'll cherish.
             </p>
+
+            <a target="_blank" href="https://topdubai.info/b/fatography/">
+              <img
+                className="badge-img"
+                src="https://topdubai.info/wp-content/uploads/sellos/fatography-NwPdVnknXzIE-banner.png?v=1779696802"
+                alt=""
+              />
+            </a>
           </div>
 
           {/* Quick Links */}
@@ -129,10 +144,10 @@ const Footer = () => {
                 <a href="/">Home</a>
               </li>
               <li>
-                <a href="/about">About Us</a>
+                <a href="/about-us">About Us</a>
               </li>
               <li>
-                <a href="/reviews">Reviews</a>
+                <a href="/testimonials">Testimonials</a>
               </li>
               <li>
                 <a href="/contact">Contact</a>
@@ -146,16 +161,16 @@ const Footer = () => {
 
             <ul>
               <li>
-                <a href="/services/pre-wedding-shoots">Wedding Photography</a>
+                <a href="/pre-wedding-shoots">Wedding Photography</a>
               </li>
               <li>
-                <a href="/services/product-photography">Product Photography</a>
+                <a href="/product-photography">Product Photography</a>
               </li>
               <li>
-                <a href="/services/event-coverage">Event Coverage</a>
+                <a href="/event-coverage">Event Coverage</a>
               </li>
               <li>
-                <a href="/services/corporate-&-linkedin">Corporate Shoots</a>
+                <a href="/corporate-&-linkedin">Corporate Shoots</a>
               </li>
             </ul>
           </div>
@@ -193,7 +208,7 @@ const Footer = () => {
               </div>
               <div className="text-sq">
                 <small>Address</small>
-                <p>Arjan Al Barsha South - Dubai - UAE</p>
+                <p>Fatography - Dubai</p>
               </div>
             </a>
           </div>

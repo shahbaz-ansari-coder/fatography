@@ -5,7 +5,13 @@ import { Link, useLocation } from "react-router";
 function Header() {
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [isHeaderActive, setIsHeaderActive] = useState(false);
+
+  // ============ MOBILE: accordion state ============
   const [isVideoOpenMobile, setIsVideoOpenMobile] = useState(false);
+
+  // ============ DESKTOP: hover dropdown states ============
+  const [isVideoOpenDesktop, setIsVideoOpenDesktop] = useState(false);
+  const [isMoreOpen, setIsMoreOpen] = useState(false);
 
   const location = useLocation();
 
@@ -25,27 +31,47 @@ function Header() {
 
   useEffect(() => {
     closeNav();
+    setIsVideoOpenMobile(false);
   }, [location.pathname]);
 
-  const navLinks = [
-    { to: "/", label: "Home" },
-    { to: "/about-us", label: "About" },
-    { to: "/services", label: "Services" },
-    { to: "/videography", label: "Videography" },
-    { to: "/celebrity-shoots", label: "Celebrity Shoots" },
-    { to: "/testimonials", label: "Testimonials" },
-    { to: "/contact-us", label: "Contact Us" },
-  ];
-
+  // ============ Videography sub-links (shared: desktop dropdown + mobile accordion) ============
   const videographySubLinks = [
-    { to: "/videography/pre-wedding", label: "Pre Wedding" },
-    { to: "/videography/wedding-events", label: "Wedding Events" },
-    { to: "/videography/food-videography", label: "Food Videography" },
+    { to: "/pre-wedding-videography", label: "Pre Wedding Videography" },
+    { to: "/wedding-events-videography", label: "Wedding Events Videography" },
+    { to: "/digital-video-commercials", label: "Digital Video Commercials" },
   ];
 
   const isVideographyActive = videographySubLinks.some(
     (sub) => location.pathname === sub.to,
   );
+
+  // ============ More sub-links ============
+  const moreLinks = [
+    { to: "/testimonials", label: "Testimonials" },
+    { to: "/blogs", label: "Blogs" },
+    { to: "/contact-us", label: "Contact Us" },
+  ];
+
+  const isMoreActive = moreLinks.some((link) => location.pathname === link.to);
+
+  // ============ DESKTOP: primary visible links ============
+  const primaryLinks = [
+    { to: "/", label: "Home" },
+    { to: "/about-us", label: "About" },
+    { to: "/our-services", label: "Services" },
+    { to: "/celebrity-shoots", label: "Celebrity Shoots" },
+  ];
+
+  // ============ MOBILE: nav links ============
+  const mobileNavLinks = [
+    { to: "/", label: "Home" },
+    { to: "/about-us", label: "About" },
+    { to: "/our-services", label: "Services" },
+    { to: "/celebrity-shoots", label: "Celebrity Shoots" },
+    { to: "/testimonials", label: "Testimonials" },
+    { to: "/blogs", label: "Blogs" },
+    { to: "/contact-us", label: "Contact Us" },
+  ];
 
   return (
     <header className={`header ${isHeaderActive ? "active" : ""}`}>
@@ -58,46 +84,81 @@ function Header() {
         {/* ================= DESKTOP NAV ================= */}
         <nav className="navbar-desktop">
           <ul className="navbar-desktop-list">
-            {navLinks.map(({ to, label }) =>
-              label === "Videography" ? (
-                <li key={to} className="ftg-dd-desktop">
-                  <div
-                    className={`ftg-dd-trigger ${isVideographyActive ? "active" : ""}`}
-                  >
-                    <span className="link-text">{label}</span>
-                    <span className="ftg-arrow">
-                      <ChevronDown size={14} />
-                    </span>
-                    <span className="link-underline" />
-                  </div>
+            {primaryLinks.map(({ to, label }) => (
+              <li key={to}>
+                <Link
+                  to={to}
+                  className={`desktop-link ${location.pathname === to ? "active" : ""}`}
+                >
+                  <span className="link-text">{label}</span>
+                  <span className="link-underline" />
+                </Link>
+              </li>
+            ))}
 
-                  <ul className="ftg-dd-menu">
-                    {videographySubLinks.map((sub) => (
-                      <li key={sub.to}>
-                        <Link
-                          to={sub.to}
-                          className={
-                            location.pathname === sub.to ? "active" : ""
-                          }
-                        >
-                          {sub.label}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </li>
-              ) : (
-                <li key={to}>
-                  <Link
-                    to={to}
-                    className={`desktop-link ${location.pathname === to ? "active" : ""}`}
-                  >
-                    <span className="link-text">{label}</span>
-                    <span className="link-underline" />
-                  </Link>
-                </li>
-              ),
-            )}
+            {/* ============ VIDEOGRAPHY DROPDOWN (Desktop, hover — same as More) ============ */}
+            <li className="ftg-more-dd">
+              <div
+                className={`ftg-more-trigger ${isVideographyActive ? "active" : ""}`}
+                onMouseEnter={() => setIsVideoOpenDesktop(true)}
+                onMouseLeave={() => setIsVideoOpenDesktop(false)}
+              >
+                <span className="link-text">Videography</span>
+                <span
+                  className={`ftg-more-arrow ${isVideoOpenDesktop ? "open" : ""}`}
+                >
+                  <ChevronDown size={14} />
+                </span>
+                <span className="link-underline" />
+
+                <ul
+                  className={`ftg-more-menu ${isVideoOpenDesktop ? "open" : ""}`}
+                >
+                  {videographySubLinks.map((link) => (
+                    <li key={link.to}>
+                      <Link
+                        to={link.to}
+                        className={
+                          location.pathname === link.to ? "active" : ""
+                        }
+                      >
+                        {link.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </li>
+
+            {/* ============ MORE DROPDOWN (Desktop, hover) ============ */}
+            <li className="ftg-more-dd">
+              <div
+                className={`ftg-more-trigger ${isMoreActive ? "active" : ""}`}
+                onMouseEnter={() => setIsMoreOpen(true)}
+                onMouseLeave={() => setIsMoreOpen(false)}
+              >
+                <span className="link-text">More</span>
+                <span className={`ftg-more-arrow ${isMoreOpen ? "open" : ""}`}>
+                  <ChevronDown size={14} />
+                </span>
+                <span className="link-underline" />
+
+                <ul className={`ftg-more-menu ${isMoreOpen ? "open" : ""}`}>
+                  {moreLinks.map((link) => (
+                    <li key={link.to}>
+                      <Link
+                        to={link.to}
+                        className={
+                          location.pathname === link.to ? "active" : ""
+                        }
+                      >
+                        {link.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </li>
           </ul>
         </nav>
 
@@ -130,55 +191,67 @@ function Header() {
           </div>
 
           <ul className="navbar-mobile-list">
-            {navLinks.map(({ to, label }) =>
-              label === "Videography" ? (
-                <li key={to} className="ftg-dd-mobile">
-                  <button
-                    className={`ftg-dd-mobile-btn ${isVideographyActive ? "active" : ""}`}
-                    onClick={() => setIsVideoOpenMobile(!isVideoOpenMobile)}
-                  >
-                    <span>Videography</span>
-                    <span
-                      className={`ftg-arrow ${isVideoOpenMobile ? "open" : ""}`}
-                    >
-                      <ChevronDown size={16} />
-                    </span>
-                  </button>
+            {mobileNavLinks.slice(0, 4).map(({ to, label }) => (
+              <li key={to}>
+                <Link
+                  to={to}
+                  className={`mobile-link ${location.pathname === to ? "active" : ""}`}
+                  onClick={closeNav}
+                >
+                  <span className="mobile-link-indicator" />
+                  <span className="mobile-link-text">{label}</span>
+                </Link>
+              </li>
+            ))}
 
-                  <ul
-                    className={`ftg-dd-mobile-menu ${isVideoOpenMobile ? "open" : ""}`}
-                  >
-                    {videographySubLinks.map((sub) => (
-                      <li key={sub.to}>
-                        <Link
-                          to={sub.to}
-                          className={`mobile-sub-link ${location.pathname === sub.to ? "active" : ""}`}
-                          onClick={closeNav}
-                        >
-                          <span className="dot" />
-                          {sub.label}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </li>
-              ) : (
-                <li key={to}>
-                  <Link
-                    to={to}
-                    className={`mobile-link ${location.pathname === to ? "active" : ""}`}
-                    onClick={closeNav}
-                  >
-                    <span className="mobile-link-indicator" />
-                    <span className="mobile-link-text">{label}</span>
-                  </Link>
-                </li>
-              ),
-            )}
+            {/* ============ VIDEOGRAPHY (Mobile accordion) ============ */}
+            <li className="ftg-dd-mobile">
+              <button
+                className={`ftg-dd-mobile-btn ${isVideographyActive ? "active" : ""}`}
+                onClick={() => setIsVideoOpenMobile(!isVideoOpenMobile)}
+              >
+                <span>Videography</span>
+                <span
+                  className={`ftg-arrow ${isVideoOpenMobile ? "open" : ""}`}
+                >
+                  <ChevronDown size={16} />
+                </span>
+              </button>
+
+              <ul
+                className={`ftg-dd-mobile-menu ${isVideoOpenMobile ? "open" : ""}`}
+              >
+                {videographySubLinks.map((sub) => (
+                  <li key={sub.to}>
+                    <Link
+                      to={sub.to}
+                      className={`mobile-sub-link ${location.pathname === sub.to ? "active" : ""}`}
+                      onClick={closeNav}
+                    >
+                      <span className="dot" />
+                      {sub.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </li>
+
+            {mobileNavLinks.slice(4).map(({ to, label }) => (
+              <li key={to}>
+                <Link
+                  to={to}
+                  className={`mobile-link ${location.pathname === to ? "active" : ""}`}
+                  onClick={closeNav}
+                >
+                  <span className="mobile-link-indicator" />
+                  <span className="mobile-link-text">{label}</span>
+                </Link>
+              </li>
+            ))}
           </ul>
 
           <div className="navbar-footer">
-            <address>Arjan Al Barsha South – Dubai – UAE</address>
+            <address>Fatography - Pakistan & Dubai</address>
             <a href="tel:+971509396784">+971 509 396 784</a>
           </div>
         </nav>

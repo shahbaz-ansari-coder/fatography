@@ -119,10 +119,31 @@ const ServicesManagement = () => {
   };
 
   // --- Shoot Management Functions ---
-  const refreshActiveService = async (id) => {
-    const res = await axios.get(`${API_BASE}/${id}`);
-    setCurrentService(res.data.data);
-  };
+const refreshActiveService = async (title) => {
+  try {
+    const res = await axios.get(
+      `${API_BASE}/single-data/${encodeURIComponent(title)}`,
+      {
+        headers: {
+          "Cache-Control": "no-cache",
+          Pragma: "no-cache",
+        },
+      },
+    );
+
+    const freshService = res.data.data;
+
+    // Current Service Refresh
+    setCurrentService(freshService);
+
+    // Services Array Refresh
+    setServices((prev) =>
+      prev.map((item) => (item._id === freshService._id ? freshService : item)),
+    );
+  } catch (err) {
+    toast.error("Failed to refresh service");
+  }
+};
 
   const handleCreateNewShoot = async (files) => {
     setActionLoading(true);
@@ -131,7 +152,7 @@ const ServicesManagement = () => {
     try {
       await axios.post(`${API_BASE}/${currentService._id}/shoot`, data);
       toast.success("New shoot created!");
-      refreshActiveService(currentService._id);
+      refreshActiveService(currentService.title);
     } catch {
       toast.error("Failed to create shoot");
     }
@@ -148,7 +169,7 @@ const ServicesManagement = () => {
         data,
       );
       toast.success("Images added!");
-      refreshActiveService(currentService._id);
+      refreshActiveService(currentService.title);
     } catch {
       toast.error("Upload failed");
     }
@@ -161,7 +182,7 @@ const ServicesManagement = () => {
         `${API_BASE}/${currentService._id}/shoot/${shootId}/image/${imageId}`,
       );
       toast.success("Image removed");
-      refreshActiveService(currentService._id);
+      refreshActiveService(currentService.title);
     } catch {
       toast.error("Delete failed");
     }
@@ -177,7 +198,7 @@ const ServicesManagement = () => {
         data,
       );
       toast.success("Image replaced!");
-      refreshActiveService(currentService._id);
+      refreshActiveService(currentService.title);
     } catch {
       toast.error("Replace failed");
     }
@@ -189,7 +210,7 @@ const ServicesManagement = () => {
     try {
       await axios.delete(`${API_BASE}/${currentService._id}/shoot/${shootId}`);
       toast.success("Shoot deleted");
-      refreshActiveService(currentService._id);
+      refreshActiveService(currentService.title);
     } catch {
       toast.error("Failed to delete shoot");
     }

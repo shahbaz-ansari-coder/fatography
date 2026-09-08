@@ -856,23 +856,30 @@ export default function DomeGallery({
                     }}
                   >
                     <img
-                      src={it.src}
+                      src={it.src.replace(
+                        "/upload/",
+                        "/upload/w_300,h_300,c_fill,f_auto,q_auto/",
+                      )}
                       draggable={false}
                       alt={it.alt}
+                      loading="lazy"
+                      decoding="async"
+                      width="300"
+                      height="300"
                       className="w-full h-full object-cover pointer-events-none"
                       style={{
                         backfaceVisibility: "hidden",
                         filter: grayscale ? "grayscale(1)" : "none",
-                        transition: "filter 0.4s ease",
+                        transition: "filter 0.3s ease",
                       }}
-                      onMouseEnter={(e) =>
-                        (e.currentTarget.style.filter = "grayscale(0)")
-                      }
-                      onMouseLeave={(e) =>
-                        (e.currentTarget.style.filter = grayscale
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.filter = "grayscale(0)";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.filter = grayscale
                           ? "grayscale(1)"
-                          : "none")
-                      }
+                          : "none";
+                      }}
                     />
                   </div>
                 </div>

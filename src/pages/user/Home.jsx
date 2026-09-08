@@ -3,6 +3,7 @@ import About from "../../components/home/About";
 import CelebrityGallery from "../../components/home/Celebrity";
 import ContactSection from "../../components/home/ContactSection";
 import DemoImges from "../../components/home/DemoImges";
+import HomeFaqSection from "../../components/home/FaqSection";
 import FloatingButtons from "../../components/home/FloatingButtons ";
 import Footer from "../../components/home/Footer";
 import Gallery from "../../components/home/Gallery";
@@ -39,6 +40,7 @@ function Home() {
           </article>
         </main>
         <ContactSection />
+        <HomeFaqSection />
         <Footer />
       </div>
     </>

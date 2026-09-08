@@ -14,23 +14,38 @@ const BANNER_URL =
 
 const VIDEO_DATA = [
   {
-    url: "https://res.cloudinary.com/djlshebp8/video/upload/q_auto/f_auto/v1776895554/Pre-Wedding_Videography_in_Dubai_gesofs.mp4",
+    url: "./videos-assets/videography-videos/Pre-Wedding_Videography_in_Dubai & Pakistan_gesofs.mp4",
     duration: "0:37",
     tag: "Pre Wedding",
   },
   {
-    url: "https://res.cloudinary.com/djlshebp8/video/upload/q_auto/f_auto/v1776895567/Pre-Wedding_Videography_in_Dubai_5_ffnguw.mp4",
+    url: "./videos-assets/videography-videos/Pre-Wedding_Videography_in_Dubai & Pakistan_5_ffnguw.mp4",
     duration: "1:48",
     tag: "Pre Wedding",
   },
   {
-    url: "https://res.cloudinary.com/djlshebp8/video/upload/q_auto/f_auto/v1776895508/Pre-Wedding_Videography_in_Dubai_3_vlmrk4.mp4",
+    url: "./videos-assets/videography-videos/Pre-Wedding_Videography_in_Dubai & Pakistan_3_vlmrk4.mp4",
     duration: "1:00",
     tag: "Pre Wedding",
   },
   {
-    url: "https://res.cloudinary.com/djlshebp8/video/upload/q_auto/f_auto/v1776895516/Wedding_Events_Videography_2_v4o34q.mp4",
+    url: "./videos-assets/videography-videos/Wedding_Events_Videography_2_v4o34q.mp4",
     duration: "0:59",
+    tag: "Pre Wedding",
+  },
+  {
+    url: "./videos-assets/videography-videos/k_a_izh2vo.mp4",
+    duration: "1:03",
+    tag: "Pre Wedding",
+  },
+  {
+    url: "./videos-assets/videography-videos/VDraw_6_ibocnr.mp4",
+    duration: "0:33",
+    tag: "Pre Wedding",
+  },
+  {
+    url: "./videos-assets/videography-videos/V36_o6wely.mp4",
+    duration: "0:22",
     tag: "Pre Wedding",
   },
 ];
@@ -307,8 +322,8 @@ function FaqSection() {
       a: "Turnaround depends on the package and scope, but most projects are delivered within 5–10 business days after the shoot. Rush delivery options are available on request.",
     },
     {
-      q: "Do you travel for shoots outside Dubai?",
-      a: "Yes. While we are based in Dubai, UAE, we regularly travel for destination weddings, celebrity shoots, and commercial projects. Travel packages can be discussed during your discovery call.",
+      q: "Do you travel for shoots outside Dubai & Pakistan?",
+      a: "Yes. While we are based in Dubai & Pakistan, UAE, we regularly travel for destination weddings, celebrity shoots, and commercial projects. Travel packages can be discussed during your discovery call.",
     },
     {
       q: "Can I customise a package for my needs?",
@@ -392,8 +407,8 @@ export default function PreWedding() {
   return (
     <>
       <SEO
-        title="Pre-Wedding Videography in Dubai | Fatography"
-        description="Luxury pre-wedding videography in Dubai by Fatography. Cinematic storytelling for couples and destination weddings. Get in touch now."
+        title="Pre-Wedding Videography in Dubai & Pakistan | Fatography"
+        description="Luxury pre-wedding videography in Dubai & Pakistan by Fatography. Cinematic storytelling for couples and destination weddings. Get in touch now."
       />
       <Header />
       <div className="wev-page">
@@ -416,7 +431,7 @@ export default function PreWedding() {
           <div className="wev-hero-content">
             <div className="wev-hero-eyebrow">
               <span className="wev-hero-line" />
-              <p>Pre-Wedding Events · Dubai</p>
+              <p>Pre-Wedding Events · Dubai & Pakistan</p>
               <span className="wev-hero-line" />
             </div>
             <h1 className="wev-hero-title">
@@ -480,11 +495,11 @@ export default function PreWedding() {
                 At Fatography, we believe the journey to forever is just as
                 beautiful as the destination. Our pre-wedding sessions are
                 designed to capture the raw, unguarded love between two people —
-                in stunning locations across Dubai and beyond.
+                in stunning locations across Dubai & Pakistan and beyond.
               </p>
               <p className="wev-story-para">
                 Whether it's the warm glow of desert dunes at sunset, the
-                glittering skyline of Downtown Dubai, or the soft blooms of a
+                glittering skyline of Downtown Dubai & Pakistan, or the soft blooms of a
                 garden in bloom, we find the perfect canvas to frame your love
                 story with cinematic artistry.
               </p>

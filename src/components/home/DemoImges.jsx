@@ -55,17 +55,31 @@ const DemoImges = () => {
   }
 
   return (
-    <div style={{ width: "100vw", height: "55vh" }}id="all-pictures">
-      <DomeGallery
-        images={images}
-        fit={1}
-        minRadius={minRadius}
-        maxVerticalRotationDeg={0}
-        segments={34}
-        dragDampening={20}
-        grayscale
-      />
-    </div>
+    <>
+      <div className="reviews-header">
+        <p className="rev-eyebrow">Our Portfolio</p>
+        <h2 className="rev-title">
+          Stories Captured Through Our Lens 
+          <em> Professional</em>
+        </h2>
+        <p className="rev-para">
+          Every image in our portfolio represents a real moment, a real client,
+          and a real story. Browse our work and imagine what we can create
+          together.
+        </p>
+      </div>
+      <div style={{ width: "100vw", height: "55vh" }} id="all-pictures">
+        <DomeGallery
+          images={images}
+          fit={1}
+          minRadius={minRadius}
+          maxVerticalRotationDeg={0}
+          segments={34}
+          dragDampening={20}
+          grayscale
+        />
+      </div>
+    </>
   );
 };
 

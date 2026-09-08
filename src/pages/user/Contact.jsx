@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Send, ChevronDown, MapPin } from "lucide-react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -13,43 +13,64 @@ const FAQ_ITEMS = [
   {
     id: 0,
     q: "Where is Fatography located?",
-    a: [
-      "Located in Arjan, Al Barsha South 3",
-      "Inside Al Fahed Contracting Co. Building",
-      "Easy access from major Dubai roads",
-      "Parking available for visitors",
-    ],
+    a: `<p>
+        Fatography is located inside the Al Fahed Contracting Co. Building in Arjan,
+        Al Barsha South 3, Dubai, UAE. We are easily accessible from major Dubai roads
+        including Sheikh Mohammed Bin Zayed Road and Al Khail Road, with parking available
+        on-site for all visitors.
+      </p>`,
   },
   {
     id: 1,
     q: "What photography services do you provide?",
-    a: [
-      "Wedding Photography & Cinematic Films",
-      "Corporate Event Coverage",
-      "Studio Portrait Photography",
-      "Commercial & Brand Shoots",
-      "Drone Photography & Videography",
-    ],
+    a: `<p>Fatography offers a comprehensive range of professional photography and videography services in Dubai, including:</p>
+      <ul>
+        <li>Wedding Photography &amp; Videography</li>
+        <li>Pre-Wedding Shoots</li>
+        <li>Fashion Photography</li>
+        <li>Corporate &amp; LinkedIn Headshots</li>
+        <li>Product Photography</li>
+        <li>Food Photography</li>
+        <li>Family Photography</li>
+        <li>Maternity Photography</li>
+        <li>Lifestyle Photography</li>
+        <li>Event Coverage</li>
+        <li>Real Estate Photography</li>
+        <li>Neon Photography</li>
+        <li>Black &amp; White Photography</li>
+        <li>Fitness Photography</li>
+        <li>Celebrity Photography</li>
+        <li>Fashion Week Coverage</li>
+        <li>Studio Sessions</li>
+      </ul>
+      <p>Whether you need a one-hour studio session or full-day event coverage,
+        we have a package to suit your vision and budget.</p>`,
   },
   {
     id: 2,
     q: "How does pricing work?",
-    a: [
-      "Flexible packages based on project scope",
-      "Custom pricing for events & commercial shoots",
-      "Drone and cinematic equipment included",
-      "Transparent pricing with no hidden charges",
-    ],
+    a: `<p>Our pricing is flexible and tailored to your project needs. Packages vary based on shoot type,
+        duration, locations, and editing requirements.</p>
+      <ul>
+        <li>Custom pricing for every project</li>
+        <li>Event &amp; commercial packages available</li>
+        <li>Transparent pricing (no hidden charges)</li>
+        <li>Drone &amp; cinematic equipment included where needed</li>
+      </ul>
+      <p>To get an accurate quote, simply contact us and we'll respond within 24 hours.</p>`,
   },
   {
     id: 3,
     q: "How long does delivery take?",
-    a: [
-      "Sneak peek images within 48 hours",
-      "Full gallery within 2 weeks",
-      "Cinematic films within 2–3 weeks",
-      "Delivered in high-resolution format",
-    ],
+    a: `<p>Delivery timelines depend on project type:</p>
+      <ul>
+        <li>Portrait &amp; Headshots: 2–3 days</li>
+        <li>Pre-Wedding &amp; Lifestyle: 5–7 days</li>
+        <li>Wedding Photography: 7–10 days</li>
+        <li>Commercial Shoots: 3–5 days</li>
+        <li>Event Coverage: 5–10 days</li>
+      </ul>
+      <p>We always try to deliver faster if possible and also handle urgent requests.</p>`,
   },
 ];
 
@@ -112,12 +133,49 @@ const CONTACT_INFO = [
   },
 ];
 
+/* ─── FAQ ITEM with auto-height ─── */
+function FaqItem({ item, isOpen, onToggle }) {
+  const bodyRef = useRef(null);
+  const [height, setHeight] = useState(0);
+
+  useEffect(() => {
+    if (isOpen && bodyRef.current) {
+      setHeight(bodyRef.current.scrollHeight);
+    } else {
+      setHeight(0);
+    }
+  }, [isOpen]);
+
+  return (
+    <div className={`cp-faq-item${isOpen ? " cp-faq-item--open" : ""}`}>
+      <button className="cp-faq-btn" onClick={onToggle}>
+        <span>{item.q}</span>
+        <ChevronDown size={17} className="cp-faq-chevron" />
+      </button>
+      <div
+        className="cp-faq-body"
+        style={{ maxHeight: height ? `${height}px` : "0px" }}
+      >
+        <div
+          ref={bodyRef}
+          className="cp-faq-body-inner"
+          dangerouslySetInnerHTML={{ __html: item.a }}
+        />
+      </div>
+    </div>
+  );
+}
+
 /* ═══════════════════════════════════
    MAIN COMPONENT
 ═══════════════════════════════════ */
 export default function ContactPage() {
   const [activeFaq, setActiveFaq] = useState(0);
   const [sending, setSending] = useState(false);
+
+  const handleToggle = (id) => {
+    setActiveFaq((prev) => (prev === id ? null : id));
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -146,8 +204,8 @@ export default function ContactPage() {
   return (
     <>
       <SEO
-        title="Contact Fatography Dubai | Book a Shoot"
-        description="Get in touch with Fatography Dubai for photography & videography services. Book your shoot or request a quote today!"
+        title="Contact Photography Session in Dubai | Fatography"
+        description="Get in touch with Fatography Dubai's 5-star photography studio. Book weddings, fashion, corporate & more. We reply within hours. Send your enquiry today!"
       />
       <Preloader />
       <Header />
@@ -162,43 +220,25 @@ export default function ContactPage() {
           <div className="cp-main-inner">
             {/* ── LEFT COLUMN ── */}
             <div className="cp-left">
-              {/* section label */}
-              <span className="cp-eyebrow">Frequently Asked</span>
-              <h2 className="cp-left-title">Common Questions</h2>
+              <span className="cp-eyebrow">Contact Fatography</span>
+              <h2 className="cp-left-title">
+                FAQ's About Contacting Fatography
+              </h2>
               <p className="cp-left-desc">
                 Everything you need to know before booking your session with
-                Fatography.
+                Fatography — answered clearly and honestly.
               </p>
 
               {/* FAQ accordion */}
               <div className="cp-faq">
-                {FAQ_ITEMS.map((item) => {
-                  const open = activeFaq === item.id;
-                  return (
-                    <div
-                      key={item.id}
-                      className={`cp-faq-item${open ? " cp-faq-item--open" : ""}`}
-                    >
-                      <button
-                        className="cp-faq-btn"
-                        onClick={() => setActiveFaq(open ? null : item.id)}
-                      >
-                        <span>{item.q}</span>
-                        <ChevronDown size={17} className="cp-faq-chevron" />
-                      </button>
-                      <div className="cp-faq-body">
-                        <ul className="cp-faq-list">
-                          {item.a.map((pt, i) => (
-                            <li key={i}>
-                              <span className="cp-faq-dot" />
-                              {pt}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-                  );
-                })}
+                {FAQ_ITEMS.map((item) => (
+                  <FaqItem
+                    key={item.id}
+                    item={item}
+                    isOpen={activeFaq === item.id}
+                    onToggle={() => handleToggle(item.id)}
+                  />
+                ))}
               </div>
             </div>
 
@@ -251,18 +291,17 @@ export default function ContactPage() {
                         <option value="" disabled>
                           Select Service Type
                         </option>
-
                         <option>Fashion Photography</option>
                         <option>Pre Wedding Shoots</option>
                         <option>Wedding Events</option>
                         <option>Lifestyle Photography</option>
                         <option>Food Photography</option>
-                        <option>Black & White</option>
+                        <option>Black &amp; White</option>
                         <option>Product Photography</option>
                         <option>Family Photography</option>
                         <option>Event Coverage</option>
                         <option>Neon Photography</option>
-                        <option>Corporate & LinkedIn</option>
+                        <option>Corporate &amp; LinkedIn</option>
                         <option>Retouching Guide</option>
                         <option>Fitness Photography</option>
                         <option>Real Estate</option>

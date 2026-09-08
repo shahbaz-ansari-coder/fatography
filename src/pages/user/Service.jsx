@@ -1,4 +1,10 @@
-import React, { useEffect, useState, useCallback, useRef } from "react";
+import React, {
+  useEffect,
+  useState,
+  useCallback,
+  useRef,
+  useMemo,
+} from "react";
 import { Link, useParams } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper/modules";
@@ -7,8 +13,182 @@ import "swiper/css/navigation";
 import "../../style/servicePage.css";
 import Header from "../../components/home/Header";
 import Footer from "../../components/home/Footer";
-import { ArrowUpToLine } from "lucide-react";
 import ContactSection from "../../components/home/ContactSection";
+import SEO from "../../components/home/SEO";
+
+/* ═══════════════════════════════════
+   SLUG HELPERS
+═══════════════════════════════════ */
+function normalizeSlug(str) {
+  return (str || "")
+    .toString()
+    .toLowerCase()
+    .trim()
+    .replace(/[\s_]+/g, "-")
+    .replace(/&/g, "and")
+    .replace(/[^a-z0-9-]/g, "");
+}
+
+/**
+ * Turns a slug like "black-and-white" or "fashion-photography"
+ * into a readable fallback title: "Black And White" / "Fashion Photography".
+ * This is what shows up BEFORE the API responds, so the <title>/<meta>
+ * is correct from the very first paint instead of flashing a generic
+ * "Photography Dubai | Fatography" and then swapping.
+ */
+function slugToTitleCase(slug) {
+  return (slug || "")
+    .split("-")
+    .filter(Boolean)
+    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+    .join(" ");
+}
+
+/* ═══════════════════════════════════
+   SERVICE-WISE SEO DATA
+   NOTE: keys here MUST be the output of normalizeSlug(paramTitle),
+   never the raw display string. "&" always becomes "and".
+═══════════════════════════════════ */
+const SERVICE_SEO = {
+  "fashion-photography": {
+    title: "Fashion & Editorial Photography Dubai | Fatography",
+    description:
+      "High-fashion, designer & editorial photography in Dubai. From thematic concepts to candid glamour — Fatography turns style into timeless art.",
+  },
+  "pre-wedding-shoots": {
+    title: "Pre-Wedding Photography Dubai | Fatography Dubai",
+    description:
+      "Pre-wedding photography across cultures — UK, USA, UAE & Pakistan. Fatography's female photographer brings discretion & artistry to every ritual.",
+  },
+  "wedding-events": {
+    title: "Wedding Photography & Videography Dubai | Fatography",
+    description:
+      "Fatography brings years of experience in wedding photography & videography in Dubai— capturing every ritual, every emotion. Book your session.",
+  },
+  "lifestyle-photography": {
+    title: "Luxury Lifestyle Photography Dubai | Fatography",
+    description:
+      "Fatography offers luxury lifestyle photography in Dubai — cars, home & candid shoots with creative direction, your vibe, your tones. Book now.",
+  },
+  "food-photography": {
+    title: "Food Photography Dubai | Fatography",
+    description:
+      "Mouth-watering food photography in Dubai. Fatography creates vibrant, appetizing visuals for restaurants, menus, and brands with expert styling and lighting.",
+  },
+  "maternity-photography": {
+    title: "Maternity Photography & Videography Dubai | Fatography",
+    description:
+      "Fatography offers culturally respectful, confidential maternity photography & videography in Dubai, capturing every glow. Book your session.",
+  },
+  // FIX: this key was "black-&-white" before, which normalizeSlug()
+  // can NEVER produce (it always converts "&" to "and"). That mismatch
+  // is exactly why this page's SEO never applied — the lookup silently
+  // fell through to the generic fallback every single time.
+  "black-and-white": {
+    title: "Black & White Photography Dubai | Fatography",
+    description:
+      "Fatography offers all types of black & white photography in Dubai — fine art, portrait & documentary mono, printed as large statement frames. Book now.",
+  },
+  "product-photography": {
+    title: "Product Photography Dubai | Fatography",
+    description:
+      "Premium product photography in Dubai. Fatography delivers crisp, high-quality commercial visuals that make your brand and products stand out.",
+  },
+  "family-photography": {
+    title: "Family Photography Dubai | Fatography",
+    description:
+      "Warm, heartfelt family photography in Dubai. Fatography captures genuine connection and cherished memories with a natural, cinematic touch.",
+  },
+  "event-coverage": {
+    title: "Event Coverage Photography Dubai | Fatography",
+    description:
+      "Professional event coverage in Dubai. Fatography documents corporate events, launches, and celebrations with cinematic precision and full creative coverage.",
+  },
+  "real-estate": {
+    title: "Real Estate Photography Dubai | Fatography",
+    description:
+      "High-end real estate photography in Dubai. Fatography showcases properties with striking composition, natural light, and architectural detail that sells.",
+  },
+  "neon-photography": {
+    title: "Neon Photography Dubai | Fatography",
+    description:
+      "Fatography offers creative neon photography in Dubai — bold color, striking lighting & editorial style. Book your neon shoot today.",
+  },
+  "corporate-and-linkedin": {
+    title: "Corporate & LinkedIn Photography Dubai | Fatography",
+    description:
+      "Professional corporate and LinkedIn headshots in Dubai. Fatography delivers polished, confident portraits that elevate your personal and professional brand.",
+  },
+  "fitness-photography": {
+    title: "Fitness Photography Dubai | Fatography",
+    description:
+      "Fatography offers luxury fitness photography in Dubai — capturing strength, discipline & transformation. Book your session.",
+  },
+};
+
+const VIDEO_SECTIONS = {
+  "maternity-photography": {
+    url: "/videos-assets/videography-videos/maternity_shoot.mp4",
+    duration: "0:54",
+    tag: "Maternity Videography",
+    heading: "Maternity Videography in Dubai",
+    description:
+      "Experience how Fatography brings maternity to life through cinematic videography — capturing texture, warmth, and every precious moment.",
+    photographer: "Fatography Studio",
+    location: "Dubai, UAE",
+  },
+  "real-estate": {
+    url: "/videos-assets/videography-videos/real-estate-videography.mp4",
+    duration: "0:48",
+    tag: "Real Estate Videography",
+    heading: "Real Estate Videography in Dubai",
+    description:
+      "Experience how Fatography brings maternity to life through cinematic videography — capturing texture, warmth, and every precious moment.",
+    photographer: "Fatography Studio",
+    location: "Dubai, UAE",
+  },
+
+  // Naya video section chahiye kisi aur service page par?
+  // Neeche is tarah entry add karein — key hamesha normalizeSlug() ka
+  // output honi chahiye (jaisa upar SERVICE_SEO mein hai), raw string nahi:
+  //
+  // "wedding-events": {
+  //   url: "/videos-assets/videography-videos/wedding_shoot.mp4",
+  //   duration: "0:20",
+  //   tag: "Wedding Videography",
+  //   heading: "Wedding Videography in Dubai",
+  //   description: "...",
+  //   photographer: "Fatography Studio",
+  //   location: "Dubai, UAE",
+  // },
+};
+
+/**
+ * Resolves the SEO title/description for a service slug.
+ *
+ * `fallbackTitle` is the human-readable title from the API (serviceData.title).
+ * It is optional on purpose: while the API call is still in flight we don't
+ * have it yet, so we derive a readable name straight from the URL slug
+ * instead of showing a generic placeholder. This means the correct-ish
+ * title/description is present on first paint, and simply gets replaced by
+ * the exact copywritten SEO_SERVICE entry (or the API title) once available
+ * — instead of flashing a wrong title first and "changing" afterwards.
+ */
+function getServiceSEO(paramTitle, fallbackTitle) {
+  const key = normalizeSlug(paramTitle);
+  if (SERVICE_SEO[key]) return SERVICE_SEO[key];
+
+  const safeTitle = fallbackTitle || slugToTitleCase(key) || "Photography";
+  return {
+    title: `${safeTitle} Dubai | Fatography`,
+    description: `Looking for a ${safeTitle.toLowerCase()} shoot in Dubai? Fatography captures natural, cinematic portraits that reflect your story and style. Book your photoshoot today.`,
+  };
+}
+
+function getVideoSection(paramTitle) {
+  const key = normalizeSlug(paramTitle);
+  return VIDEO_SECTIONS[key] || null;
+}
 
 /* ═══════════════════════════════════
    WHY POINTS
@@ -149,7 +329,11 @@ function Lightbox({ src, onClose }) {
   if (!src) return null;
   return (
     <div className="ftg-lb-overlay" onClick={onClose}>
-      <button className="ftg-lb-close" onClick={onClose}>
+      <button
+        className="ftg-lb-close"
+        onClick={onClose}
+        aria-label="Close preview"
+      >
         ✕
       </button>
       <img
@@ -211,10 +395,10 @@ function ShootSlider({ shoot, onImageClick }) {
                     <path
                       d="M3.75 9h10.5M9 3.75l5.25 5.25L9 14.25"
                       stroke="#000"
-                      stroke-width="1.6"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    ></path>
+                      strokeWidth="1.6"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
                   </svg>
                 </div>
               </div>
@@ -327,45 +511,256 @@ function FaqSection({ serviceTitle }) {
 }
 
 /* ═══════════════════════════════════
+   VIDEO PLAYER — custom controls
+═══════════════════════════════════ */
+function VideoPlayer({ src }) {
+  const videoRef = useRef(null);
+  const [playing, setPlaying] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [muted, setMuted] = useState(false);
+
+  const toggle = () => {
+    if (!videoRef.current) return;
+    if (playing) {
+      videoRef.current.pause();
+      setPlaying(false);
+    } else {
+      videoRef.current.play();
+      setPlaying(true);
+    }
+  };
+
+  const onTimeUpdate = () => {
+    if (!videoRef.current) return;
+    const { currentTime, duration } = videoRef.current;
+    if (duration) setProgress((currentTime / duration) * 100);
+  };
+
+  const onSeek = (e) => {
+    if (!videoRef.current) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const ratio = (e.clientX - rect.left) / rect.width;
+    videoRef.current.currentTime = ratio * (videoRef.current.duration || 0);
+  };
+
+  const toggleMute = (e) => {
+    e.stopPropagation();
+    if (!videoRef.current) return;
+    videoRef.current.muted = !muted;
+    setMuted(!muted);
+  };
+
+  // Reset player state whenever the video source changes (navigating
+  // between service pages that both have a video section).
+  useEffect(() => {
+    setPlaying(false);
+    setProgress(0);
+  }, [src]);
+
+  /* Auto-pause when scrolled out of view */
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) {
+          video.pause();
+          setPlaying(false);
+        }
+      },
+      { threshold: 0.5 },
+    );
+    observer.observe(video);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div className="asp-video-wrap">
+      <div className="asp-video-inner" onClick={toggle}>
+        <video
+          ref={videoRef}
+          src={src}
+          className="asp-video-el"
+          playsInline
+          loop
+          onTimeUpdate={onTimeUpdate}
+          onEnded={() => setPlaying(false)}
+          onClick={(e) => e.stopPropagation()}
+        />
+
+        {!playing && (
+          <div className="asp-video-play-overlay">
+            <div className="asp-video-play-btn">
+              <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+                <path d="M8 5.5l14 7.5-14 7.5V5.5z" fill="#000" />
+              </svg>
+            </div>
+            <p className="asp-video-play-label">Play Showreel</p>
+          </div>
+        )}
+
+        <div className="asp-video-badge">
+          <span className="asp-video-badge-dot" />
+          Behind The Lens
+        </div>
+      </div>
+
+      <div className="asp-video-controls">
+        <button
+          className="asp-vc-btn"
+          onClick={toggle}
+          aria-label={playing ? "Pause" : "Play"}
+        >
+          {playing ? (
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <rect
+                x="3"
+                y="2"
+                width="3.5"
+                height="12"
+                rx="1"
+                fill="currentColor"
+              />
+              <rect
+                x="9.5"
+                y="2"
+                width="3.5"
+                height="12"
+                rx="1"
+                fill="currentColor"
+              />
+            </svg>
+          ) : (
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M4 2.5l10 5.5-10 5.5V2.5z" fill="currentColor" />
+            </svg>
+          )}
+        </button>
+
+        <div className="asp-vc-bar" onClick={onSeek}>
+          <div className="asp-vc-bar-fill" style={{ width: `${progress}%` }} />
+        </div>
+
+        <button
+          className="asp-vc-btn"
+          onClick={toggleMute}
+          aria-label={muted ? "Unmute" : "Mute"}
+        >
+          {muted ? (
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M2 5.5h2.5L8 2v12l-3.5-3.5H2V5.5z" fill="currentColor" />
+              <path
+                d="M10.5 6L13.5 9M13.5 6L10.5 9"
+                stroke="currentColor"
+                strokeWidth="1.4"
+                strokeLinecap="round"
+              />
+            </svg>
+          ) : (
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M2 5.5h2.5L8 2v12l-3.5-3.5H2V5.5z" fill="currentColor" />
+              <path
+                d="M10 5.5c1.1.7 1.8 1.9 1.8 3.5S11.1 11.8 10 12.5"
+                stroke="currentColor"
+                strokeWidth="1.4"
+                strokeLinecap="round"
+              />
+            </svg>
+          )}
+        </button>
+      </div>
+    </div>
+  );
+}
+
+/* ═══════════════════════════════════
    MAIN PAGE
 ═══════════════════════════════════ */
 export default function ServicePage() {
   const { title } = useParams();
+
   const [serviceData, setServiceData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [notFound, setNotFound] = useState(false);
   const [lightboxSrc, setLightboxSrc] = useState(null);
+
   const heroRef = useRef(null);
   const handleClose = useCallback(() => setLightboxSrc(null), []);
 
+  /*
+   * ─── SEO — computed synchronously from the URL, on every render ───
+   * This is the fix for "title/desc pehle kuch aur dikhata hai phir
+   * change hota hai": previously <SEO> was only rendered AFTER
+   * serviceData had loaded, so between navigation and the API response
+   * the tab kept showing the *previous* page's title, then jumped to
+   * the new one once data arrived. By deriving seoData straight from
+   * the `title` slug (with a readable fallback) we get the correct
+   * meta tags on the very first render, before any network call
+   * finishes — and it's re-derived again once the exact API title
+   * comes in, so precise copy still wins when available.
+   */
+  const seoData = useMemo(
+    () => getServiceSEO(title, serviceData?.title),
+    [title, serviceData],
+  );
+  const videoData = useMemo(() => getVideoSection(title), [title]);
+
+  /*
+   * ─── Data fetching ───
+   * FIX: the original effect had an empty dependency array ([]), so it
+   * only ran once when the component first mounted. Because React
+   * Router reuses the same component instance for routes like
+   * "/services/:title" when you navigate from one service to another
+   * via <Link>, that meant the fetch never re-ran on navigation and
+   * the page kept showing the PREVIOUS service's data/SEO until a full
+   * hard reload. Depending on [title] fixes that.
+   *
+   * An AbortController is used so that if the user navigates again
+   * quickly (before the first request finishes), the stale response
+   * is ignored instead of overwriting the newer page's data — a
+   * classic race condition that also produces "wrong data flashes
+   * then changes" symptoms.
+   */
   useEffect(() => {
-    if (!title) {
-      setLoading(false);
-      return;
-    }
+    if (!title) return;
+
+    const controller = new AbortController();
+
+    setLoading(true);
+    setNotFound(false);
+    setServiceData(null);
+    setLightboxSrc(null);
+    window.scrollTo({
+      top: 0,
+      behavior: "instant" in window ? "instant" : "auto",
+    });
 
     const fetchService = async () => {
       try {
         const res = await fetch(
           `https://fatography-backend.vercel.app/api/services/single-data/${title}`,
+          { signal: controller.signal },
         );
-
         const result = await res.json();
-        console.log("API RESPONSE:", result);
 
         if (result.success) {
           setServiceData(result.data);
         } else {
-          setServiceData(null);
+          setNotFound(true);
         }
       } catch (err) {
-        console.error("Fetch error:", err);
-        setServiceData(null);
+        if (err.name !== "AbortError") {
+          console.error("Fetch error:", err);
+          setNotFound(true);
+        }
       } finally {
-        setLoading(false);
+        if (!controller.signal.aborted) setLoading(false);
       }
     };
 
     fetchService();
+
+    return () => controller.abort();
   }, [title]);
 
   /* parallax */
@@ -381,29 +776,41 @@ export default function ServicePage() {
 
   if (loading) {
     return (
-      <div className="ftg-loader">
-        <div className="ftg-loader-ring">
-          <span />
-          <span />
+      <>
+        <SEO title={seoData.title} description={seoData.description} />
+        <div className="ftg-loader">
+          <div className="ftg-loader-ring">
+            <span />
+            <span />
+          </div>
+          <p className="ftg-loader-text">Loading Studio</p>
         </div>
-        <p className="ftg-loader-text">Loading Studio</p>
-      </div>
+      </>
     );
   }
 
-  if (!serviceData) {
+  if (notFound || !serviceData) {
     return (
-      <div className="ftg-error-screen">
-        <span className="ftg-error-code">404</span>
-        <p>Service Not Found</p>
-      </div>
+      <>
+        <SEO title={seoData.title} description={seoData.description} />
+        <div className="ftg-error-screen">
+          <span className="ftg-error-code">404</span>
+          <p>Service Not Found</p>
+        </div>
+      </>
     );
   }
 
   const shoots = serviceData.shoots || [];
 
+  /* Flatten ALL images from all shoots into one array */
+  const allImages = shoots.flatMap((shoot) =>
+    (shoot.images || []).map((img) => ({ url: img.url, _id: img._id })),
+  );
+
   return (
     <>
+      <SEO title={seoData.title} description={seoData.description} />
       <Header />
       <div className="ftg-page">
         <Lightbox src={lightboxSrc} onClose={handleClose} />
@@ -414,10 +821,8 @@ export default function ServicePage() {
           className="fsg-hero"
           style={{ backgroundImage: `url(${serviceData.banner?.url})` }}
         >
-          {/* diagonal overlay */}
           <div className="fsg-hero-gradient" />
 
-          {/* centre content */}
           <div className="fsg-hero-content">
             <div className="fsg-hero-tag">
               <span />
@@ -441,13 +846,11 @@ export default function ServicePage() {
             </div>
           </div>
 
-          {/* bottom-right scroll indicator */}
           <div className="fsg-hero-scroll">
             <span className="fsg-hero-scroll-label">Scroll</span>
             <span className="fsg-hero-scroll-line" />
           </div>
 
-          {/* bottom stats strip */}
           <div className="fsg-hero-stats">
             <div className="fsg-hero-stat">
               <strong>500+</strong>
@@ -466,27 +869,37 @@ export default function ServicePage() {
           </div>
         </header>
 
-        {/* ══ OVERVIEW ══ */}
-        <section className="ftg-overview">
-          <div className="ftg-overview-inner">
-            <div className="ftg-desc-box">
-              <span className="ftg-section-label">The Narrative</span>
-              <p className="ftg-desc-body">{serviceData.description}</p>
-            </div>
-            <div className="ftg-why-box">
-              <span className="ftg-section-label">Why Fatography?</span>
-              <div className="ftg-why-grid">
-                {WHY_POINTS.map((pt, i) => (
-                  <div key={i} className="ftg-why-card">
-                    <div className="ftg-why-card-icon">{pt.icon}</div>
-                    <h3 className="ftg-why-card-label">{pt.label}</h3>
-                    <p className="ftg-why-card-desc">{pt.desc}</p>
+        {/* ══ VIDEO SECTION — only when this slug has a VIDEO_SECTIONS entry ══ */}
+        {videoData && (
+          <section className="asp-video-section">
+            <div className="asp-video-section-inner">
+              <div className="asp-video-text">
+                <span className="fsg-section-label">{videoData.tag}</span>
+                <h2 className="asp-video-heading">{videoData.heading}</h2>
+                <p className="asp-video-sub">{videoData.description}</p>
+
+                <div className="asp-video-info-row">
+                  <div className="asp-vi-item">
+                    <span className="asp-vi-label">Studio</span>
+                    <span className="asp-vi-val">{videoData.photographer}</span>
                   </div>
-                ))}
+                  <div className="asp-vi-item">
+                    <span className="asp-vi-label">Location</span>
+                    <span className="asp-vi-val">{videoData.location}</span>
+                  </div>
+                  <div className="asp-vi-item">
+                    <span className="asp-vi-label">Total Frames</span>
+                    <span className="asp-vi-val">
+                      {allImages.length} Photos
+                    </span>
+                  </div>
+                </div>
               </div>
+
+              <VideoPlayer src={videoData.url} />
             </div>
-          </div>
-        </section>
+          </section>
+        )}
 
         {/* ══ GALLERY ══ */}
         {shoots.length > 0 && (
@@ -510,6 +923,28 @@ export default function ServicePage() {
             </div>
           </section>
         )}
+
+        {/* ══ OVERVIEW ══ */}
+        <section className="ftg-overview">
+          <div className="ftg-overview-inner">
+            <div className="ftg-desc-box">
+              <span className="ftg-section-label">The Narrative</span>
+              <p className="ftg-desc-body">{serviceData.description}</p>
+            </div>
+            <div className="ftg-why-box">
+              <span className="ftg-section-label">Why Fatography?</span>
+              <div className="ftg-why-grid">
+                {WHY_POINTS.map((pt, i) => (
+                  <div key={i} className="ftg-why-card">
+                    <div className="ftg-why-card-icon">{pt.icon}</div>
+                    <h3 className="ftg-why-card-label">{pt.label}</h3>
+                    <p className="ftg-why-card-desc">{pt.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
       <FaqSection serviceTitle={serviceData.title} />
       <ContactSection />

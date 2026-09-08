@@ -7,27 +7,45 @@ function About() {
       <div className="container">
         {/* ─── About text content */}
         <div className="about-content">
-          <h2 className="h2 section-title">
-            Professional Photography & Videography Services in Dubai
-          </h2>
+          <h1 className="h2 section-title">
+            Premier Photography & Videography Studio
+          </h1>
 
           {/* ─── About description */}
           <div className="wrapper has-before">
             <p className="section-text">
-              Welcome to Fatography, Dubai’s premier studio for expert
-              photography and videography. Whether you are celebrating a
-              once-in-a-lifetime milestone or elevating your corporate brand, we
-              believe that every fleeting moment deserves to be preserved with
-              artistic brilliance and uncompromising quality. From breathtaking
-              pre-wedding shoots to high-profile corporate events, our team of
-              skilled professionals is dedicated to delivering stunning,
-              story-driven results. We pair top-notch equipment with creative,
-              industry-leading editing to produce high-resolution imagery that
-              truly speaks for itself. At Fatography, we do more than just take
-              pictures—we craft visual legacies.
+              <span className="!mb-5">
+                Fatography founded by Fatimah Haroon in 2009, a London-trained
+                filmmaker and photographer who studied Film & Television at
+                Central Saint Martins, and holds a Master's degree from
+                Birmingham in Film Marketing, Fatography brings a rare blend of
+                academic rigor and global creative instinct to every shoot. Her
+                career has taken her from the red carpet of the Cannes Film
+                Festival to international productions and PR work with
+                celebrated names in film and fashion, giving Fatography a visual
+                language shaped by some of the world's leading creative
+                capitals. This global perspective, paired with a deep
+                understanding of the Middle East market, is what sets Fatography
+                apart as a premier photography and videography studio in Dubai.
+              </span>
+              <span className="!mb-5">
+                Today, Fatography is recognised as one of Dubai's best
+                photography and videography teams, delivering 17+ years of
+                creative excellence across weddings, pre-wedding shoots,
+                fashion, product, corporate, and brand photography. From the
+                first consultation to final delivery, our Dubai-based team
+                combines international training with local expertise to create
+                visuals that are considered, authentic, and built to elevate
+                your brand or your biggest moments. Whether you're searching for
+                a top-notch wedding photographer in Dubai, a corporate and
+                product photography studio, or a creative partner for high-end
+                brand content, Fatography offers the polish, professionalism,
+                and storytelling depth of a globally trained creative house —
+                right here in the heart of Dubai.
+              </span>
             </p>
             <Link to={"/about-us"}>
-              <button className="main-glow-btn">Read More</button>
+              <button className="main-glow-btn">Read More About Us</button>
             </Link>
           </div>
         </div>

@@ -288,45 +288,57 @@
 .cp-faq-chevron {
   flex-shrink: 0;
   color: var(--p);
-  transition: transform 0.3s ease;
+  transition: transform 0.35s ease;
 }
 .cp-faq-item--open .cp-faq-chevron {
   transform: rotate(180deg);
 }
 
+/* ── FAQ BODY — height driven by JS via inline style ── */
 .cp-faq-body {
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.4s ease;
 }
-.cp-faq-item--open .cp-faq-body {
-  max-height: 220px;
-}
 
-.cp-faq-list {
-  list-style: none;
-  padding: 0 0 20px 4px;
+/* ── FAQ body inner — actual HTML content styling ── */
+.cp-faq-body-inner {
+  padding: 0 4px 20px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
-}
-.cp-faq-list li {
-  display: flex;
-  align-items: center;
   gap: 10px;
-  font-size: 16px;
+}
+.cp-faq-body-inner p {
+  font-size: 15px;
+  color: #888;
+  font-weight: 300;
+  line-height: 1.75;
+}
+.cp-faq-body-inner ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  padding-left: 4px;
+}
+.cp-faq-body-inner ul li {
+  font-size: 15px;
   color: #888;
   font-weight: 300;
   line-height: 1.55;
+  padding-left: 16px;
+  position: relative;
 }
-.cp-faq-dot {
-  margin-top: -5px !important;
+.cp-faq-body-inner ul li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 9px;
   width: 5px;
   height: 5px;
   border-radius: 50%;
   background: var(--p);
   flex-shrink: 0;
-  margin-top: 6px;
 }
 
 /* ── MAP ── */
@@ -459,11 +471,11 @@
   resize: none;
 }
 
- .cp-field select{
+.cp-field select {
   height: 100% !important;
- }
+}
 
-.cp-field input::placeholder, 
+.cp-field input::placeholder,
 .cp-field textarea::placeholder {
   color: #444;
 }

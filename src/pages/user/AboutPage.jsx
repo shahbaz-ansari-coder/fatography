@@ -12,6 +12,7 @@ function Counter({ target, suffix = "", duration = 2000 }) {
   const [count, setCount] = useState(0);
   const ref = useRef(null);
   const started = useRef(false);
+  
 
   useEffect(() => {
     const el = ref.current;
@@ -45,6 +46,25 @@ function Counter({ target, suffix = "", duration = 2000 }) {
     </span>
   );
 }
+
+const faqs = [
+  {
+    q: "When was Fatography established?",
+    a: "Fatography was established in 2009 and has been providing professional photography and videography services for over 15 years across Dubai and Pakistan.",
+  },
+  {
+    q: "Where is Fatography located?",
+    a: "Fatography proudly serves clients through its branches in Dubai and Pakistan. Contact us to find the nearest branch or book your session.",
+  },
+  {
+    q: "Who is the lead photographer at Fatography?",
+    a: "Fatography is led by Fatimah Haroon, a professionally trained photographer and University of the Arts London graduate, known for her distinctive visual style and client-first approach.",
+  },
+  {
+    q: "What makes Fatography different from other photography studios?",
+    a: "Fatography stands out for its 15+ years of experience, flexible and affordable packages, creative expertise, fast turnaround, and a client-first approach that has earned the trust of individuals and businesses across Dubai and Pakistan.",
+  },
+];
 
 /* ─── services list ─── */
 const SERVICES = [
@@ -95,6 +115,7 @@ const STATS = [
 ════════════════════════════════════ */
 export default function AboutPage() {
   const lineRef = useRef(null);
+    const [openIdx, setOpenIdx] = useState(null);
 
   /* subtle scroll-driven line animation */
   useEffect(() => {
@@ -115,8 +136,8 @@ export default function AboutPage() {
     <>
       <Preloader />
       <SEO
-        title="About Fatography | Top Photographers in Dubai"
-        description="Learn about Fatography, a leading photography and videography company in Dubai. Discover our passion, expertise, and creative approach. Contact us today!"
+        title="About Dubai's Photography Studio | Fatography"
+        description="Fatography is Dubai's trusted photography studio since 2009 15+ years of weddings, fashion, corporate & celebrity shoots. Discover our story. Book today!"
       />
       <div className="ab-page">
         <Header />
@@ -134,25 +155,25 @@ export default function AboutPage() {
             <div className="ab-hero-left">
               <div className="ab-pill">
                 <span className="ab-pill-dot" />
-                Introduction
+                About Us
               </div>
               <h1 className="ab-hero-title">
                 Welcome to
                 <br />
-                <em className="ab-hero-em">Fatography</em>
+                <em className="ab-hero-em"> Fatography</em>
               </h1>
               <p className="ab-hero-desc">
                 Fatography is a professional photography and creative production
-                company based in Dubai, UAE. Founded with a vision to deliver
-                high-quality yet affordable photography solutions, Fatography
-                quickly earned a reputation for its distinctive visual style and
-                client-first approach.
+                studio serving clients across Dubai and Pakistan. Founded with a
+                vision to deliver high-quality, affordable photography for
+                everyone, we quickly earned a reputation for our distinctive
+                visual style and uncompromising client-first approach.
               </p>
               <div className="ab-hero-btns">
                 <a href="#story" className="ab-btn ab-btn--filled">
                   Our Story
                 </a>
-                <Link to="/services" className="ab-btn ab-btn--ghost">
+                <Link to="/our-services" className="ab-btn ab-btn--ghost">
                   See Our Work
                 </Link>
               </div>
@@ -202,17 +223,15 @@ export default function AboutPage() {
                 Blending Art, Technique, and Vision
               </h2>
               <p className="ab-story-text">
-                Our craft is built on a perfect balance of creativity and
-                technical expertise. We master the art of composition, lighting,
-                and timing to ensure every image tells a story worth
-                remembering. From portraiture and events to product and
-                lifestyle photography, we adapt our style to match your vision.
-              </p>
-              <p className="ab-story-text">
-                Our skills go beyond the click — we excel in post-production,
-                bringing out the best colors, details, and emotions in every
-                shot. With a keen eye for beauty and a commitment to perfection,
-                we create photographs that speak louder than words.
+                Great photography is never just about pressing a button. At
+                Fatography, our craft is built on a purposeful balance of
+                creativity and technical precision. We master the art of
+                composition, lighting, and timing to ensure every image tells a
+                story worth remembering—whether it's a quiet pre-wedding moment,
+                a high-energy fashion editorial, or a brand campaign that
+                demands attention. Proudly serving clients across Dubai and
+                Pakistan, we bring the same commitment to quality and creativity
+                to every project.
               </p>
             </div>
           </div>
@@ -228,20 +247,21 @@ export default function AboutPage() {
               </h2>
               <p className="ab-skills-desc">
                 Fatography is a professional photography and creative production
-                company based in Dubai, UAE, known for delivering high-quality
-                yet affordable photography solutions with a strong client-first
-                approach. What started as a small studio offering personalized
-                sessions for families, couples, and individuals has grown into a
-                full creative hub, providing photography and videography
-                services for events, corporate portraits, commercial projects,
-                weddings, and product shoots. In 2024, Fatography expanded its
-                services to better serve Dubai’s diverse and fast-growing
-                community, introducing flexible packages designed to meet
-                different creative needs without compromising quality. Today,
-                Fatography is more than just a studio — it’s a visual
-                storytelling partner dedicated to capturing meaningful moments,
-                building powerful brand imagery, and bringing every client’s
-                vision to life with creativity and precision.
+                company serving clients across Dubai and Pakistan. Founded in
+                2009 with a clear vision—to deliver high-quality, affordable
+                photography without compromise—we have spent over 15 years
+                building a legacy of visual excellence, earning the trust of
+                individuals, families, and businesses through exceptional
+                creativity and service.
+              </p>
+              <p className="ab-skills-desc !mt-3">
+                At Fatography, we understand that every client has unique needs,
+                timelines, and budgets. That's why we create flexible,
+                value-driven packages designed to deliver exceptional results
+                without compromising on quality. Whether you're launching a
+                product, celebrating a milestone, or building a brand, we're
+                committed to capturing your story with creativity, precision,
+                and the attention it deserves.
               </p>
             </div>
             <div className="ab-skills-right">
@@ -259,10 +279,9 @@ export default function AboutPage() {
               <span className="ab-eyebrow">How We Work</span>
               <h2 className="ab-process-title">Our Working Process</h2>
               <p className="ab-process-sub">
-                We believe great photography starts with understanding you. From
-                the first conversation to the final delivery, our process is
-                simple, transparent, and designed to make you feel comfortable
-                every step of the way.
+                We believe great photography starts long before the camera is
+                raised. Our process is built to make you feel confident,
+                comfortable, and creatively involved — every step of the way.
               </p>
             </div>
             <div className="ab-process-steps">
@@ -270,27 +289,27 @@ export default function AboutPage() {
                 {
                   step: "01",
                   title: "Discovery Call",
-                  desc: "We learn about your vision, goals, and the story you want to tell.",
+                  desc: "We start with a conversation — understanding your vision, goals, timeline, and the story you want to tell. No jargon, no pressure.",
                 },
                 {
                   step: "02",
                   title: "Creative Planning",
-                  desc: "Concept boards, location scouting, and timeline planning — all tailored to you.",
+                  desc: "Our team crafts a tailored shoot plan — covering locations, mood boards, styling direction, lighting setup, and a creative brief aligned with your goals..",
                 },
                 {
                   step: "03",
                   title: "The Shoot",
-                  desc: "On the day, we bring energy, precision, and our full creative team.",
+                  desc: "This is where the magic happens. We bring energy, precision, and creative instinct to every frame — guiding you naturally so every shot feels authentic",
                 },
                 {
                   step: "04",
                   title: "Post-Production",
-                  desc: "Meticulous editing, retouching, and colour grading by our in-house editors.",
+                  desc: "Our editors apply professional colour grading, retouching, and enhancement to ensure every image is polished, consistent, and visually stunning..",
                 },
                 {
                   step: "05",
                   title: "Final Delivery",
-                  desc: "Your gallery delivered on time — ready to share, print, and treasure.",
+                  desc: "Your gallery is delivered on time, ready to download, share, and treasure — in the formats and resolutions you need, exactly when you need them.",
                 },
               ].map((p, i) => (
                 <div key={p.step} className="ab-process-card">
@@ -330,6 +349,73 @@ export default function AboutPage() {
           </div>
         </section>
         <ContactSection />
+        <section className="fsg-faq">
+          <div className="fsg-faq-top">
+            <div className="fsg-section-label fsg-label--center">
+              <span />
+              FAQ
+              <span />
+            </div>
+            <h2 className="fsg-faq-heading">
+              <em>FAQ's</em> About Fatography Services 
+            </h2>
+            <p className="rev-para">
+              Get quick answers about Fatography services, from booking and
+              pricing to location and delivery information.
+            </p>
+          </div>
+
+          <div className="fsg-faq-list">
+            {faqs.map((faq, i) => (
+              <div
+                key={i}
+                className={`fsg-faq-item ${openIdx === i ? "fsg-faq-item--open" : ""}`}
+              >
+                <button
+                  className="fsg-faq-q"
+                  onClick={() => setOpenIdx(openIdx === i ? null : i)}
+                  aria-expanded={openIdx === i}
+                >
+                  <span className="fsg-faq-q-num">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span className="fsg-faq-q-text">{faq.q}</span>
+                  <span className="fsg-faq-icon">
+                    <svg
+                      className="fsg-faq-arrow"
+                      width="14"
+                      height="14"
+                      viewBox="0 0 14 14"
+                      fill="none"
+                    >
+                      <path
+                        d="M3 5l4 4 4-4"
+                        stroke="currentColor"
+                        strokeWidth="1.6"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </span>
+                </button>
+                <div className="fsg-faq-body">
+                  <div>
+                    <p className="fsg-faq-ans">{faq.a}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="fsg-faq-cta-row">
+            <div className="fsg-faq-cta-line" />
+            <span className="fsg-faq-cta-text">Still have questions?</span>
+            <Link to="/contact-us" className="fsg-faq-cta-link">
+              Contact Us →
+            </Link>
+            <div className="fsg-faq-cta-line" />
+          </div>
+        </section>
         <Footer />
       </div>
     </>

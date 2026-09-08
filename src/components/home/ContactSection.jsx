@@ -41,7 +41,7 @@ const ContactSection = () => {
 
   return (
     <>
-      <section className="cs-section">
+      <section className="cs-section" id="contact-section">
         <div className="cs-inner">
           {/* Header */}
           <div className="reviews-header">
@@ -49,6 +49,11 @@ const ContactSection = () => {
             <h2 className="rev-title">
               Let us <em>capture</em> your memories
             </h2>
+            <p className="rev-para">
+              Ready to book your session or have questions? Reach out to our
+              team and we'll get back to you within 24 hours. We'd love to hear
+              about your vision.
+            </p>
           </div>
 
           {/* Card */}

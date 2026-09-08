@@ -6,6 +6,19 @@ import Footer from "../../components/home/Footer";
 import ContactSection from "../../components/home/ContactSection";
 import SEO from "../../components/home/SEO";
 
+/* Swiper */
+import { Swiper, SwiperSlide } from "swiper/react";
+import {
+  EffectCoverflow,
+  Navigation,
+  Pagination,
+  Autoplay,
+} from "swiper/modules";
+import "swiper/css";
+import "swiper/css/effect-coverflow";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+
 /* ═══════════════════════════════════
    LIGHTBOX
 ═══════════════════════════════════ */
@@ -38,69 +51,151 @@ function Lightbox({ src, onClose }) {
 }
 
 /* ═══════════════════════════════════
-   GALLERY CARD
+   COLLECTION SLIDER (one per shoot)
 ═══════════════════════════════════ */
-const ROTATIONS = [
-  "-5deg",
-  "3deg",
-  "-4deg",
-  "6deg",
-  "-2deg",
-  "4deg",
-  "-6deg",
-  "3deg",
-  "-3deg",
-  "5deg",
-];
+function CollectionSlider({ images, index, onImageClick }) {
+  if (!images || images.length === 0) return null;
 
+  const swiperElRef = useRef(null);
+  const dragRef = useRef({ moved: false, startX: 0, startY: 0 });
 
-function GalleryCard({ src, index, onImageClick }) {
-  const rot = ROTATIONS[index % ROTATIONS.length];
-  const cardRef = useRef(null);
+  // enough slides needed for a clean loop across all breakpoints (max 4 per view)
+  const canLoop = images.length >= 8;
 
-  useEffect(() => {
-    const el = cardRef.current;
-    if (!el) return;
-    el.style.opacity = "0";
-    el.style.transform = `rotate(${rot}) translateY(28px)`;
-    const t = setTimeout(
-      () => {
-        el.style.transition = "opacity 0.45s ease, transform 0.45s ease";
-        el.style.opacity = "1";
-        el.style.transform = `rotate(${rot})`;
-        const t2 = setTimeout(() => {
-          el.style.transition = "";
-          el.style.transform = "";
-          el.style.setProperty("--fsg-rot", rot);
-        }, 480);
-        return () => clearTimeout(t2);
-      },
-      50 + index * 60,
-    );
-    return () => clearTimeout(t);
-  }, [rot, index]);
+  const resetDrag = (x, y) => {
+    dragRef.current = { moved: false, startX: x, startY: y };
+  };
+
+  const handleTouchStart = (swiper, e) => {
+    const p = e.touches ? e.touches[0] : e;
+    resetDrag(p.clientX, p.clientY);
+  };
+
+  const handleSliderMove = (swiper, e) => {
+    const p = e.touches ? e.touches[0] : e;
+    const dx = Math.abs(p.clientX - dragRef.current.startX);
+    const dy = Math.abs(p.clientY - dragRef.current.startY);
+    if (dx > 6 || dy > 6) dragRef.current.moved = true;
+  };
+
+  const handleSwiperClick = (swiper) => {
+    // agar user ne drag kiya tha ya slider abhi transition me hai -> click ignore
+    if (dragRef.current.moved || swiper.animating) return;
+
+    const clickedSlideEl = swiper.clickedSlide;
+    if (!clickedSlideEl) return;
+
+    // loop mode me clone slides ka asli index is attribute me hota hai
+    const realAttr = clickedSlideEl.getAttribute("data-swiper-slide-index");
+    const realIdx =
+      realAttr !== null ? parseInt(realAttr, 10) : swiper.clickedIndex;
+
+    if (swiper.clickedIndex === swiper.activeIndex) {
+      // sirf center/active slide ka image lightbox me khulega
+      onImageClick(images[realIdx]?.url);
+    } else {
+      // side slide -> usay center me le aao, image mat kholo
+      swiper.slideTo(swiper.clickedIndex);
+    }
+  };
+
+  const handleMouseEnter = () => {
+    swiperElRef.current?.autoplay?.stop();
+  };
+  const handleMouseLeave = () => {
+    swiperElRef.current?.autoplay?.start();
+  };
 
   return (
-    <div
-      ref={cardRef}
-      className="fsg-card"
-      style={{ "--fsg-rot": rot }}
-      onClick={() => onImageClick(src)}
-    >
-      <img src={src} alt={`photo-${index + 1}`} loading="lazy" />
-      <div className="fsg-card-shine" />
-      <div className="fsg-card-overlay">
-        <div className="fsg-card-overlay-circle">
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-            <path
-              d="M3.75 9h10.5M9 3.75l5.25 5.25L9 14.25"
-              stroke="#000"
-              strokeWidth="1.6"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </div>
+    <div className="fsg-collection">
+      <div className="fsg-collection-head">
+        <span className="fsg-collection-line" />
+        <span className="fsg-collection-tag">Collection</span>
+        <span className="fsg-collection-num">
+          {String(index + 1).padStart(2, "0")}
+        </span>
+        <span className="fsg-collection-count">
+          {images.length} {images.length === 1 ? "Photo" : "Photos"}
+        </span>
+      </div>
+
+      <div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+        <Swiper
+          modules={[EffectCoverflow, Navigation, Pagination, Autoplay]}
+          effect="coverflow"
+          grabCursor
+          centeredSlides
+          loop={canLoop}
+          loopAdditionalSlides={4}
+          watchSlidesProgress
+          rewind={!canLoop}
+          speed={650}
+          resistanceRatio={0.85}
+          slidesPerView={1.15}
+          spaceBetween={18}
+          coverflowEffect={{
+            rotate: 18,
+            stretch: 0,
+            depth: 140,
+            modifier: 1,
+            slideShadows: false,
+          }}
+          navigation
+          pagination={{ clickable: true }}
+          autoplay={{
+            delay: 3200,
+            disableOnInteraction: false,
+            pauseOnMouseEnter: false, // manual hover-pause upar handle ho raha hai
+          }}
+          breakpoints={{
+            560: { slidesPerView: 1.8, spaceBetween: 22 },
+            860: { slidesPerView: 2.6, spaceBetween: 24 },
+            1180: { slidesPerView: 3.4, spaceBetween: 26 },
+            1440: { slidesPerView: 4, spaceBetween: 28 },
+          }}
+          onSwiper={(swiper) => (swiperElRef.current = swiper)}
+          onTouchStart={handleTouchStart}
+          onSliderMove={handleSliderMove}
+          onClick={handleSwiperClick}
+          className="fsg-swiper"
+        >
+          {images.map((img, i) => (
+            <SwiperSlide key={img._id || i} className="fsg-swiper-slide">
+              {({ isActive }) => (
+                <div
+                  className={`fsg-slide-card ${isActive ? "fsg-slide-card--active" : "fsg-slide-card--side"}`}
+                >
+                  <img
+                    src={img.url}
+                    alt={`collection-${index + 1}-${i + 1}`}
+                    loading="lazy"
+                  />
+                  <div className="fsg-slide-shine" />
+                  {isActive && (
+                    <div className="fsg-slide-overlay">
+                      <div className="fsg-slide-overlay-circle">
+                        <svg
+                          width="18"
+                          height="18"
+                          viewBox="0 0 18 18"
+                          fill="none"
+                        >
+                          <path
+                            d="M3.75 9h10.5M9 3.75l5.25 5.25L9 14.25"
+                            stroke="#000"
+                            strokeWidth="1.6"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </div>
     </div>
   );
@@ -128,8 +223,8 @@ const WHY_POINTS = [
         />
       </svg>
     ),
-        label: "Premium Post-Production",
-    desc: "Meticulous retouching and cinematic colour grading by our in-house editors.",
+    label: "Fearless Creative Direction",
+    desc: "Our sessions are led by a creative eye that understands mood, movement, and styling. We guide you from pose to post-production — so every frame feels intentional, confident, and on-brand.",
   },
   {
     icon: (
@@ -151,8 +246,8 @@ const WHY_POINTS = [
         />
       </svg>
     ),
-    label: "Cinematic Storytelling",
-    desc: "We craft visual narratives that go far beyond ordinary photography.",
+    label: "Studio-Grade Results, Every Time",
+    desc: "Our Dubai studio is equipped with professional-grade lighting systems, multiple backdrop setups, and high-resolution cameras — delivering clean, commercial-quality results whether you're shooting editorial, e-commerce, or portfolio work.",
   },
   {
     icon: (
@@ -172,8 +267,8 @@ const WHY_POINTS = [
         />
       </svg>
     ),
-    label: "Industry-Leading Visuals",
-    desc: "Award-winning equipment and technique — putting your brand at the top.",
+    label: "Precision Post-Production",
+    desc: "Every image is refined through expert colour grading, skin retouching, and digital enhancement, ensuring your final gallery is polished, consistent, and ready to publish anywhere.",
   },
   {
     icon: (
@@ -235,28 +330,20 @@ function FaqSection({ serviceTitle }) {
 
   const faqs = [
     {
-      q: "What makes Fatography different from other studios?",
-      a: `For ${serviceTitle || "this service"}, we combine cinematic post-production, professional art direction, and a dedicated creative team to deliver imagery that goes far beyond ordinary photography. Every project is a visual story.`,
+      q: "How much does fashion photography cost in Dubai?",
+      a: `Fashion photography pricing in Dubai varies depending on the type of shoot, session duration, number of looks, and whether hair and makeup are included. At Fatography, we offer flexible packages designed for models, brands, and influencers at accessible price points from short portfolio sessions to full-day brand campaigns. Contact us for a personalised quote with no hidden fees.`,
     },
     {
-      q: "How do I book a session?",
-      a: "Simply click 'Book a Session' on any service page or visit our Contact page. We'll schedule a discovery call to understand your vision, goals, and timeline before anything else.",
+      q: "What types of fashion photography does Fatography offer?",
+      a: "Fatography offers a full range of fashion photography services in Dubai including editorial fashion photography, model portfolio shoots, lookbook and catalogue photography, e-commerce fashion photography, influencer content shoots, fashion brand campaigns, studio shoots, outdoor location sessions, and neon/themed fashion photography.",
     },
     {
-      q: "What is included in post-production?",
-      a: "Every project includes meticulous retouching, cinematic colour grading, and a final quality review by our in-house editors. We don't just deliver raw files — we deliver polished, gallery-ready images.",
+      q: "Do I need a stylist or makeup artist for my fashion shoot?",
+      a: "While we encourage clients to come with a clear vision for their look, our team can advise on styling direction during the shoot. We also work with trusted hair and makeup professionals in Dubai and can help coordinate a team for your session on request. Get in touch to discuss your specific requirements.",
     },
     {
-      q: "How long does delivery take?",
-      a: "Turnaround depends on the package and scope, but most projects are delivered within 5–10 business days after the shoot. Rush delivery options are available on request.",
-    },
-    {
-      q: "Do you travel for shoots outside Dubai?",
-      a: "Yes. While we are based in Dubai, UAE, we regularly travel for destination weddings, celebrity shoots, and commercial projects. Travel packages can be discussed during your discovery call.",
-    },
-    {
-      q: "Can I customise a package for my needs?",
-      a: "Absolutely. We offer fully flexible packages designed around your creative needs, timeline, and budget — without ever compromising on quality.",
+      q: "How long does it take to receive my fashion photography images?",
+      a: "Standard delivery for fashion photography sessions at Fatography is 3–7 business days, depending on the volume of images and level of retouching required. Rush delivery is available on request. All images are delivered as high-resolution files, fully retouched and colour-graded, ready for print and digital use.",
     },
   ];
 
@@ -269,8 +356,12 @@ function FaqSection({ serviceTitle }) {
           <span />
         </div>
         <h2 className="fsg-faq-heading">
-          Frequently Asked <em>Questions</em>
+          FAQ's About Fashion <em>Photography</em> in Dubai
         </h2>
+        <p className="rev-para">
+          Get quick answers about Fatography services, from booking and pricing
+          to location and delivery information.
+        </p>
       </div>
 
       <div className="fsg-faq-list">
@@ -331,7 +422,6 @@ function FaqSection({ serviceTitle }) {
    MAIN PAGE
 ═══════════════════════════════════ */
 export default function FashionServices() {
-//   const { title } = useParams();
   const [serviceData, setServiceData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [lightboxSrc, setLightboxSrc] = useState(null);
@@ -386,16 +476,13 @@ export default function FashionServices() {
     );
   }
 
-  /* Flatten ALL images from all shoots into one array */
-  const allImages = (serviceData.shoots || []).flatMap((shoot) =>
-    (shoot.images || []).map((img) => ({ url: img.url, _id: img._id })),
-  );
+  const shoots = serviceData.shoots || [];
 
   return (
     <>
       <SEO
-        title="Fashion Photography Dubai | Model Shoots – Fatography"
-        description="Studio and outdoor fashion photography in Dubai. Get pro model shoots, portfolios, and brand campaigns with Fatography. Book your session today!"
+        title="Best Fashion Photography Studio in Dubai | Fatography"
+        description="Professional fashion photography in Dubai for models, brands & influencers. Editorial, lookbook, portfolio & e-commerce shoots. 15+ years of excellence. Book now!"
       />
       <Header />
       <div className="fsg-page">
@@ -407,20 +494,16 @@ export default function FashionServices() {
           className="fsg-hero"
           style={{ backgroundImage: `url(${serviceData.banner?.url})` }}
         >
-          {/* diagonal overlay */}
           <div className="fsg-hero-gradient" />
 
-          {/* centre content */}
           <div className="fsg-hero-content">
             <div className="fsg-hero-tag">
               <span />
               <p>Premium Photography</p>
               <span />
             </div>
-            <h1 className="fsg-hero-title">{serviceData.title}</h1>
-            <p className="fsg-hero-sub">
-              Crafted with vision. Built for legacy.
-            </p>
+            <h1 className="fsg-hero-title">{serviceData.title} in Dubai</h1>
+            <p className="fsg-hero-sub">Bold. Editorial. Unforgettable.</p>
             <div className="fsg-hero-cta-row">
               <Link
                 to="/contact-us"
@@ -434,13 +517,11 @@ export default function FashionServices() {
             </div>
           </div>
 
-          {/* bottom-right scroll indicator */}
           <div className="fsg-hero-scroll">
             <span className="fsg-hero-scroll-label">Scroll</span>
             <span className="fsg-hero-scroll-line" />
           </div>
 
-          {/* bottom stats strip */}
           <div className="fsg-hero-stats">
             <div className="fsg-hero-stat">
               <strong>500+</strong>
@@ -462,20 +543,50 @@ export default function FashionServices() {
         {/* ══ OVERVIEW ══ */}
         <section className="fsg-overview">
           <div className="fsg-overview-inner">
-            {/* description */}
             <div className="fsg-desc-box">
               <span className="fsg-section-label">The Narrative</span>
-              <p className="fsg-desc-body">{serviceData.description}</p>
+              <h2 className="!text-5xl !my-5">
+                Professional Fashion Photography for Dubai’s Creative Scene
+              </h2>
+              <p className="fsg-desc-body">
+                <p>
+                  At Fatography, we craft fashion photography in Dubai that goes
+                  beyond the frame. Whether you're a model building your
+                  portfolio, a designer launching a collection, an influencer
+                  creating scroll-stopping content, or a brand producing a
+                  seasonal campaign, we translate your vision into powerful,
+                  publication-ready visuals.
+                </p>
+                <p className="!mt-5">
+                  Dubai's fashion scene demands imagery that is striking,
+                  current, and authentically yours. With over 15 years of
+                  experience, a fully equipped professional studio, and a
+                  creative team that understands style at every level,
+                  Fatography delivers fashion photography that makes people stop
+                  and look twice.
+                </p>
+              </p>
+              <div className="!mt-10">
+                <a href="tel:+971509396784">
+                  <button className="details-btn">Call Fatography Today</button>
+                </a>
+                <Link to="/contact-us">
+                  <button className="secound-btn !mt-10">
+                    Book Your Session
+                  </button>
+                </Link>
+              </div>
             </div>
 
-            {/* Why Fatography — icon card grid */}
             <div className="fsg-why-box">
-              <span className="fsg-section-label">Why Fatography?</span>
-              <div className="fsg-why-grid">
+              <span className="fsg-section-label">
+                Why Dubai's Models, Brands & Influencers Choose Fatography?
+              </span>
+              <div className="fsg-why-grid !mt-3">
                 {WHY_POINTS.map((pt, i) => (
                   <div key={i} className="fsg-why-card">
                     <div className="fsg-why-card-icon">{pt.icon}</div>
-                    <h3 className="fsg-why-card-label">{pt.label}</h3>
+                    <h2 className="fsg-why-card-label">{pt.label}</h2>
                     <p className="fsg-why-card-desc">{pt.desc}</p>
                   </div>
                 ))}
@@ -484,23 +595,29 @@ export default function FashionServices() {
           </div>
         </section>
 
-        {/* ══ ALL IMAGES — single unified gallery ══ */}
-        {allImages.length > 0 && (
+        {/* ══ COLLECTIONS — one 3D swiper per shoot ══ */}
+        {shoots.length > 0 && (
           <section className="fsg-gallery" id="gallery">
             <div className="fsg-gallery-header">
               <span className="fsg-section-label fsg-label--center">
                 Visual Gallery
               </span>
               <h2 className="fsg-gallery-title">
-                Explore Our Photography Collection
+                Explore Our Fashion Photography Collection
               </h2>
+              <div className="rev-para">
+                Every image in this gallery represents a real collaboration — a
+                model who trusted us, a brand that believed in us, and a story
+                we helped tell through the power of fashion photography.
+              </div>
             </div>
-            <div className="fsg-cards-grid">
-              {allImages.map((img, i) => (
-                <GalleryCard
-                  key={img._id || i}
-                  src={img.url}
-                  index={i}
+
+            <div className="fsg-collections-wrap">
+              {shoots.map((shoot, idx) => (
+                <CollectionSlider
+                  key={shoot._id || idx}
+                  images={shoot.images}
+                  index={idx}
                   onImageClick={setLightboxSrc}
                 />
               ))}
@@ -508,7 +625,6 @@ export default function FashionServices() {
           </section>
         )}
       </div>
-      {/* ══ FAQ SECTION ══ */}
       <FaqSection serviceTitle={serviceData.title} />
       <ContactSection />
       <Footer />

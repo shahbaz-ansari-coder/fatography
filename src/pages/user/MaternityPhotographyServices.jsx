@@ -7,6 +7,20 @@ import ContactSection from "../../components/home/ContactSection";
 import SEO from "../../components/home/SEO";
 
 /* ═══════════════════════════════════
+   VIDEO DATA  — hardcoded (backend se nahi)
+═══════════════════════════════════ */
+const MATERNITY_VIDEO = {
+  url: "/videos-assets/videography-videos/maternity_shoot.mp4",
+  duration: "0:54",
+  tag: "Maternity Videography",
+  heading: "Maternity Videography in Dubai",
+  description:
+    "Experience how Fatography brings maternity to life through cinematic videography — capturing texture, warmth, and every precious moment.",
+  photographer: "Fatography Studio",
+  location: "Dubai, UAE",
+};
+
+/* ═══════════════════════════════════
    LIGHTBOX
 ═══════════════════════════════════ */
 function Lightbox({ src, onClose }) {
@@ -33,6 +47,155 @@ function Lightbox({ src, onClose }) {
         className="fsg-lb-img"
         onClick={(e) => e.stopPropagation()}
       />
+    </div>
+  );
+}
+
+/* ═══════════════════════════════════
+   VIDEO PLAYER  — custom controls
+═══════════════════════════════════ */
+function VideoPlayer({ src, poster }) {
+  const videoRef = useRef(null);
+  const [playing, setPlaying] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [muted, setMuted] = useState(false);
+
+  const toggle = () => {
+    if (!videoRef.current) return;
+    if (playing) {
+      videoRef.current.pause();
+      setPlaying(false);
+    } else {
+      videoRef.current.play();
+      setPlaying(true);
+    }
+  };
+
+  const onTimeUpdate = () => {
+    if (!videoRef.current) return;
+    const { currentTime, duration } = videoRef.current;
+    if (duration) setProgress((currentTime / duration) * 100);
+  };
+
+  const onSeek = (e) => {
+    if (!videoRef.current) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const ratio = (e.clientX - rect.left) / rect.width;
+    videoRef.current.currentTime = ratio * (videoRef.current.duration || 0);
+  };
+
+  const toggleMute = (e) => {
+    e.stopPropagation();
+    if (!videoRef.current) return;
+    videoRef.current.muted = !muted;
+    setMuted(!muted);
+  };
+
+  /* Auto-pause when scrolled out of view */
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) {
+          video.pause();
+          setPlaying(false);
+        }
+      },
+      { threshold: 0.5 },
+    );
+    observer.observe(video);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div className="asp-video-wrap">
+      <div className="asp-video-inner" onClick={toggle}>
+        <video
+          ref={videoRef}
+          src={src}
+          // poster={poster}
+          className="asp-video-el"
+          playsInline
+          loop
+          onTimeUpdate={onTimeUpdate}
+          onEnded={() => setPlaying(false)}
+          onClick={(e) => e.stopPropagation()}
+        />
+
+        {!playing && (
+          <div className="asp-video-play-overlay">
+            <div className="asp-video-play-btn">
+              <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+                <path d="M8 5.5l14 7.5-14 7.5V5.5z" fill="#000" />
+              </svg>
+            </div>
+            <p className="asp-video-play-label">Play Showreel</p>
+          </div>
+        )}
+
+        <div className="asp-video-badge">
+          <span className="asp-video-badge-dot" />
+          Behind The Lens
+        </div>
+      </div>
+
+      <div className="asp-video-controls">
+        <button className="asp-vc-btn" onClick={toggle}>
+          {playing ? (
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <rect
+                x="3"
+                y="2"
+                width="3.5"
+                height="12"
+                rx="1"
+                fill="currentColor"
+              />
+              <rect
+                x="9.5"
+                y="2"
+                width="3.5"
+                height="12"
+                rx="1"
+                fill="currentColor"
+              />
+            </svg>
+          ) : (
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M4 2.5l10 5.5-10 5.5V2.5z" fill="currentColor" />
+            </svg>
+          )}
+        </button>
+
+        <div className="asp-vc-bar" onClick={onSeek}>
+          <div className="asp-vc-bar-fill" style={{ width: `${progress}%` }} />
+        </div>
+
+        <button className="asp-vc-btn" onClick={toggleMute}>
+          {muted ? (
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M2 5.5h2.5L8 2v12l-3.5-3.5H2V5.5z" fill="currentColor" />
+              <path
+                d="M10.5 6L13.5 9M13.5 6L10.5 9"
+                stroke="currentColor"
+                strokeWidth="1.4"
+                strokeLinecap="round"
+              />
+            </svg>
+          ) : (
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M2 5.5h2.5L8 2v12l-3.5-3.5H2V5.5z" fill="currentColor" />
+              <path
+                d="M10 5.5c1.1.7 1.8 1.9 1.8 3.5S11.1 11.8 10 12.5"
+                stroke="currentColor"
+                strokeWidth="1.4"
+                strokeLinecap="round"
+              />
+            </svg>
+          )}
+        </button>
+      </div>
     </div>
   );
 }
@@ -127,7 +290,7 @@ const WHY_POINTS = [
         />
       </svg>
     ),
-        label: "Premium Post-Production",
+    label: "Premium Post-Production",
     desc: "Meticulous retouching and cinematic colour grading by our in-house editors.",
   },
   {
@@ -390,6 +553,9 @@ export default function MaternityPhotographyServices() {
     (shoot.images || []).map((img) => ({ url: img.url, _id: img._id })),
   );
 
+  /* Video poster — first image from gallery or banner */
+  const videoPoster = allImages[0]?.url || serviceData.banner?.url || "";
+
   return (
     <>
       <SEO
@@ -480,6 +646,40 @@ export default function MaternityPhotographyServices() {
                 ))}
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* ══ VIDEO SECTION ══ */}
+        <section className="asp-video-section">
+          <div className="asp-video-section-inner">
+            <div className="asp-video-text">
+              <span className="fsg-section-label">{MATERNITY_VIDEO.tag}</span>
+
+              <h2 className="asp-video-heading">{MATERNITY_VIDEO.heading}</h2>
+
+              <p className="asp-video-sub">{MATERNITY_VIDEO.description}</p>
+
+              <div className="asp-video-info-row">
+                <div className="asp-vi-item">
+                  <span className="asp-vi-label">Studio</span>
+                  <span className="asp-vi-val">
+                    {MATERNITY_VIDEO.photographer}
+                  </span>
+                </div>
+
+                <div className="asp-vi-item">
+                  <span className="asp-vi-label">Location</span>
+                  <span className="asp-vi-val">{MATERNITY_VIDEO.location}</span>
+                </div>
+
+                <div className="asp-vi-item">
+                  <span className="asp-vi-label">Total Frames</span>
+                  <span className="asp-vi-val">{allImages.length} Photos</span>
+                </div>
+              </div>
+            </div>
+
+            <VideoPlayer src={MATERNITY_VIDEO.url} poster={videoPoster} />
           </div>
         </section>
 
