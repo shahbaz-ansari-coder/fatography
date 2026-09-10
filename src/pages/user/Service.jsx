@@ -80,10 +80,6 @@ const SERVICE_SEO = {
     description:
       "Fatography offers culturally respectful, confidential maternity photography & videography in Dubai, capturing every glow. Book your session.",
   },
-  // FIX: this key was "black-&-white" before, which normalizeSlug()
-  // can NEVER produce (it always converts "&" to "and"). That mismatch
-  // is exactly why this page's SEO never applied — the lookup silently
-  // fell through to the generic fallback every single time.
   "black-and-white": {
     title: "Black & White Photography Dubai | Fatography",
     description:
@@ -102,12 +98,12 @@ const SERVICE_SEO = {
   "event-coverage": {
     title: "Event Coverage Photography Dubai | Fatography",
     description:
-      "Professional event coverage in Dubai. Fatography documents corporate events, launches, and celebrations with cinematic precision and full creative coverage.",
+      "Professional event photography & videography in Dubai — from Gulfood to fashion launches. Fatography delivers polished coverage. Book today",
   },
   "real-estate": {
     title: "Real Estate Photography Dubai | Fatography",
     description:
-      "High-end real estate photography in Dubai. Fatography showcases properties with striking composition, natural light, and architectural detail that sells.",
+      "Fatography offers real estate photography in Dubai for agents & developers — listings that drive instant inquiries and sell faster. Book now.",
   },
   "neon-photography": {
     title: "Neon Photography Dubai | Fatography",
@@ -123,6 +119,11 @@ const SERVICE_SEO = {
     title: "Fitness Photography Dubai | Fatography",
     description:
       "Fatography offers luxury fitness photography in Dubai — capturing strength, discipline & transformation. Book your session.",
+  },
+  "commercial-events": {
+    title: "Commercial Event Coverage Photography Dubai | Fatography",
+    description:
+      "Professional commercial event photography & videography in Dubai — from exhibitions and branded booths to large-scale shows. Fatography delivers polished coverage.",
   },
 };
 
@@ -163,17 +164,6 @@ const VIDEO_SECTIONS = {
   // },
 };
 
-/**
- * Resolves the SEO title/description for a service slug.
- *
- * `fallbackTitle` is the human-readable title from the API (serviceData.title).
- * It is optional on purpose: while the API call is still in flight we don't
- * have it yet, so we derive a readable name straight from the URL slug
- * instead of showing a generic placeholder. This means the correct-ish
- * title/description is present on first paint, and simply gets replaced by
- * the exact copywritten SEO_SERVICE entry (or the API title) once available
- * — instead of flashing a wrong title first and "changing" afterwards.
- */
 function getServiceSEO(paramTitle, fallbackTitle) {
   const key = normalizeSlug(paramTitle);
   if (SERVICE_SEO[key]) return SERVICE_SEO[key];

@@ -42,8 +42,8 @@ function ServiceCard({ data }) {
   const slug = data?.title?.toLowerCase().trim().replace(/\s+/g, "-");
 
   const link = specialServices.includes(data?.title?.toLowerCase())
-    ? `/our-services/${slug}`
-    : `/our-services/${slug}`;
+    ? `/services/${slug}`
+    : `/services/${slug}`;
 
   return (
     <Link to={link}>
@@ -106,9 +106,9 @@ export default function Service() {
       <div className="service-container">
         <div className="reviews-header">
           <p className="rev-eyebrow">Our Services</p>
-          <h2 className="rev-title">
+          <h1 className="rev-title">
             Professional <em>Photography</em> Solutions
-          </h2>
+          </h1>
         </div>
         <div className="services-grid">
           {services.map((service) => (

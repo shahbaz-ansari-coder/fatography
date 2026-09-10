@@ -104,7 +104,7 @@ const SERVICE_SLUGS = [
   "corporate-&-linkedin",
   "fitness-photography",
   "retouching-guide",
-  "fashion-weeks",
+  "commercial-events",
 ];
 
 // Keep this list in sync with the slugs used in /celebrity-shoots/:name
@@ -135,12 +135,6 @@ function findSlugMatch(list, value) {
   return list.find((item) => item.toLowerCase() === value);
 }
 
-/**
- * Handles old /dubai/:slug and /pakistan/:slug links.
- * - If the slug belongs to a celebrity -> /celebrity-shoots/:slug
- * - If the slug belongs to a service   -> /our-services/:slug
- * - Otherwise -> home page
- */
 function LegacyCategoryRedirect() {
   const { slug = "" } = useParams();
   const decodedSlug = decodeURIComponent(slug).toLowerCase();
@@ -152,7 +146,7 @@ function LegacyCategoryRedirect() {
 
   const matchedService = findSlugMatch(SERVICE_SLUGS, decodedSlug);
   if (matchedService) {
-    return <Navigate to={`/our-services/${matchedService}`} replace />;
+    return <Navigate to={`/services/${matchedService}`} replace />;
   }
 
   return <Navigate to="/" replace />;
@@ -171,7 +165,7 @@ function App() {
         // Main pages
         { path: "/", element: <Home /> },
         { path: "/about-us", element: <AboutPage /> },
-        { path: "/our-services", element: <AllServicesPage /> },
+        { path: "/services", element: <AllServicesPage /> },
         { path: "/celebrity-shoots", element: <CelebrityShootsPage /> },
         { path: "/testimonials", element: <TestimonialsPage /> },
         { path: "/contact-us", element: <ContactPage /> },
@@ -190,14 +184,14 @@ function App() {
         },
 
         // Dynamic current-generation pages
-        { path: "/our-services/:title", element: <ServicePage /> },
+        { path: "/services/:title", element: <ServicePage /> },
         { path: "/celebrity-shoots/:name", element: <ActorShootPage /> },
 
         // ---- Legacy URL redirects (old /dubai and /pakistan structure) ----
         { path: "/dubai/:slug", element: <LegacyCategoryRedirect /> },
-        { path: "/dubai", element: <Navigate to="/our-services" replace /> },
+        { path: "/dubai", element: <Navigate to="/services" replace /> },
         { path: "/pakistan/:slug", element: <LegacyCategoryRedirect /> },
-        { path: "/pakistan", element: <Navigate to="/our-services" replace /> },
+        { path: "/pakistan", element: <Navigate to="/services" replace /> },
 
         // Catch-all: any other unknown link -> home
         { path: "*", element: <NotFoundRedirect /> },
